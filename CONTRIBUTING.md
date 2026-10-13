@@ -75,6 +75,7 @@ Each kind of change has generated files that must move with it. CI fails if they
 | Component CSS | Use tokens only: `npm run lint` rejects raw colours and raw `z-index` |
 | The logo colours or geometry | Rebuild `brand/` (below) |
 | Anything visible | Expect the visual workflow to fail, and say so in the pull request |
+| A file sites need, added or moved | Update `files` and `exports` in `package.json` and the required list in `scripts/check-pack.mjs` |
 
 A new component lives in `components/<Name>/` with a `README.md` and a `preview.html`. The preview's first line is a `@dsCard` comment naming its group (`Layout`, `Navigation`, `Content`, `Actions`, `Forms` or `Status`). Copy that line from a neighbour. Its CSS goes in `components/bundle.css`.
 
@@ -107,4 +108,4 @@ The pull request form asks for each of these; fill it in rather than deleting it
 3. Say what changed visually and in which themes, with before and after screenshots for anything visible.
 4. The `ci` and `visual` workflows run on every pull request. `ci` must pass. `visual` may fail only for the change you described.
 
-Expect a first reply within a week. The maintainer merges to `main`, records the change in [CHANGELOG.md](CHANGELOG.md), and cuts releases. Don't bump `package.json`'s version yourself, because a new version there publishes a release.
+Expect a first reply within a week. The maintainer merges to `main`, records the change in [CHANGELOG.md](CHANGELOG.md), and cuts releases. Don't bump `package.json`'s version yourself, because a new version there publishes a release: the workflow tags `vX.Y.Z`, and sites install that tag. Don't add an install or `prepare` script either; a git install would run it on every site.

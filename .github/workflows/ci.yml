@@ -23,3 +23,5 @@ jobs:
         run: node scripts/build-llms.mjs --check
       - name: No raw colours or z-index values in component CSS
         run: npm run lint
+      - name: A git install ships the whitelisted files and runs nothing
+        run: node scripts/check-pack.mjs

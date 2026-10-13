@@ -68,15 +68,55 @@ Built with:
 
 ## Install
 
-Neptune isn't on npm. Clone it, then install the tooling:
+Install a released version from its git tag. Neptune isn't on the npm registry; every release is tagged `vX.Y.Z`.
+
+```bash
+npm i github:JosephSearle/neptune#v1.1.0
+```
+
+`package.json` then records the tag, so every site shows which version it's on. The install has no dependencies and runs no scripts. It contains only what a site uses: `tokens.css`, `tokens/` (DTCG files and primitives), `components/bundle.css`, `brand/`, `llms.txt`, `llms-full.txt`, the README and the changelog.
+
+### Reference the files
+
+Import by these paths, not by folder:
+
+| Path | File |
+| --- | --- |
+| `neptune/tokens.css` | `tokens.css` |
+| `neptune/bundle.css` | `components/bundle.css` |
+| `neptune/neptune.js` | `components/neptune.js`, from the release that adds it |
+| `neptune/tokens/*` | DTCG files and primitives, e.g. `neptune/tokens/dtcg/base.tokens.json` |
+| `neptune/brand/*` | Logo, favicon set and social card |
+
+With a bundler (Vite, Parcel, webpack, PostCSS with `postcss-import`), import the stylesheets in order:
+
+```css
+@import "neptune/tokens.css";
+@import "neptune/bundle.css";
+```
+
+For plain HTML with no build step, copy the files out of `node_modules/neptune/` into the site's static folder at build or deploy time, and link them as in the [Example](#example):
+
+```bash
+cp node_modules/neptune/tokens.css node_modules/neptune/components/bundle.css public/
+cp -r node_modules/neptune/brand public/
+```
+
+### Upgrade
+
+1. Read the new version's section in [CHANGELOG.md](CHANGELOG.md), or in `node_modules/neptune/CHANGELOG.md` after installing. Check Deprecated and Removed before a major.
+2. Change the tag: `npm i github:JosephSearle/neptune#v1.2.0`.
+3. Re-copy the files if the site copies them, then check the site at 390px and 1280px in both themes.
+
+### Work on Neptune
+
+To change Neptune itself or run its tooling, clone it and install the dev dependencies:
 
 ```bash
 git clone https://github.com/JosephSearle/neptune.git
 cd neptune
 npm ci
 ```
-
-To use it in a site, copy `tokens.css`, `components/bundle.css` and the `brand/` files you need. Nothing else ships to the browser.
 
 ### Dependencies
 
@@ -133,7 +173,7 @@ The tooling runs through npm scripts:
 | `npm run llms` | Rebuild `llms.txt` and `llms-full.txt` |
 | `npm run lint` | Lint `components/` for raw colours and `z-index` |
 | `npm run contrast` | Measure every documented colour pair in both themes; fail below 4.5:1 for text, 3:1 for borders |
-| `npm run check` | Everything CI runs; writes nothing |
+| `npm run check` | Everything CI runs, including the install contents check; writes nothing |
 | `npm run visual` | Screenshot every preview in both themes and compare |
 
 `python3 scripts/build-brand.py <newsreader-500.woff2>` rebuilds the logo, favicon set and social card from `tokens.json`; [CONTRIBUTING.md](CONTRIBUTING.md#making-a-change) has the full command.
@@ -293,6 +333,8 @@ The mark is Neptune's trident (♆), square-stroked on a 24-unit grid in a `nept
 
 Neptune follows semantic versioning. The public surface is the token names, the `np-` classes and their documented markup.
 
+Sites pin a release tag (`github:JosephSearle/neptune#v1.1.0`, see [Install](#install)) and upgrade by changing it. A tag never moves, so a site only changes when its tag does.
+
 - Major (2.0): removing or renaming a token, class, component or modifier; changing what a token means; markup changes existing pages must make.
 - Minor (1.2): new tokens, components, variants and states; visual refinements that existing markup picks up unchanged.
 - Patch (1.1.1): bug fixes, docs, and value nudges that keep contrast and meaning.
@@ -303,7 +345,7 @@ Deprecation comes before removal, for at least one minor release:
 2. Keep it working: an old class stays as an alias in `bundle.css`; an old token becomes an alias of the new one, its usage note starting "Deprecated:".
 3. Remove it in the next major, listed under Removed with what replaces it.
 
-A release updates the version stamps (README, Cover, Nav, Hero, Footer previews, `package.json`), moves the Unreleased entries in [CHANGELOG.md](CHANGELOG.md) under the new number, and bumps `package.json`; on push, the release workflow tags `vX.Y.Z` and publishes the GitHub release from that section.
+A release updates the version stamps (README, Cover, Nav, Hero, Footer previews, `package.json`), moves the Unreleased entries in [CHANGELOG.md](CHANGELOG.md) under the new number, and bumps `package.json`; on push, the release workflow tags `vX.Y.Z` and publishes the GitHub release from that section. That tag is what sites install.
 
 ## Changelog
 
@@ -324,7 +366,7 @@ npm run check
 npm run visual
 ```
 
-`npm run check` runs everything CI runs: tokens in sync, `llms.txt` current, and a stylelint pass on `components/` that rejects raw colours (hex, `rgb()`, named colours) and any `z-index` that isn't a `z-` token. A new colour goes into `tokens.json` (and `tokens/primitives.json`) first.
+`npm run check` runs everything CI runs: tokens in sync, `llms.txt` current, a stylelint pass on `components/` that rejects raw colours (hex, `rgb()`, named colours) and any `z-index` that isn't a `z-` token, and `scripts/check-pack.mjs`, which fails if a git install would miss a site file, ship anything outside `files` in `package.json`, or run an install script. A new colour goes into `tokens.json` (and `tokens/primitives.json`) first.
 
 Visual regression: `tests/visual.spec.js` screenshots every component preview in Paper and Deep, with the brand fonts served locally, and CI compares them with `tests/__screenshots__` on every push. After an intended visual change, run the **visual** workflow by hand with *update* ticked; it rewrites the baselines in the same container CI uses and commits them.
 

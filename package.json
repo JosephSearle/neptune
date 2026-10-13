@@ -5,12 +5,33 @@
   "description": "Neptune: Joseph Searle's personal brand and design system.",
   "license": "UNLICENSED",
   "type": "module",
+  "files": [
+    "tokens.css",
+    "tokens/",
+    "components/bundle.css",
+    "components/neptune.js",
+    "brand/",
+    "llms.txt",
+    "llms-full.txt",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "exports": {
+    "./tokens.css": "./tokens.css",
+    "./bundle.css": "./components/bundle.css",
+    "./neptune.js": "./components/neptune.js",
+    "./tokens/*": "./tokens/*",
+    "./brand/*": "./brand/*",
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "tokens": "node scripts/build-tokens.mjs",
     "llms": "node scripts/build-llms.mjs",
     "lint": "stylelint \"components/**/*.css\"",
     "contrast": "node scripts/check-contrast.mjs",
-    "check": "node scripts/build-tokens.mjs --check && node scripts/check-contrast.mjs && node scripts/build-llms.mjs --check && npm run lint",
+    "check": "node scripts/build-tokens.mjs --check && node scripts/check-contrast.mjs && node scripts/build-llms.mjs --check && npm run lint && node scripts/check-pack.mjs",
     "visual": "playwright test"
   },
   "devDependencies": {
