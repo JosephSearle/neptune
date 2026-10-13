@@ -14,6 +14,7 @@ The format follows [Keep a Changelog 2.0.0](https://keepachangelog.com/en/2.0.0/
 - README: install steps, a working page example and a table of the npm scripts.
 - `npm run contrast` (`scripts/check-contrast.mjs`): measures every documented text pair (4.5:1) and `line-strong` and `focus` on each paper surface (3:1) in both themes. `npm run check` and CI run it, so a token nudge that breaks contrast fails the build.
 - Versioned installs: `npm i github:JosephSearle/neptune#v1.1.0` installs a release tag. `package.json` lists the files that ship (`files`) and the import paths (`exports`: `neptune/tokens.css`, `neptune/bundle.css`, `neptune/neptune.js`, `neptune/tokens/*`, `neptune/brand/*`). `scripts/check-pack.mjs`, run by `npm run check` and CI, fails if an install would miss a file, ship anything else, or run a script. README Install covers referencing the files and upgrading.
+- Accessibility checks: CI runs axe-core on every component preview in Paper and Deep, and fails on serious or critical violations. Run them with `npm run a11y`.
 
 ### Changed
 
@@ -23,6 +24,8 @@ The format follows [Keep a Changelog 2.0.0](https://keepachangelog.com/en/2.0.0/
 ### Fixed
 
 - Tabs: Home and End now move to the first and last tab, and the README documents the keys.
+- Every component preview declares `lang="en"`, so screen readers pick the right pronunciation.
+- SearchDialog: results are now a listbox driven from the input as a combobox. `aria-selected` on plain links was invalid ARIA and wasn't announced. The README documents the new markup.
 
 ## [1.1.0] - 2026-10-13
 
