@@ -13,6 +13,7 @@ The format follows [Keep a Changelog 2.0.0](https://keepachangelog.com/en/2.0.0/
 - A pull request template asking why the change is needed, what it changes visually, and for the checks CI runs.
 - README: install steps, a working page example and a table of the npm scripts.
 - `npm run contrast` (`scripts/check-contrast.mjs`): measures every documented text pair (4.5:1) and `line-strong` and `focus` on each paper surface (3:1) in both themes. `npm run check` and CI run it, so a token nudge that breaks contrast fails the build.
+- Versioned installs: `npm i github:JosephSearle/neptune#v1.1.0` installs a release tag. `package.json` lists the files that ship (`files`) and the import paths (`exports`: `neptune/tokens.css`, `neptune/bundle.css`, `neptune/neptune.js`, `neptune/tokens/*`, `neptune/brand/*`). `scripts/check-pack.mjs`, run by `npm run check` and CI, fails if an install would miss a file, ship anything else, or run a script. README Install covers referencing the files and upgrading.
 
 ### Changed
 
