@@ -1,0 +1,80 @@
+# Neptune
+
+> Joseph Searle's personal brand and design system: an engineer's notebook printed on paper. Classical serif (Newsreader) for ideas, monospace (IBM Plex Mono) for anything a machine would say, one electric blue for action. Two themes: Paper (light, default) and Deep (dark). Plain CSS: tokens as CSS variables plus `np-` component classes, no framework.
+
+Rules an agent most often gets wrong:
+
+- Load `tokens.css` then `components/bundle.css`. Build from the `np-` components; never restyle them inline or invent new colours.
+- Spend `neptune` (the blue) on one thing per view: the primary action, a link, the active item or the focus ring.
+- Headings and body in serif; labels, buttons, nav, metadata and code in mono. Never paragraphs in mono, never buttons in serif.
+- Square corners, 1px hairlines, no blurred shadows, no gradients, no emoji, no icons: use the typographic glyphs in the guide.
+- Status always carries a word, never colour alone. Errors use `aria-invalid` and say what went wrong, then what to do.
+- Copy is direct and imperative, sentence case, no marketing adjectives.
+
+## Guide
+
+- [Brand guide](https://raw.githubusercontent.com/JosephSearle/neptune/main/README.md): voice, colour, type, space, layout, docs page recipe, slides, ornament, imagery, motion, accessibility, states, how to use it in code, changelog.
+- [tokens.css](https://raw.githubusercontent.com/JosephSearle/neptune/main/tokens.css): every token as a CSS variable for both themes, the system-dark default and print, plus a class per type style.
+- [tokens.json](https://raw.githubusercontent.com/JosephSearle/neptune/main/tokens.json): the source of truth for all tokens, each with a usage note.
+- [components/bundle.css](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/bundle.css): every `np-` component class.
+
+## Components: Layout
+
+- [DocsLayout](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/DocsLayout/README.md): The three-column docs page: Sidebar, content, On this page.
+- [PageGrid](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/PageGrid/README.md): A 12-column grid (4 below `bp-md`) with an optional hairline rule at every column edge: the visible grid the brand book asks for.
+
+## Components: Navigation
+
+- [Breadcrumb](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Breadcrumb/README.md): The path from the docs root to the current page, in mono with › separators.
+- [Footer](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Footer/README.md): The page closer on `paper-sunk`: link columns with mono headings, a metadata line, and an oversized serif wordmark cropped by the page edge.
+- [Nav](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Nav/README.md): The top bar: serif wordmark with a mono version stamp, uppercase mono links and a ⌘K search.
+- [Pager](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Pager/README.md): Previous and next links at the foot of a docs page.
+- [SearchDialog](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/SearchDialog/README.md): The ⌘K search: a native modal dialog with a prompt input, grouped results and key hints.
+- [Sidebar](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Sidebar/README.md): Grouped navigation for a docs site, inside a disclosure that ships open.
+- [SkipLink](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/SkipLink/README.md): A "Skip to content" link, hidden until a keyboard user tabs to it, so they can jump past the Nav and Sidebar.
+- [Toc](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Toc/README.md): The "on this page" list: the page's headings, the one in view marked with › in `neptune`.
+
+## Components: Content
+
+- [ArticleHeader](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/ArticleHeader/README.md): The top of a note or playbook: a kind-and-date stamp, the title, a lead, then byline and tags, closed by a hairline.
+- [Callout](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Callout/README.md): A boxed aside with a bracketed mono label: note, tip or warning.
+- [Card](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Card/README.md): A square, hairline-bordered panel with a mono index bar, serif title and a metadata footer.
+- [CodeCopy](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/CodeCopy/README.md): A dark code block with a language label and a Copy button, plus a light inline code style.
+- [Feed](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Feed/README.md): A dated list of entries, one row each: ISO date, serif title, tag.
+- [Figure](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Figure/README.md): A framed image with ┌ ┘ corner marks and a numbered `FIG.` caption.
+- [Hero](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Hero/README.md): The page opener: a mono stamp, a `display-xl` serif headline, a lead, actions and an optional stats strip, framed by ┌ ┘ corner marks.
+- [Prose](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Prose/README.md): A wrapper that applies Neptune's type to plain article HTML: headings, paragraphs, lists, links, quotes and inline code.
+- [Rule](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Rule/README.md): A hairline section break with a centred glyph or eyebrow label.
+- [SectionHead](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/SectionHead/README.md): The opener for a page section: an optional indexed rule, a serif heading, an optional lead and an optional action on the right.
+- [Split](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Split/README.md): A row of text beside a figure, alternating sides down the page.
+- [Table](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Table/README.md): A data table with mono uppercase headers on `paper-sunk`, serif cells, hairline rows and right-aligned tabular numbers.
+- [Tabs](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Tabs/README.md): Mono tabs over panels, for alternatives a reader picks one of: package managers, languages, operating systems.
+- [Terminal](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Terminal/README.md): A dark code and command block with a mono title bar; stays dark in both themes.
+
+## Components: Actions
+
+- [Button](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Button/README.md): A square, mono-labelled action that lifts on hover with `shadow-press`.
+- [ThemeToggle](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/ThemeToggle/README.md): A two-state segmented control that switches between the Paper and Deep themes.
+
+## Components: Forms
+
+- [Checkbox](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Checkbox/README.md): Checkboxes and radio buttons: a square (round for radio) that fills with a `neptune` mark when checked.
+- [Input](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Input/README.md): A mono text field with a `›` prompt, an uppercase label and a hint line.
+- [Select](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Select/README.md): A native select in the Input box, mono text, ▾ on the right.
+- [Switch](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Switch/README.md): An on/off control for a setting that applies at once. Square track, square thumb; on fills `neptune`.
+- [Textarea](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Textarea/README.md): A multi-line field in the Input box. Mono text, resizes vertically.
+
+## Components: Status
+
+- [Dialog](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Dialog/README.md): A native modal for confirmations and short tasks: bracketed label, serif title, body, and actions on a sunk footer.
+- [EmptyState](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/EmptyState/README.md): What shows when a list, a search or a page has nothing in it: a mono frame glyph, what is empty, what to do, and at most one action.
+- [Kbd](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Kbd/README.md): A physical-looking key for shortcuts, with a 2px bottom edge.
+- [Tag](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Tag/README.md): A square mono label for categories, licences and status.
+- [Toast](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Toast/README.md): A short machine message after something happens: dark like the terminal in both themes, mono, bottom right.
+- [Tooltip](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Tooltip/README.md): A short mono hint on hover or keyboard focus, dark like the terminal.
+
+## Optional
+
+- [DTCG tokens](https://raw.githubusercontent.com/JosephSearle/neptune/main/tokens/dtcg/base.tokens.json): W3C Design Tokens 2025.10 export (with `primitives`, `paper` and `deep` files beside it) for Style Dictionary, Terrazzo or Figma variables.
+- [Full text](https://raw.githubusercontent.com/JosephSearle/neptune/main/llms-full.txt): the brand guide and every component README in one file.
+- Previews: each component folder has a `preview.html` showing working markup, e.g. [Dialog](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Dialog/preview.html).

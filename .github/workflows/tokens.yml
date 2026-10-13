@@ -15,3 +15,5 @@ jobs:
           node-version: 22
       - name: Check DTCG tokens and tokens.css match tokens.json
         run: node scripts/build-tokens.mjs --check
+      - name: Check llms.txt and llms-full.txt are up to date
+        run: node scripts/build-llms.mjs --check

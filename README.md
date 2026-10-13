@@ -143,6 +143,10 @@ Load primitives + base + one theme. Every semantic colour must alias a primitive
 
 After changing `tokens.json`, `tokens/primitives.json` or `tokens.css`, run `node scripts/build-tokens.mjs`. CI runs it with `--check` and fails if the DTCG files or `tokens.css` disagree with `tokens.json`.
 
+### For agents
+
+`llms.txt` indexes the guide and every component for an LLM, with the rules agents most often break; `llms-full.txt` is the guide and all component READMEs in one file. Both are generated: after changing any README, run `node scripts/build-llms.mjs`. CI fails if they're stale.
+
 ### States
 
 Buttons and fields share one set of states. Use the attribute, not a class:
@@ -160,7 +164,7 @@ No logo yet. Set "Neptune" in Newsreader 500, -0.01em, `ink`. Pair it with a `me
 
 ## Changelog
 
-- Unreleased: system theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
+- Unreleased: `llms.txt` and `llms-full.txt` for agents, generated and checked in CI. System theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
 
 - 1.0 · 2026-10-13: 35 components. Audit fixes (one focus ring, reduced-motion lift, terminal edges in Deep, 44px touch targets, measured contrast). Layout, breakpoint, timing and z-index tokens. Docs set (DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout, Tabs), forms (Select, Textarea, Checkbox, Switch), SearchDialog, EmptyState, PageGrid, Figure, Split, Feed. Slide type scale. Open: logo.
 - 0.1 · 2026-10-13: tokens in two themes, 15 components, brand book.
