@@ -1,0 +1,45 @@
+name: Suggest a change
+description: A new variant, state, component or token that fits Neptune.
+title: "[Change] "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Neptune stays an engineer's notebook printed on paper: two faces, one blue, square corners, hairlines, no icons. Proposals to change that are closed. See [Suggesting a change](https://github.com/JosephSearle/neptune/blob/main/CONTRIBUTING.md#suggesting-a-change).
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you couldn't build, or built badly, with today's components. Describe the need, not a fix.
+      placeholder: A settings page needs a group of mutually exclusive options, and there's no radio group.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Where it came up
+      description: The page or markup you were working on. A link or a screenshot is fine.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: The smallest change that would solve it
+      description: Prefer a variant or state over a new component, and an existing token over a new one.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered
+      description: What you tried with existing components, or other fixes, and why they fall short.
+    validations:
+      required: true
+  - type: checkboxes
+    id: fit
+    attributes:
+      label: Fit
+      options:
+        - label: This adds no new colour, typeface, icon, rounded corner, blur or gradient, or I've explained why it must.
+          required: true

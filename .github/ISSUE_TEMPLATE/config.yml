@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security problem
+    url: https://github.com/JosephSearle/neptune/security/advisories/new
+    about: Report it privately. Don't open a public issue.
+  - name: Read the brand guide
+    url: https://github.com/JosephSearle/neptune#readme
+    about: Usage, tokens, components and the rules agents most often break.

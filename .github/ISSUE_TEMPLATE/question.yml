@@ -1,0 +1,19 @@
+name: Question
+description: How to do something with Neptune, when the guide doesn't answer it.
+title: "[Question] "
+labels: [question]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: What you're trying to do
+      placeholder: Put a Toast inside a DocsLayout page without it covering the On this page column.
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: What you've read or tried
+      description: The guide sections or component READMEs you checked, and any markup you tried.
+    validations:
+      required: true

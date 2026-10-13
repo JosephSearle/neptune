@@ -1,0 +1,143 @@
+name: Bug report
+description: Something in Neptune doesn't work or doesn't look as documented.
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search the [open issues](https://github.com/JosephSearle/neptune/issues) first. A security problem goes through the Security tab, not here.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Component or area
+      description: Where the problem shows up.
+      options:
+        - ArticleHeader
+        - Breadcrumb
+        - Button
+        - Callout
+        - Card
+        - Chart
+        - Checkbox
+        - CodeCopy
+        - Cover
+        - Dialog
+        - DocsLayout
+        - EmptyState
+        - Feed
+        - Figure
+        - Footer
+        - Hero
+        - Input
+        - Kbd
+        - Logo
+        - Nav
+        - PageGrid
+        - Pager
+        - Prose
+        - Rule
+        - SearchDialog
+        - SectionHead
+        - Select
+        - Sidebar
+        - SkipLink
+        - Split
+        - Switch
+        - Table
+        - Tabs
+        - Tag
+        - Terminal
+        - Textarea
+        - ThemeToggle
+        - Toast
+        - Toc
+        - Tooltip
+        - Tokens (tokens.json, tokens.css, DTCG export)
+        - Brand files (logo, favicons, social card)
+        - Brand guide (README)
+        - llms.txt or llms-full.txt
+        - Tooling or CI
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Neptune version
+      description: From `package.json`, the release you downloaded, or the stamp on the Cover.
+      placeholder: 1.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Theme and mode
+      description: Pick every one where you see it.
+      multiple: true
+      options:
+        - Paper
+        - Deep
+        - System setting
+        - Forced colours
+        - Print
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you saw, as plainly as you can. Save your theory about the cause for the last field.
+      placeholder: The Dialog's close button has no focus ring in Deep.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps, starting from a clean page. A cut-down `preview.html` is ideal.
+      placeholder: |
+        1. Open components/Dialog/preview.html.
+        2. Set data-theme="dark" on <html>.
+        3. Press Tab until the close button has focus.
+    validations:
+      required: true
+  - type: textarea
+    id: markup
+    attributes:
+      label: Smallest markup that shows it
+      description: Optional if the steps use a preview file unchanged.
+      render: html
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+      description: What should have happened, and where it's documented if you know.
+      placeholder: A 2px focus ring, as the Accessibility section of the guide says.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser and version, OS, and viewport width.
+      placeholder: |
+        Firefox 131, macOS 15.1, 390px wide
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots or measurements
+      description: A screenshot, a recording, or the contrast ratio you measured.
+  - type: textarea
+    id: cause
+    attributes:
+      label: Possible cause
+      description: Optional. Your guess at why, kept apart from what you saw.
+  - type: checkboxes
+    id: a11y
+    attributes:
+      label: Accessibility
+      options:
+        - label: This stops someone using a keyboard, screen reader, zoom or contrast theme.

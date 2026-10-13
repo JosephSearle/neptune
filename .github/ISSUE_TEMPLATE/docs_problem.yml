@@ -1,0 +1,25 @@
+name: Docs problem
+description: A mistake, gap or confusing line in the guide, a component README or llms.txt.
+title: "[Docs] "
+labels: [documentation]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: The file and section, or a link to the line.
+      placeholder: components/Tabs/README.md, Keyboard
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong or missing
+      placeholder: It says Home jumps to the first tab, but the preview doesn't do that.
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: What it should say
+      description: Optional. Your suggested wording.

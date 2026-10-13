@@ -15,7 +15,9 @@ This guide covers how to get a change accepted. For how to use Neptune, read the
 
 ## Questions
 
-There are no Discussions or chat. Open an issue and label it `question`.
+There are no Discussions or chat. Read the [README](README.md) first, then use the [Question form](https://github.com/JosephSearle/neptune/issues/new?template=question.yml).
+
+Every issue starts from a form; blank issues are turned off. A mistake or gap in the docs has its own [Docs problem form](https://github.com/JosephSearle/neptune/issues/new?template=docs_problem.yml).
 
 ## Reporting a security problem
 
@@ -23,7 +25,7 @@ Don't open a public issue. Report it privately from the repository's **Security*
 
 ## Reporting a bug
 
-Search the [open issues](https://github.com/JosephSearle/neptune/issues) first. If it's new, open one with the `bug` label (`accessibility` too, if it applies) and include:
+Search the [open issues](https://github.com/JosephSearle/neptune/issues) first. If it's new, use the [Bug report form](https://github.com/JosephSearle/neptune/issues/new?template=bug_report.yml). It asks for:
 
 - **Component and version:** for example, `Dialog`, Neptune 1.1.0.
 - **Theme:** Paper, Deep or system, and forced colours or print if they're involved.
@@ -31,14 +33,16 @@ Search the [open issues](https://github.com/JosephSearle/neptune/issues) first. 
 - **Expected and actual:** what should happen and what does.
 - **Environment:** browser and version, OS, viewport width.
 - **Evidence:** a screenshot or the contrast ratio you measured.
+- **Possible cause:** optional, and kept apart from what you saw.
 
 ## Suggesting a change
 
-Neptune stays an engineer's notebook printed on paper: two faces, one blue, square corners, hairlines, no icons. A proposal that fits gets a hearing. Open an issue with the `enhancement` label and include:
+Neptune stays an engineer's notebook printed on paper: two faces, one blue, square corners, hairlines, no icons. A proposal that fits gets a hearing. Use the [Suggest a change form](https://github.com/JosephSearle/neptune/issues/new?template=suggest_change.yml). It asks for:
 
 - **The problem:** what you couldn't build, or built badly, with today's components.
 - **An example:** the page or markup where it came up.
 - **The smallest change:** a new variant or state before a new component, an existing token before a new one.
+- **Alternatives:** what you tried with existing components, and why it falls short.
 
 New tokens and components are minor releases and renames are major ones (see [Versions](README.md#versions)), so the bar rises in that order.
 
