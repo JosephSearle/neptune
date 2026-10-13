@@ -20,32 +20,6 @@
     <div class="np-code"><pre><code><span class="p">$</span> <span class="c">pip install neptune-tokens</span></code></pre></div>
   </div>
 </div>
-<script>
-document.querySelectorAll('.np-tabs').forEach(function (root) {
-  var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
-  function select(tab) {
-    tabs.forEach(function (t) {
-      var on = t === tab;
-      t.setAttribute('aria-selected', String(on));
-      t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-    });
-    tab.focus();
-  }
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { select(t); });
-    t.addEventListener('keydown', function (e) {
-      var next;
-      if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
-      else if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
-      else if (e.key === 'Home') next = tabs[0];
-      else if (e.key === 'End') next = tabs[tabs.length - 1];
-      if (!next) return;
-      e.preventDefault();
-      select(next);
-    });
-  });
-});
-</script>
+<script src="../neptune.js" defer></script>
 </body>
 </html>

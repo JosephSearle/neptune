@@ -13,10 +13,6 @@
     <span class="np-tip"><abbr tabindex="0" aria-describedby="tip-scope">OAuth scope</abbr><span class="np-tip__bubble" role="tooltip" id="tip-scope">A permission string the server checks per call.</span></span>.
   </p>
 </div>
-<script>
-// Esc hides an open tooltip without moving focus; leaving the trigger resets it.
-document.addEventListener('keydown', function (e) { if (e.key === 'Escape') document.querySelectorAll('.np-tip:hover, .np-tip:focus-within, .np-tip[data-open]').forEach(function (t) { t.setAttribute('data-dismissed', ''); }); });
-document.querySelectorAll('.np-tip').forEach(function (t) { ['mouseleave', 'focusout'].forEach(function (ev) { t.addEventListener(ev, function () { t.removeAttribute('data-dismissed'); }); }); });
-</script>
+<script src="../neptune.js" defer></script>
 </body>
 </html>
