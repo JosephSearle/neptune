@@ -1,0 +1,49 @@
+<!-- @dsCard group="Navigation" height=520 subtitle="Open state, results grouped; ⌘K or the button reopens it as a modal" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>SearchDialog</title>
+<style>body{margin:0;padding:24px}.stage{position:relative;min-height:440px}.stage .np-search{position:static;margin:var(--space-6) 0 0}</style></head>
+<body class="np-root">
+<div class="stage">
+  <button class="np-nav__search" type="button" id="open"><span class="np-search-text">Search</span> <kbd class="np-kbd">⌘</kbd><kbd class="np-kbd">K</kbd></button>
+  <dialog class="np-search" aria-label="Search" open>
+    <form class="np-search__box" method="dialog">
+      <span class="np-input"><input type="search" value="gateway" aria-label="Search notes and playbooks" autocomplete="off"></span>
+      <kbd class="np-kbd">Esc</kbd>
+    </form>
+    <div class="np-search__results">
+      <p class="np-search__group">Playbooks</p>
+      <ul class="np-search__list">
+        <li><a class="np-search__item" href="#" aria-selected="true"><span>Install the <mark>gateway</mark></span><span class="np-meta">MCP</span></a></li>
+        <li><a class="np-search__item" href="#" aria-selected="false"><span>Rotating the <mark>gateway</mark> key</span><span class="np-meta">MCP</span></a></li>
+      </ul>
+      <p class="np-search__group">Notes</p>
+      <ul class="np-search__list">
+        <li><a class="np-search__item" href="#" aria-selected="false"><span>One <mark>gateway</mark> for every tool</span><span class="np-meta">2026-10-08</span></a></li>
+      </ul>
+    </div>
+    <div class="np-search__foot"><span>↑ ↓ move</span><span>↵ open</span><span>Esc close</span></div>
+  </dialog>
+</div>
+<script>
+var dlg = document.querySelector('.np-search');
+var items = function () { return Array.prototype.slice.call(dlg.querySelectorAll('.np-search__item')); };
+function move(d) {
+  var list = items(), i = list.findIndex(function (a) { return a.getAttribute('aria-selected') === 'true'; });
+  var n = (i + d + list.length) % list.length;
+  list.forEach(function (a, k) { a.setAttribute('aria-selected', String(k === n)); });
+  list[n].scrollIntoView({ block: 'nearest' });
+}
+function openModal() { if (dlg.open) dlg.close(); dlg.showModal(); dlg.querySelector('input').focus(); }
+document.getElementById('open').addEventListener('click', openModal);
+document.addEventListener('keydown', function (e) {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openModal(); }
+});
+dlg.addEventListener('keydown', function (e) {
+  if (e.key === 'ArrowDown') { e.preventDefault(); move(1); }
+  if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
+  if (e.key === 'Enter') { e.preventDefault(); var s = dlg.querySelector('[aria-selected="true"]'); if (s) s.click(); }
+});
+</script>
+</body>
+</html>

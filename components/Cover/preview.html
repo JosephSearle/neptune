@@ -1,0 +1,54 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../bundle.css">
+<title>Neptune</title>
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--paper); color:var(--ink); font-family:var(--font-serif); overflow:hidden; }
+  .cover { position:relative; height:288px; width:960px; overflow:hidden; }
+  .art { position:absolute; top:0; left:480px; width:480px; height:288px; overflow:hidden; }
+  .art svg { display:block; width:480px; height:288px; }
+  .brand { fill:var(--neptune); }
+  .deep { fill:var(--ink); }
+  .accent { fill:var(--term-accent); }
+  .sq { rx:var(--radius-none); }
+  .orbit { fill:none; stroke:var(--paper); stroke-width:2; }
+  .planet { fill:var(--neptune); }
+  .words { position:absolute; left:var(--space-8); bottom:var(--space-8); max-width:440px; }
+  .name { margin:0; font-size:112px; line-height:.92; font-weight:400; letter-spacing:-.02em; color:var(--ink); }
+  .stamp { position:absolute; left:var(--space-8); top:var(--space-6); margin:0; font-family:var(--font-mono); font-size:11px; line-height:16px; letter-spacing:.04em; color:var(--ink-muted); }
+  .tag { margin:var(--space-3) 0 0 4px; font-family:var(--font-mono); font-size:13px; line-height:20px; letter-spacing:.04em; color:var(--ink-muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      neptune 192×264 bled off the top (the brand, largest) · ink 280×192 bleeding off the right · term-accent 128×56 bled off the top (relief tint; neptune-soft vanished on Deep) · ≈40% of 960×288
+  arrangement one tall neptune slab with an ink satellite and a small accent band, bottoms on one line space-8 above the edge, space-4 gutters
+  pattern     literal motif, chosen because the brand is named for a planet: four concentric orbit arcs in the paper colour centred on the slab's bottom-right corner, cutting through slab and ink, plus one planet disc on the third orbit
+  scales      sides in space-4/space-8 multiples; gutters space-4; orbit radii space-12 steps (48/96/144/192); stroke stroke-key; corners radius-none
+-->
+<rect class="brand sq" x="0" y="-8" width="192" height="264"/>
+<rect class="accent sq" x="208" y="-8" width="128" height="56"/>
+<rect class="deep sq" x="208" y="64" width="288" height="192"/>
+<path class="orbit" d="M144 256 A48 48 0 0 1 240 256"/>
+<path class="orbit" d="M96 256 A96 96 0 0 1 288 256"/>
+<path class="orbit" d="M48 256 A144 144 0 0 1 336 256"/>
+<path class="orbit" d="M0 256 A192 192 0 0 1 384 256"/>
+<circle class="planet" cx="316.7" cy="184" r="8"/>
+</svg>
+</div>
+<p class="stamp">NEPTUNE / 1.0 · LDN · 2026-10-13 · 35 COMPONENTS · 2 THEMES</p>
+<div class="words">
+  <h1 class="name">Neptune</h1>
+  <p class="tag">An engineer's notebook, printed on paper.</p>
+</div>
+</div>
+</body>
+</html>

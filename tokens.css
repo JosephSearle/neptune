@@ -1,0 +1,68 @@
+/* Neptune — generated from tokens.json */
+:root, [data-theme="light"] {
+  --paper: #f4f1ea;
+  --paper-raised: #fbf9f4;
+  --paper-sunk: #ebe6db;
+  --line: #d6cfc0;
+  --line-strong: #7a7466;
+  --ink: #141a2e;
+  --ink-muted: #545a6b;
+  --neptune: #1f3bff;
+  --neptune-soft: #dfe4ff;
+  --on-neptune: #ffffff;
+  --focus: var(--neptune);
+  --ok: #0d6b63;
+  --alert: #b4400a;
+  --term-bg: #141a2e;
+  --term-ink: #e8e4d8;
+  --term-muted: #8d93a6;
+  --term-accent: #8fa2ff;
+  --shadow-press: 3px 3px 0 #141a2e;
+}
+[data-theme="dark"] {
+  --paper: #0b0e18;
+  --paper-raised: #121626;
+  --paper-sunk: #070910;
+  --line: #262c40;
+  --line-strong: #626a82;
+  --ink: #ebe7dc;
+  --ink-muted: #9aa0b2;
+  --neptune: #6f86ff;
+  --neptune-soft: #151c3d;
+  --on-neptune: #0b0e18;
+  --focus: var(--neptune);
+  --ok: #4fd1c0;
+  --alert: #ff9a5c;
+  --term-bg: #05070d;
+  --term-ink: #e8e4d8;
+  --term-muted: #8d93a6;
+  --term-accent: #8fa2ff;
+  --shadow-press: 3px 3px 0 #6f86ff;
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-full: 9999px;
+  --stroke-hairline: 1px;
+  --stroke-key: 2px;
+  --font-serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+.display-xl { font-family: var(--font-serif); font-size: 72px; line-height: 72px; font-weight: 400; letter-spacing: -0.02em; }
+.display { font-family: var(--font-serif); font-size: 48px; line-height: 52px; font-weight: 400; letter-spacing: -0.015em; }
+.heading { font-family: var(--font-serif); font-size: 32px; line-height: 38px; font-weight: 400; letter-spacing: -0.01em; }
+.title { font-family: var(--font-serif); font-size: 22px; line-height: 28px; font-weight: 500; }
+.body { font-family: var(--font-serif); font-size: 18px; line-height: 28px; font-weight: 400; }
+.body-sm { font-family: var(--font-serif); font-size: 16px; line-height: 24px; font-weight: 400; }
+.quote { font-family: var(--font-serif); font-size: 24px; line-height: 34px; font-weight: 300; font-style: italic; }
+.label { font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 0.08em; }
+.meta { font-family: var(--font-mono); font-size: 11px; line-height: 16px; font-weight: 400; letter-spacing: 0.04em; }
+.code { font-family: var(--font-mono); font-size: 14px; line-height: 22px; font-weight: 400; }

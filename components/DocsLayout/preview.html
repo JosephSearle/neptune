@@ -1,0 +1,66 @@
+<!-- @dsCard group="Layout" height=900 width=1280 subtitle="A full docs page: sidebar, content, on this page" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>DocsLayout</title>
+<style>body{margin:0}.np-container{padding-top:var(--space-12);padding-bottom:var(--space-12)}</style></head>
+<body class="np-root">
+<div class="np-container">
+<div class="np-docs">
+  <aside class="np-docs__side">
+    <details class="np-sidebar" open>
+      <summary>Contents</summary>
+      <div class="np-sidebar__group">
+        <p class="np-sidebar__heading">01 · MCP</p>
+        <ul>
+          <li><a href="#">Install the gateway</a></li>
+          <li><a href="#">Tool scoping</a></li>
+          <li><a href="#" aria-current="page">Servers in production</a></li>
+          <li><a href="#">Audit logs</a></li>
+        </ul>
+      </div>
+      <div class="np-sidebar__group">
+        <p class="np-sidebar__heading">02 · Retrieval</p>
+        <ul>
+          <li><a href="#">Search first</a></li>
+          <li><a href="#">GraphRAG vs vector RAG</a></li>
+        </ul>
+      </div>
+    </details>
+  </aside>
+  <article class="np-docs__main">
+    <nav class="np-crumbs" aria-label="Breadcrumb"><ol><li><a href="#">Playbooks</a></li><li><a href="#">MCP</a></li><li><span aria-current="page">Servers in production</span></li></ol></nav>
+    <header class="np-article-head">
+      <p class="np-article-head__stamp">Playbook · 2026-10-08</p>
+      <h1 class="np-article-head__title">Servers in production</h1>
+      <p class="np-article-head__lead">Auth, tool scoping and audit logs for servers agents actually call.</p>
+      <div class="np-article-head__foot"><p class="np-article-head__byline">By <strong>Joseph Searle</strong></p><div class="np-row" style="gap:var(--space-2)"><span class="np-tag">MCP</span></div></div>
+    </header>
+    <div class="np-prose">
+      <p>An agent should never decide what it is allowed to do. Put the scope check in the server, next to the tool, and log every call.</p>
+      <aside class="np-callout np-callout--tip" role="note">
+        <div class="np-callout__label">[ Tip ]</div>
+        <div class="np-callout__body"><p>Start every server read-only. Add write tools one at a time, each behind its own scope.</p></div>
+      </aside>
+      <h2 id="log">What to log</h2>
+      <p>Who called, with which token. Which tool, with which arguments. What came back, and how long it took.</p>
+    </div>
+    <div class="np-rule">∴</div>
+    <nav class="np-pager" aria-label="Pages">
+      <a class="np-pager__link" href="#"><span class="np-pager__dir">← Previous</span><span class="np-pager__title">Tool scoping</span></a>
+      <a class="np-pager__link np-pager__link--next" href="#"><span class="np-pager__dir">Next →</span><span class="np-pager__title">Audit logs</span></a>
+    </nav>
+  </article>
+  <aside class="np-docs__toc">
+    <nav class="np-toc" aria-label="On this page">
+      <p class="np-toc__label">On this page</p>
+      <ol class="np-toc__list">
+        <li><a href="#">Overview</a></li>
+        <li><a href="#log" aria-current="true">What to log</a></li>
+        <li><a href="#">Rotating keys</a></li>
+      </ol>
+    </nav>
+  </aside>
+</div>
+</div>
+</body>
+</html>

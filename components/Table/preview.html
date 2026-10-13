@@ -1,0 +1,18 @@
+<!-- @dsCard group="Content" height=260 subtitle="Indexed rows, mono headers, tabular numbers" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Table</title>
+<style>body{margin:0;padding:24px}</style></head>
+<body class="np-root">
+<div class="np-table-wrap">
+<table class="np-table">
+  <thead><tr><th>#</th><th>Approach</th><th>Status</th><th class="num">p95 latency</th><th class="num">Cost / 1k</th></tr></thead>
+  <tbody>
+    <tr><td class="idx">01</td><td>Vector RAG</td><td><span class="np-tag np-tag--ok"><span class="np-dot"></span>Shipped</span></td><td class="num">420 ms</td><td class="num">£0.18</td></tr>
+    <tr><td class="idx">02</td><td>GraphRAG</td><td><span class="np-tag">Testing</span></td><td class="num">1,240 ms</td><td class="num">£0.61</td></tr>
+    <tr><td class="idx">03</td><td>Long context only</td><td><span class="np-tag np-tag--alert"><span class="np-dot"></span>Dropped</span></td><td class="num">3,900 ms</td><td class="num">£2.40</td></tr>
+  </tbody>
+</table>
+</div>
+</body>
+</html>

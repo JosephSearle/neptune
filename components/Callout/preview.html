@@ -1,0 +1,22 @@
+<!-- @dsCard group="Content" height=400 subtitle="Note, tip, warning" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Callout</title>
+<style>body{margin:0;padding:24px}.np-stack{gap:var(--space-6);max-width:640px}</style></head>
+<body class="np-root">
+<div class="np-stack">
+  <aside class="np-callout" role="note">
+    <div class="np-callout__label">[ Note ]</div>
+    <div class="np-callout__body"><p>Scopes are checked on the server, not in the agent. The agent never sees a tool it can't call.</p></div>
+  </aside>
+  <aside class="np-callout np-callout--tip" role="note">
+    <div class="np-callout__label">[ Tip ]</div>
+    <div class="np-callout__body"><p>Run <code class="np-code-inline">npx neptune init --dry-run</code> first to see what changes.</p></div>
+  </aside>
+  <aside class="np-callout np-callout--warn" role="note">
+    <div class="np-callout__label">[ Warning ]</div>
+    <div class="np-callout__body"><p>Rotating the gateway key logs out every connected agent. Schedule it.</p></div>
+  </aside>
+</div>
+</body>
+</html>

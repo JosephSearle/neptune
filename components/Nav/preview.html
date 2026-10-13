@@ -1,0 +1,37 @@
+<!-- @dsCard group="Navigation" height=300 subtitle="Desktop, and phone with the menu open" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Nav</title>
+<style>body{margin:0}.phone{width:390px;margin:24px;border:1px solid var(--line)}.phone .np-nav__links{display:none}.phone .np-nav__menu{display:block}.phone .np-search-text{display:none}.phone .np-nav{padding:12px 16px}.phone{height:220px}</style></head>
+<body class="np-root">
+<nav class="np-nav">
+  <a class="np-nav__brand" href="#"><span class="np-nav__mark">Neptune</span><span class="np-meta">v1.0 · LDN</span></a>
+  <ul class="np-nav__links">
+    <li><a href="#" aria-current="page">Notes</a></li>
+    <li><a href="#">Playbooks</a></li>
+    <li><a href="#">Projects</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <div class="np-nav__actions">
+    <button class="np-nav__search" type="button"><span class="np-search-text">Search</span> <kbd class="np-kbd">⌘</kbd><kbd class="np-kbd">K</kbd></button>
+  </div>
+</nav>
+<div class="phone">
+<nav class="np-nav">
+  <a class="np-nav__brand" href="#"><span class="np-nav__mark">Neptune</span></a>
+  <div class="np-nav__actions">
+    <button class="np-nav__search" type="button" aria-label="Search"><span class="np-search-text">Search</span> <kbd class="np-kbd">⌘</kbd><kbd class="np-kbd">K</kbd></button>
+    <details class="np-nav__menu" open>
+      <summary>Menu</summary>
+      <ul>
+        <li><a href="#" aria-current="page">Notes</a></li>
+        <li><a href="#">Playbooks</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </details>
+  </div>
+</nav>
+</div>
+</body>
+</html>

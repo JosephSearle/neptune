@@ -1,0 +1,48 @@
+<!-- @dsCard group="Content" height=600 subtitle="Plain cards, then cards with an image slot" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Card</title>
+<style>body{margin:0;padding:24px}.np-stack{gap:var(--space-8)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--space-8)}</style></head>
+<body class="np-root">
+<div class="np-stack">
+<div class="grid">
+  <a class="np-card" href="#">
+    <div class="np-card__bar"><span>01 / Playbook</span><span class="np-tag np-tag--accent">New</span></div>
+    <div class="np-card__body">
+      <h3 class="np-card__title">MCP servers in production</h3>
+      <p class="np-card__text">Auth, tool scoping and audit logs for servers agents actually call.</p>
+    </div>
+    <div class="np-card__foot"><span>2026-10-08</span><span>8 min →</span></div>
+  </a>
+  <a class="np-card" href="#">
+    <div class="np-card__bar"><span>02 / Research</span><span>[ Draft ]</span></div>
+    <div class="np-card__body">
+      <h3 class="np-card__title">GraphRAG vs vector RAG</h3>
+      <p class="np-card__text">When a graph earns its keep, and when embeddings are enough.</p>
+    </div>
+    <div class="np-card__foot"><span>2026-10-07</span><span>12 min →</span></div>
+  </a>
+</div>
+<div class="grid">
+  <a class="np-card" href="#">
+    <div class="np-card__bar"><span>03 / Playbook</span></div>
+    <div class="np-card__media np-slot"><span>[ Image · 16:9 ]</span></div>
+    <div class="np-card__body">
+      <h3 class="np-card__title">Observability for agents</h3>
+      <p class="np-card__text">Traces, evals and cost per run in MLflow.</p>
+    </div>
+    <div class="np-card__foot"><span>2026-10-05</span><span>10 min →</span></div>
+  </a>
+  <a class="np-card" href="#">
+    <div class="np-card__bar"><span>04 / Notes</span></div>
+    <div class="np-card__media np-slot"><span>[ Image · 16:9 ]</span></div>
+    <div class="np-card__body">
+      <h3 class="np-card__title">Skills over prompts</h3>
+      <p class="np-card__text">Package a workflow once, load it on demand.</p>
+    </div>
+    <div class="np-card__foot"><span>2026-10-03</span><span>6 min →</span></div>
+  </a>
+</div>
+</div>
+</body>
+</html>

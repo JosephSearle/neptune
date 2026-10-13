@@ -1,0 +1,21 @@
+<!-- @dsCard group="Forms" height=240 subtitle="Checkbox group and radio group" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Checkbox</title>
+<style>body{margin:0;padding:24px}.np-row{align-items:flex-start;gap:var(--space-16)}</style></head>
+<body class="np-root">
+<div class="np-row">
+  <fieldset class="np-fieldset">
+    <legend class="np-field__label">Notify me about</legend>
+    <label class="np-check"><input type="checkbox" checked> New playbooks</label>
+    <label class="np-check"><input type="checkbox"> Research notes</label>
+    <label class="np-check"><input type="checkbox" disabled> Talks (none yet)</label>
+  </fieldset>
+  <fieldset class="np-fieldset">
+    <legend class="np-field__label">Frequency</legend>
+    <label class="np-check"><input type="radio" name="freq" checked> When something ships</label>
+    <label class="np-check"><input type="radio" name="freq"> Monthly digest</label>
+  </fieldset>
+</div>
+</body>
+</html>

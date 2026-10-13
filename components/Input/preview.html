@@ -1,0 +1,20 @@
+<!-- @dsCard group="Forms" height=200 subtitle="Prompt-style input, default and error" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Input</title>
+<style>body{margin:0;padding:24px}.np-stack{max-width:420px}</style></head>
+<body class="np-root">
+<div class="np-stack">
+  <label class="np-field">
+    <span class="np-field__label">Email</span>
+    <span class="np-input"><input type="email" placeholder="you@domain.com"></span>
+    <span class="np-field__hint">One note a month. Unsubscribe any time.</span>
+  </label>
+  <label class="np-field np-field--error">
+    <span class="np-field__label">Repo</span>
+    <span class="np-input"><input value="josephsearle/neptune ui"></span>
+    <span class="np-field__hint">Invalid name: spaces not allowed. Use kebab-case.</span>
+  </label>
+</div>
+</body>
+</html>

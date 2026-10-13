@@ -1,0 +1,45 @@
+<!-- @dsCard group="Content" height=220 subtitle="Install commands per package manager" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Tabs</title>
+<style>body{margin:0;padding:24px}.np-tabs{max-width:640px}</style></head>
+<body class="np-root">
+<div class="np-tabs">
+  <div class="np-tabs__list" role="tablist" aria-label="Package manager">
+    <button class="np-tabs__tab" role="tab" id="t-npm" aria-selected="true" aria-controls="p-npm">npm</button>
+    <button class="np-tabs__tab" role="tab" id="t-pnpm" aria-selected="false" aria-controls="p-pnpm" tabindex="-1">pnpm</button>
+    <button class="np-tabs__tab" role="tab" id="t-pip" aria-selected="false" aria-controls="p-pip" tabindex="-1">pip</button>
+  </div>
+  <div class="np-tabs__panel" role="tabpanel" id="p-npm" aria-labelledby="t-npm">
+    <div class="np-code"><pre><code><span class="p">$</span> <span class="c">npm install @neptune/tokens</span></code></pre></div>
+  </div>
+  <div class="np-tabs__panel" role="tabpanel" id="p-pnpm" aria-labelledby="t-pnpm" hidden>
+    <div class="np-code"><pre><code><span class="p">$</span> <span class="c">pnpm add @neptune/tokens</span></code></pre></div>
+  </div>
+  <div class="np-tabs__panel" role="tabpanel" id="p-pip" aria-labelledby="t-pip" hidden>
+    <div class="np-code"><pre><code><span class="p">$</span> <span class="c">pip install neptune-tokens</span></code></pre></div>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.np-tabs').forEach(function (root) {
+  var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+  function select(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    tab.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') select(tabs[(i + 1) % tabs.length]);
+      if (e.key === 'ArrowLeft') select(tabs[(i - 1 + tabs.length) % tabs.length]);
+    });
+  });
+});
+</script>
+</body>
+</html>
