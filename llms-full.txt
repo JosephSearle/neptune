@@ -83,7 +83,7 @@ To use it in a site, copy `tokens.css`, `components/bundle.css` and the `brand/`
 - A browser with CSS custom properties and `prefers-color-scheme`. No JavaScript runtime.
 - Google Fonts, imported by `bundle.css`: Newsreader and IBM Plex Mono. Self-host for production.
 - Tooling only: Node.js 22 (CI's version) for the token, `llms.txt` and lint scripts and Playwright.
-- Brand files only: Python 3 with `fonttools`, for `scripts/build-brand.py`.
+- Brand files only: Python 3 with `fonttools`, `brotli` and `pillow`, for `scripts/build-brand.py`.
 
 ## Usage
 
@@ -135,7 +135,7 @@ The tooling runs through npm scripts:
 | `npm run check` | Everything CI runs; writes nothing |
 | `npm run visual` | Screenshot every preview in both themes and compare |
 
-`python3 scripts/build-brand.py` rebuilds the logo, favicon set and social card from `tokens.json`.
+`python3 scripts/build-brand.py <newsreader-500.woff2>` rebuilds the logo, favicon set and social card from `tokens.json`; [CONTRIBUTING.md](CONTRIBUTING.md#making-a-change) has the full command.
 
 ### Tokens
 
@@ -323,7 +323,7 @@ A release updates the version stamps (README, Cover, Nav, Hero, Footer previews,
 
 ## Contributing
 
-Neptune is a personal system, so it doesn't take pull requests for new direction. Bug reports and fixes are welcome: [open an issue](https://github.com/JosephSearle/neptune/issues/new) first.
+Neptune is a personal system, so it doesn't take pull requests for new direction. Bug reports and fixes are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for how to report a bug, set up, and get a pull request merged.
 
 Before you push, run the checks:
 
