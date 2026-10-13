@@ -1,0 +1,50 @@
+<!-- @dsCard group="Status" height=380 subtitle="Ok, alert with action, neutral" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Toast</title>
+<style>body{margin:0;padding:24px;min-height:340px}.np-toasts{position:static}</style></head>
+<body class="np-root">
+<section class="np-toasts" aria-label="Notifications" aria-live="polite">
+  <div class="np-toast np-toast--ok">
+    <p class="np-toast__label"><span class="np-dot"></span> Published</p>
+    <p class="np-toast__text">MCP servers in production is live at /playbooks/mcp.</p>
+    <button class="np-toast__close" type="button">Dismiss</button>
+  </div>
+  <div class="np-toast np-toast--alert" role="alert">
+    <p class="np-toast__label"><span class="np-dot"></span> Failed</p>
+    <p class="np-toast__text">Deploy failed: missing API_BASE_URL. Set it in .env.</p>
+    <div class="np-toast__actions"><button class="np-toast__action" type="button">View log</button></div>
+    <button class="np-toast__close" type="button">Dismiss</button>
+  </div>
+  <div class="np-toast">
+    <p class="np-toast__label">Archived</p>
+    <p class="np-toast__text">3 notes moved to the archive.</p>
+    <div class="np-toast__actions"><button class="np-toast__action" type="button">Undo</button></div>
+    <button class="np-toast__close" type="button">Dismiss</button>
+  </div>
+</section>
+<script>
+// toast(kind, label, text): adds a toast; ok/neutral leave after 6s unless hovered or focused.
+function toast(kind, label, text) {
+  var region = document.querySelector('.np-toasts'), t = document.createElement('div');
+  t.className = 'np-toast' + (kind ? ' np-toast--' + kind : '');
+  if (kind === 'alert') t.setAttribute('role', 'alert');
+  t.innerHTML = '<p class="np-toast__label">' + (kind ? '<span class="np-dot"></span> ' : '') + '</p><p class="np-toast__text"></p><button class="np-toast__close" type="button">Dismiss</button>';
+  t.querySelector('.np-toast__label').append(label);
+  t.querySelector('.np-toast__text').textContent = text;
+  region.append(t);
+  while (region.children.length > 3) region.firstElementChild.remove();
+  if (kind !== 'alert') {
+    var left = 6000, start, id, run = function () { start = Date.now(); id = setTimeout(function () { t.remove(); }, left); };
+    var hold = function () { clearTimeout(id); left -= Date.now() - start; };
+    t.addEventListener('mouseenter', hold); t.addEventListener('focusin', hold);
+    t.addEventListener('mouseleave', run); t.addEventListener('focusout', run);
+    run();
+  }
+}
+document.addEventListener('click', function (e) {
+  if (e.target.matches('.np-toast__close')) e.target.closest('.np-toast').remove();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!-- @dsCard group="Status" height=160 subtitle="On a button and on a term, shown open" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Tooltip</title>
+<style>body{margin:0;padding:72px 24px 24px}.np-row{gap:var(--space-16)}p{margin:0;font-size:16px;line-height:24px}abbr{text-decoration:underline dotted;text-underline-offset:3px;cursor:help}</style></head>
+<body class="np-root">
+<div class="np-row">
+  <span class="np-tip" data-open>
+    <button class="np-btn" type="button" aria-describedby="tip-run">Re-run evals</button>
+    <span class="np-tip__bubble" role="tooltip" id="tip-run">Uses the last saved judge. About 4 min.</span>
+  </span>
+  <p>Each tool needs an
+    <span class="np-tip"><abbr tabindex="0" aria-describedby="tip-scope">OAuth scope</abbr><span class="np-tip__bubble" role="tooltip" id="tip-scope">A permission string the server checks per call.</span></span>.
+  </p>
+</div>
+<script>
+// Esc hides an open tooltip without moving focus; leaving the trigger resets it.
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') document.querySelectorAll('.np-tip:hover, .np-tip:focus-within, .np-tip[data-open]').forEach(function (t) { t.setAttribute('data-dismissed', ''); }); });
+document.querySelectorAll('.np-tip').forEach(function (t) { ['mouseleave', 'focusout'].forEach(function (ev) { t.addEventListener(ev, function () { t.removeAttribute('data-dismissed'); }); }); });
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!-- @dsCard group="Status" height=420 subtitle="Destructive confirmation, typed name to enable" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Dialog</title>
+<style>body{margin:0;padding:24px;min-height:380px}.np-dialog[open]:not(:modal){position:static;margin:0}</style></head>
+<body class="np-root">
+<dialog class="np-dialog np-dialog--danger" open aria-labelledby="del-title" aria-describedby="del-text">
+  <form class="np-dialog__box" method="dialog">
+    <p class="np-dialog__label">[ Irreversible ]</p>
+    <h2 class="np-dialog__title" id="del-title">Delete mcp-gateway?</h2>
+    <div class="np-dialog__body">
+      <p id="del-text">This removes the project, its 14 runs and its 3 API keys. Connected agents lose access at once.</p>
+      <label class="np-field">
+        <span class="np-field__label">Type mcp-gateway to confirm</span>
+        <span class="np-input"><input id="del-name" autocomplete="off" spellcheck="false"></span>
+      </label>
+    </div>
+    <div class="np-dialog__foot">
+      <button class="np-btn" value="cancel" autofocus>Cancel</button>
+      <button class="np-btn np-btn--danger" value="confirm" id="del-go" disabled>Delete project</button>
+    </div>
+  </form>
+</dialog>
+<script>
+// Enable the destructive action only when the typed name matches.
+var input = document.getElementById('del-name'), go = document.getElementById('del-go');
+input.addEventListener('input', function () { go.disabled = input.value.trim() !== 'mcp-gateway'; });
+// In a page: dialog.showModal() from a trigger; on 'close', check dialog.returnValue === 'confirm'.
+</script>
+</body>
+</html>

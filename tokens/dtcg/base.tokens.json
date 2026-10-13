@@ -194,6 +194,14 @@
     "z-dialog": {
       "$value": 100,
       "$description": "Dialogs and their backdrop, such as search."
+    },
+    "z-toast": {
+      "$value": 200,
+      "$description": "The toast stack. Above dialogs, so a result can land while one is open."
+    },
+    "z-tooltip": {
+      "$value": 300,
+      "$description": "Tooltips. Above everything."
     }
   },
   "typography": {

@@ -30,7 +30,8 @@ Keep it true. A stamp that lies (fake version numbers, fake uptime) is decoratio
 - Put `neptune` text on `neptune-soft` for accent tags and selections. Put `on-neptune` on a `neptune` fill.
 - Draw meaningful borders (inputs, cards, tags, kbd) in `line-strong`. Use `line` only for decorative rules.
 - Use `ok` and `alert` for state, always with a word or the `np-dot`. Never colour alone.
-- Terminals and code blocks stay dark in both themes: `term-bg` with `term-ink`, `term-muted` for prompts, `term-accent` for commands.
+- Fill `alert` only for the danger button, with `on-alert` text.
+- Terminals, code blocks, toasts and tooltips stay dark in both themes: `term-bg` with `term-ink`, `term-muted` for prompts, `term-accent` for commands and actions, `term-ok` and `term-alert` for state.
 
 ## Type
 
@@ -63,7 +64,7 @@ Build a docs page from one recipe, in this order:
 3. End main with a Rule and the Pager.
 
 One page, one `aria-current` per list: the open page in the Sidebar, the visible heading in On this page.
-- Layers: `z-menu` for menus, `z-dialog` for dialogs. Nothing else sets a z-index.
+- Layers: `z-menu` for menus, `z-dialog` for dialogs, `z-toast` for the toast stack, `z-tooltip` for tooltips. Nothing else sets a z-index.
 
 ## Slides
 
@@ -148,7 +149,7 @@ Buttons and fields share one set of states. Use the attribute, not a class:
 | Disabled | `disabled`, or `aria-disabled="true"` on a link with no `href` | `disabled`; box sinks to `paper-sunk` |
 | Busy | `aria-busy="true"` plus `disabled`; a block cursor blinks after the label | — |
 | Read-only | — | `readonly`; `paper-sunk`, still focusable |
-| Invalid | — | `aria-invalid="true"` + `aria-describedby`; border, prompt and hint turn `alert` | Wrap the page in `np-root` and its content in `np-container`. Build pages from components: Nav, Hero, SectionHead, Card, Figure, Split, Feed, Table, Prose, CodeCopy, Footer. Docs pages add DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout and Tabs. Forms use Input, Select, Textarea, Checkbox and Switch. Lay out index pages on PageGrid. Every site gets SearchDialog behind ⌘K and an EmptyState for anything that can come back empty. Style nothing inline that a component or type class already covers.
+| Invalid | — | `aria-invalid="true"` + `aria-describedby`; border, prompt and hint turn `alert` | Wrap the page in `np-root` and its content in `np-container`. Build pages from components: Nav, Hero, SectionHead, Card, Figure, Split, Feed, Table, Prose, CodeCopy, Footer. Docs pages add DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout and Tabs. Forms use Input, Select, Textarea, Checkbox and Switch. Lay out index pages on PageGrid. Every site gets SearchDialog behind ⌘K and an EmptyState for anything that can come back empty. Feedback uses Toast for results, Dialog for decisions and Tooltip for optional hints; destructive actions go through a Dialog with `np-btn--danger`. Style nothing inline that a component or type class already covers.
 
 ## Wordmark
 
@@ -156,7 +157,7 @@ No logo yet. Set "Neptune" in Newsreader 500, -0.01em, `ink`. Pair it with a `me
 
 ## Changelog
 
-- Unreleased: disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
+- Unreleased: Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
 
 - 1.0 · 2026-10-13: 35 components. Audit fixes (one focus ring, reduced-motion lift, terminal edges in Deep, 44px touch targets, measured contrast). Layout, breakpoint, timing and z-index tokens. Docs set (DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout, Tabs), forms (Select, Textarea, Checkbox, Switch), SearchDialog, EmptyState, PageGrid, Figure, Split, Feed. Slide type scale. Open: logo.
 - 0.1 · 2026-10-13: tokens in two themes, 15 components, brand book.

@@ -53,6 +53,10 @@
       "$value": "{primitive.orange.300}",
       "$description": "Warning, failure or breaking change. Always paired with a word. As text, on paper and paper-raised."
     },
+    "on-alert": {
+      "$value": "{primitive.slate.950}",
+      "$description": "Text on an alert fill: the danger button. 5.7:1 (Paper), 9.2:1 (Deep)."
+    },
     "term-bg": {
       "$value": "{primitive.slate.990}",
       "$description": "Terminal and code-block ground. Dark in both themes."
@@ -68,6 +72,14 @@
     "term-accent": {
       "$value": "{primitive.blue.300}",
       "$description": "Commands, paths and highlights on term-bg."
+    },
+    "term-ok": {
+      "$value": "{primitive.green.300}",
+      "$description": "Healthy / done state on term-bg: toast labels. Always with a word."
+    },
+    "term-alert": {
+      "$value": "{primitive.orange.300}",
+      "$description": "Warning or failure on term-bg: toast labels. Always with a word."
     }
   },
   "shadow": {
