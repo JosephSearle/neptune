@@ -161,13 +161,13 @@ Buttons and fields share one set of states. Use the attribute, not a class:
 | Read-only | — | `readonly`; `paper-sunk`, still focusable |
 | Invalid | — | `aria-invalid="true"` + `aria-describedby`; border, prompt and hint turn `alert` |
 
-## Wordmark
+## Logo
 
-No logo yet. Set "Neptune" in Newsreader 500, -0.01em, `ink`. Pair it with a `meta` version stamp. Do not draw a mark until one is designed.
+The mark is Neptune's trident (♆), square-stroked on a 24-unit grid in a `neptune` tile; the lockup adds the wordmark, "Neptune" in Newsreader 500 at -0.01em. Files, sizes, clear space and the favicon and social card are in Logo. Where the mark would be the only blue on a page that has spent its `neptune`, use the single-ink version.
 
 ## Changelog
 
-- Unreleased: Chart, with a measured data-viz palette (`viz-1`…`viz-6`, `viz-other`, `viz-grid`, `viz-axis`, `viz-seq-1`…`7`, `viz-div-*`) and new primitive families (gold, plum, cyan, red). `llms.txt` and `llms-full.txt` for agents, generated and checked in CI. System theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
+- Unreleased: Logo: the trident mark, lockups for Paper and Deep, single ink, favicon set and social card, all built from tokens by `scripts/build-brand.py`. Chart, with a measured data-viz palette (`viz-1`…`viz-6`, `viz-other`, `viz-grid`, `viz-axis`, `viz-seq-1`…`7`, `viz-div-*`) and new primitive families (gold, plum, cyan, red). `llms.txt` and `llms-full.txt` for agents, generated and checked in CI. System theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
 
 - 1.0 · 2026-10-13: 35 components. Audit fixes (one focus ring, reduced-motion lift, terminal edges in Deep, 44px touch targets, measured contrast). Layout, breakpoint, timing and z-index tokens. Docs set (DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout, Tabs), forms (Select, Textarea, Checkbox, Switch), SearchDialog, EmptyState, PageGrid, Figure, Split, Feed. Slide type scale. Open: logo.
 - 0.1 · 2026-10-13: tokens in two themes, 15 components, brand book.

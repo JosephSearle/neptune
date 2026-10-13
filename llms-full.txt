@@ -167,13 +167,13 @@ Buttons and fields share one set of states. Use the attribute, not a class:
 | Read-only | — | `readonly`; `paper-sunk`, still focusable |
 | Invalid | — | `aria-invalid="true"` + `aria-describedby`; border, prompt and hint turn `alert` |
 
-## Wordmark
+## Logo
 
-No logo yet. Set "Neptune" in Newsreader 500, -0.01em, `ink`. Pair it with a `meta` version stamp. Do not draw a mark until one is designed.
+The mark is Neptune's trident (♆), square-stroked on a 24-unit grid in a `neptune` tile; the lockup adds the wordmark, "Neptune" in Newsreader 500 at -0.01em. Files, sizes, clear space and the favicon and social card are in Logo. Where the mark would be the only blue on a page that has spent its `neptune`, use the single-ink version.
 
 ## Changelog
 
-- Unreleased: Chart, with a measured data-viz palette (`viz-1`…`viz-6`, `viz-other`, `viz-grid`, `viz-axis`, `viz-seq-1`…`7`, `viz-div-*`) and new primitive families (gold, plum, cyan, red). `llms.txt` and `llms-full.txt` for agents, generated and checked in CI. System theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
+- Unreleased: Logo: the trident mark, lockups for Paper and Deep, single ink, favicon set and social card, all built from tokens by `scripts/build-brand.py`. Chart, with a measured data-viz palette (`viz-1`…`viz-6`, `viz-other`, `viz-grid`, `viz-axis`, `viz-seq-1`…`7`, `viz-div-*`) and new primitive families (gold, plum, cyan, red). `llms.txt` and `llms-full.txt` for agents, generated and checked in CI. System theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
 
 - 1.0 · 2026-10-13: 35 components. Audit fixes (one focus ring, reduced-motion lift, terminal edges in Deep, 44px touch targets, measured contrast). Layout, breakpoint, timing and z-index tokens. Docs set (DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout, Tabs), forms (Select, Textarea, Checkbox, Switch), SearchDialog, EmptyState, PageGrid, Figure, Split, Feed. Slide type scale. Open: logo.
 - 0.1 · 2026-10-13: tokens in two themes, 15 components, brand book.
@@ -411,7 +411,7 @@ The page closer on `paper-sunk`: link columns with mono headings, a metadata lin
 
 - Markup: `<footer class="np-footer">` with `np-footer__cols` (each `np-footer__col` an `h4` + `ul`), `np-footer__meta`, and `p.np-footer__giant` marked `aria-hidden`.
 - Consumer provides: 2–4 columns of 3–5 links, the version stamp, and the copyright line.
-- The giant wordmark is decorative and sits flush with the bottom edge, cropped at the descenders. Swap it for the logo once one exists.
+- The giant wordmark is decorative and sits flush with the bottom edge, cropped at the descenders. It stays type: the mark is for small sizes and the Nav.
 - One footer per page.
 
 Source: components/Footer/README.md · Preview: components/Footer/preview.html
@@ -457,6 +457,36 @@ A physical-looking key for shortcuts, with a 2px bottom edge.
 - Show the shortcut beside the action it triggers, e.g. in the nav search button.
 
 Source: components/Kbd/README.md · Preview: components/Kbd/preview.html
+
+---
+
+# Logo
+
+The mark is Neptune's trident (♆, the planet's astronomical sign) drawn on a 24-unit grid with 2-unit square strokes, in a `neptune` square. The lockup sets it beside the "Neptune" wordmark in Newsreader 500, outlined.
+
+- Files in `brand/`: `neptune-mark.svg` and `neptune-mark-deep.svg` (the tile), `neptune-mark-ink.svg` (single ink, no tile), `neptune-lockup.svg` and `neptune-lockup-deep.svg`, the favicon set (`favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`) and the social card (`og-template.html`, `og-default.png`). `scripts/build-brand.py` makes them all from `tokens.json`; don't edit them by hand.
+- Paper pages use the Paper files, Deep pages the Deep ones. `favicon.svg` switches with the system theme by itself.
+- Single ink (`neptune-mark-ink.svg`, in `ink`) is for print, embossing, one-colour merch, and anywhere the blue tile would be the only colour on a page that already spends its `neptune`.
+- Clear space: half the tile on every side. Nothing else enters it, including other marks and the page edge.
+- Minimum size: 16px for the mark, 24px tile height for the lockup. Below that, set the wordmark in type.
+- In the Nav, the mark (20px) may sit before the wordmark; the text wordmark stays, so the name is still text.
+
+## Head tags
+
+```html
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:image" content="https://…/og-default.png">
+```
+
+## Social card
+
+`brand/og-template.html` is a 1200×630 card: stamp, serif title, kind and date, the trident on a `neptune` slab. Open it with `?kind=Playbook&title=MCP%20servers%20in%20production&date=2026-10-08` and screenshot it at 1200×630 for each page; `og-default.png` is the fallback.
+
+- Don't: recolour the mark (other than single ink), round the tile, add a shadow or gradient, rotate it, outline it, set the wordmark in another face, or stretch either.
+
+Source: components/Logo/README.md · Preview: components/Logo/preview.html
 
 ---
 

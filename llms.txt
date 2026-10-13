@@ -74,6 +74,10 @@ Rules an agent most often gets wrong:
 - [Toast](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Toast/README.md): A short machine message after something happens: dark like the terminal in both themes, mono, bottom right.
 - [Tooltip](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Tooltip/README.md): A short mono hint on hover or keyboard focus, dark like the terminal.
 
+## Components: Brand
+
+- [Logo](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Logo/README.md): The mark is Neptune's trident (♆, the planet's astronomical sign) drawn on a 24-unit grid with 2-unit square strokes, in a `neptune` square. The lockup sets it beside the "Neptune" wordmark in Newsreader 500, outlined.
+
 ## Optional
 
 - [DTCG tokens](https://raw.githubusercontent.com/JosephSearle/neptune/main/tokens/dtcg/base.tokens.json): W3C Design Tokens 2025.10 export (with `primitives`, `paper` and `deep` files beside it) for Style Dictionary, Terrazzo or Figma variables.
