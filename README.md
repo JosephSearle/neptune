@@ -2,6 +2,8 @@
 
 Neptune 1.0 (2026-10-13) is Joseph Searle's personal brand: an engineer's notebook printed on paper. Classical serif for ideas, monospace for anything a machine would say, one electric blue for action. Light paper by default; Deep is the dark theme.
 
+Code, tooling and history live in [JosephSearle/neptune](https://github.com/JosephSearle/neptune): the DTCG token export, `llms.txt` for agents and the CI checks are there, not in the design system page.
+
 ## Voice
 
 - Write direct and terse. Short sentences. No filler ("simply", "in order to", "please note").
