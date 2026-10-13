@@ -10,7 +10,7 @@ This guide covers how to get a change accepted. For how to use Neptune, read the
 
 - Be kind and specific. There's no code of conduct file yet; until there is, treat everyone the way you'd want a reviewer to treat you.
 - Open an issue before a pull request, except for the small changes listed under [Small changes](#small-changes).
-- A pull request passes `npm run check` and the visual workflow, or says why it doesn't.
+- A pull request passes `npm run check`, the visual workflow and the a11y workflow, or says why it doesn't.
 - Write in the guide's voice: direct, terse, sentence case, no emoji. See [Voice](README.md#voice).
 
 ## Questions
@@ -106,6 +106,6 @@ The pull request form asks for each of these; fill it in rather than deleting it
 1. Keep each pull request to one change, and link its issue (`Fixes #12`).
 2. Write the title as a [Conventional Commit](https://www.conventionalcommits.org/): `fix:`, `feat:`, `docs:`, `test:` or `ci:`, as in the history (`feat: add Dialog, Toast, Tooltip and the danger button`).
 3. Say what changed visually and in which themes, with before and after screenshots for anything visible.
-4. The `ci` and `visual` workflows run on every pull request. `ci` must pass. `visual` may fail only for the change you described.
+4. The `ci`, `visual` and `a11y` workflows run on every pull request. `ci` and `a11y` must pass. `visual` may fail only for the change you described.
 
 Expect a first reply within a week. The maintainer merges to `main`, records the change in [CHANGELOG.md](CHANGELOG.md), and cuts releases. Don't bump `package.json`'s version yourself, because a new version there publishes a release: the workflow tags `vX.Y.Z`, and sites install that tag. Don't add an install or `prepare` script either; a git install would run it on every site.

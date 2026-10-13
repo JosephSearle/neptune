@@ -175,6 +175,7 @@ The tooling runs through npm scripts:
 | `npm run contrast` | Measure every documented colour pair in both themes; fail below 4.5:1 for text, 3:1 for borders |
 | `npm run check` | Everything CI runs, including the install contents check; writes nothing |
 | `npm run visual` | Screenshot every preview in both themes and compare |
+| `npm run a11y` | Run axe-core on every preview in both themes; fail on serious or critical violations |
 
 `python3 scripts/build-brand.py <newsreader-500.woff2>` rebuilds the logo, favicon set and social card from `tokens.json`; [CONTRIBUTING.md](CONTRIBUTING.md#making-a-change) has the full command.
 
@@ -364,11 +365,14 @@ Before you push, run the checks:
 ```bash
 npm run check
 npm run visual
+npm run a11y
 ```
 
 `npm run check` runs everything CI runs: tokens in sync, `llms.txt` current, a stylelint pass on `components/` that rejects raw colours (hex, `rgb()`, named colours) and any `z-index` that isn't a `z-` token, and `scripts/check-pack.mjs`, which fails if a git install would miss a site file, ship anything outside `files` in `package.json`, or run an install script. A new colour goes into `tokens.json` (and `tokens/primitives.json`) first.
 
 Visual regression: `tests/visual.spec.js` screenshots every component preview in Paper and Deep, with the brand fonts served locally, and CI compares them with `tests/__screenshots__` on every push. After an intended visual change, run the **visual** workflow by hand with *update* ticked; it rewrites the baselines in the same container CI uses and commits them.
+
+Accessibility: `tests/a11y.spec.js` runs axe-core on every component preview in Paper and Deep, in the same container, and the **a11y** workflow fails on any serious or critical violation. Fix the markup, the README or the CSS; don't add an ignore unless the violation is preview-only scaffolding, and say why next to it.
 
 Follow [Versions](#versions) for anything that changes a token, class or component.
 
@@ -984,9 +988,10 @@ Source: components/Rule/README.md · Preview: components/Rule/preview.html
 
 The ⌘K search: a native modal dialog with a prompt input, grouped results and key hints.
 
-- Markup: `<dialog class="np-search" aria-label="Search">` holding `form.np-search__box` (an `np-input` with `type="search"` and an `Esc` Kbd), `div.np-search__results` (per group: `p.np-search__group` and `ul.np-search__list` of `a.np-search__item`), and `div.np-search__foot` with key hints.
+- Markup: `<dialog class="np-search" aria-label="Search">` holding `form.np-search__box` (an `np-input` with `type="search"` and an `Esc` Kbd), `div.np-search__results` and `div.np-search__foot` with key hints.
+- Results are a listbox, with the input as its combobox. The input takes `role="combobox"`, `aria-autocomplete="list"`, `aria-expanded`, `aria-controls` pointing at the results' `id`, and `aria-activedescendant` naming the selected result. `div.np-search__results` takes `role="listbox"` and an `aria-label`. Per group: `div[role="group"]` labelled by its `p.np-search__group`, holding `ul.np-search__list[role="none"]` of `li[role="none"]` > `a.np-search__item[role="option"]`, each with an `id`, `tabindex="-1"` and `aria-selected`.
 - Open with `showModal()` from the Nav search button and from ⌘K / Ctrl+K. The browser handles Esc, the focus trap and the backdrop.
-- Keyboard: Up and Down move `aria-selected` through results, Enter opens the selected one. The preview has the script to copy.
+- Keyboard: focus stays in the input. Up and Down move `aria-selected` and `aria-activedescendant` through results; Enter opens the selected one. The preview has the script to copy.
 - Each result: the title, with the matched words in `<mark>`, and its section in `np-meta` on the right.
 - No results: put an EmptyState in the results area.
 - Results read from a prebuilt index; nothing loads until the dialog opens.

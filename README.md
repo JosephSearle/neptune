@@ -169,6 +169,7 @@ The tooling runs through npm scripts:
 | `npm run contrast` | Measure every documented colour pair in both themes; fail below 4.5:1 for text, 3:1 for borders |
 | `npm run check` | Everything CI runs, including the install contents check; writes nothing |
 | `npm run visual` | Screenshot every preview in both themes and compare |
+| `npm run a11y` | Run axe-core on every preview in both themes; fail on serious or critical violations |
 
 `python3 scripts/build-brand.py <newsreader-500.woff2>` rebuilds the logo, favicon set and social card from `tokens.json`; [CONTRIBUTING.md](CONTRIBUTING.md#making-a-change) has the full command.
 
@@ -358,11 +359,14 @@ Before you push, run the checks:
 ```bash
 npm run check
 npm run visual
+npm run a11y
 ```
 
 `npm run check` runs everything CI runs: tokens in sync, `llms.txt` current, a stylelint pass on `components/` that rejects raw colours (hex, `rgb()`, named colours) and any `z-index` that isn't a `z-` token, and `scripts/check-pack.mjs`, which fails if a git install would miss a site file, ship anything outside `files` in `package.json`, or run an install script. A new colour goes into `tokens.json` (and `tokens/primitives.json`) first.
 
 Visual regression: `tests/visual.spec.js` screenshots every component preview in Paper and Deep, with the brand fonts served locally, and CI compares them with `tests/__screenshots__` on every push. After an intended visual change, run the **visual** workflow by hand with *update* ticked; it rewrites the baselines in the same container CI uses and commits them.
+
+Accessibility: `tests/a11y.spec.js` runs axe-core on every component preview in Paper and Deep, in the same container, and the **a11y** workflow fails on any serious or critical violation. Fix the markup, the README or the CSS; don't add an ignore unless the violation is preview-only scaffolding, and say why next to it.
 
 Follow [Versions](#versions) for anything that changes a token, class or component.
 

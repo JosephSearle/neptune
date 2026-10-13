@@ -25,10 +25,10 @@ jobs:
       - run: npm ci
       - name: Compare with baselines
         if: ${{ !inputs.update }}
-        run: npx playwright test
+        run: npx playwright test tests/visual.spec.js
       - name: Rewrite baselines
         if: ${{ inputs.update }}
-        run: npx playwright test --update-snapshots=all
+        run: npx playwright test tests/visual.spec.js --update-snapshots=all
       - name: Commit baselines
         if: ${{ inputs.update }}
         run: |
