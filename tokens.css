@@ -15,6 +15,7 @@
   --ok: #0d6b63;
   --alert: #b4400a;
   --on-alert: #ffffff;
+  --scrim: #0b0e188c;
   --term-bg: #141a2e;
   --term-ink: #e8e4d8;
   --term-muted: #8d93a6;
@@ -62,6 +63,7 @@
   --ok: #4fd1c0;
   --alert: #ff9a5c;
   --on-alert: #0b0e18;
+  --scrim: #0b0e188c;
   --term-bg: #05070d;
   --term-ink: #e8e4d8;
   --term-muted: #8d93a6;
@@ -111,6 +113,7 @@
     --ok: #4fd1c0;
     --alert: #ff9a5c;
     --on-alert: #0b0e18;
+    --scrim: #0b0e188c;
     --term-bg: #05070d;
     --term-ink: #e8e4d8;
     --term-muted: #8d93a6;
@@ -161,6 +164,7 @@
     --ok: #0d6b63;
     --alert: #b4400a;
     --on-alert: #ffffff;
+    --scrim: #0b0e188c;
     --term-bg: #141a2e;
     --term-ink: #e8e4d8;
     --term-muted: #8d93a6;

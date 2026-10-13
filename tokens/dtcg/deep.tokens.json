@@ -57,6 +57,10 @@
       "$value": "{primitive.slate.950}",
       "$description": "Text on an alert fill: the danger button. 5.7:1 (Paper), 9.2:1 (Deep)."
     },
+    "scrim": {
+      "$value": "{primitive.scrim.55}",
+      "$description": "Backdrop behind modal dialogs and search: Deep paper at 55%. Same in both themes."
+    },
     "term-bg": {
       "$value": "{primitive.slate.990}",
       "$description": "Terminal and code-block ground. Dark in both themes."

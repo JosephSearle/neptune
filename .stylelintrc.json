@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "color-no-hex": [true, { "message": "Raw hex colour. Use a token: var(--name). New colours go in tokens.json." }],
+    "color-named": ["never", { "message": "Named colour. Use a token: var(--name).", "ignore": ["inside-function"] }],
+    "function-disallowed-list": [["rgb", "rgba", "hsl", "hsla", "hwb", "lab", "lch", "oklab", "oklch", "color", "color-mix"], { "message": "Colour function. Use a token: var(--name)." }],
+    "declaration-property-value-allowed-list": [{ "z-index": ["/^var\\(--z-[a-z-]+(, *\\d+)?\\)$/"] }, { "message": "z-index must be a z- token: var(--z-menu, 10)." }]
+  }
+}

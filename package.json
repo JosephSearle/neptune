@@ -1,0 +1,17 @@
+{
+  "name": "neptune",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Neptune: Joseph Searle's personal brand and design system.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "tokens": "node scripts/build-tokens.mjs",
+    "llms": "node scripts/build-llms.mjs",
+    "lint": "stylelint \"components/**/*.css\"",
+    "check": "node scripts/build-tokens.mjs --check && node scripts/build-llms.mjs --check && npm run lint"
+  },
+  "devDependencies": {
+    "stylelint": "^16.26.1"
+  }
+}

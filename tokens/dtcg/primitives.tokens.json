@@ -538,6 +538,20 @@
           "hex": "#da404e"
         }
       }
+    },
+    "scrim": {
+      "55": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0431,
+            0.0549,
+            0.0941
+          ],
+          "hex": "#0b0e18",
+          "alpha": 0.549
+        }
+      }
     }
   }
 }

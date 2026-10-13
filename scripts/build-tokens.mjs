@@ -25,9 +25,11 @@ const errors = [];
 
 const color = (hex) => {
   const h = hex.toLowerCase();
-  if (!/^#[0-9a-f]{6}$/.test(h)) throw new Error(`Not a 6-digit hex colour: ${hex}`);
+  if (!/^#[0-9a-f]{6}([0-9a-f]{2})?$/.test(h)) throw new Error(`Not a 6- or 8-digit hex colour: ${hex}`);
   const c = [1, 3, 5].map((i) => +(parseInt(h.slice(i, i + 2), 16) / 255).toFixed(4));
-  return { colorSpace: "srgb", components: c, hex: h };
+  const out = { colorSpace: "srgb", components: c, hex: h.slice(0, 7) };
+  if (h.length === 9) out.alpha = +(parseInt(h.slice(7, 9), 16) / 255).toFixed(4);
+  return out;
 };
 
 const dim = (v) => {
