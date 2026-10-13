@@ -1,0 +1,48 @@
+name: visual
+
+# Screenshots every component preview in both themes and compares them with tests/__screenshots__.
+# Run it by hand with "update" ticked to (re)make the baselines after an intended visual change.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      update:
+        description: Rewrite the baselines and commit them to this branch
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.64.0-noble
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - name: Compare with baselines
+        if: ${{ !inputs.update }}
+        run: npx playwright test
+      - name: Rewrite baselines
+        if: ${{ inputs.update }}
+        run: npx playwright test --update-snapshots
+      - name: Commit baselines
+        if: ${{ inputs.update }}
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add tests/__screenshots__
+          git diff --cached --quiet || git commit -m "test: update visual baselines"
+          git push
+      - uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
+        with:
+          name: visual-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
