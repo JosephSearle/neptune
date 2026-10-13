@@ -298,24 +298,15 @@ Neptune follows semantic versioning. The public surface is the token names, the 
 
 Deprecation comes before removal, for at least one minor release:
 
-1. Mark it in its README: `[ DEPRECATED · 1.x · use np-new ]`, and in the changelog under Deprecated.
+1. Mark it in its README: `[ DEPRECATED · 1.x · use np-new ]`, and in [CHANGELOG.md](CHANGELOG.md) under Deprecated.
 2. Keep it working: an old class stays as an alias in `bundle.css`; an old token becomes an alias of the new one, its usage note starting "Deprecated:".
 3. Remove it in the next major, listed under Removed with what replaces it.
 
-A release updates the version stamps (README, Cover, Nav, Hero, Footer previews, `package.json`), moves the changelog entry under its number, and bumps `package.json`; on push, the release workflow tags `vX.Y.Z` and publishes the GitHub release from this changelog.
+A release updates the version stamps (README, Cover, Nav, Hero, Footer previews, `package.json`), moves the Unreleased entries in [CHANGELOG.md](CHANGELOG.md) under the new number, and bumps `package.json`; on push, the release workflow tags `vX.Y.Z` and publishes the GitHub release from that section.
 
 ## Changelog
 
-- 1.1 · 2026-10-13: 39 components.
-  - New: Chart with a measured data-viz palette; Dialog with the destructive pattern and `np-btn--danger`; Toast; Tooltip; SkipLink and `np-visually-hidden`; Logo (trident mark, lockups, single ink, favicon set, social card).
-  - States: disabled, busy, read-only and invalid for Button, Input, Select and Textarea, set by attributes; errors follow `aria-invalid`.
-  - Tokens: a primitive colour tier; `on-alert`, `scrim`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip` and the `viz-` set. W3C DTCG export.
-  - Themes: follows the system setting until the reader picks; forced colours; print is always Paper.
-  - Fixes: Card and Figure image slots (centring and hatching), Card bars of unequal height.
-  - Tooling: CI checks tokens, `llms.txt`, a colour and z-index lint, and visual regression in both themes. Anatomy and keyboard notes for every component that needs them.
-
-- 1.0 · 2026-10-13: 35 components. Audit fixes (one focus ring, reduced-motion lift, terminal edges in Deep, 44px touch targets, measured contrast). Layout, breakpoint, timing and z-index tokens. Docs set (DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout, Tabs), forms (Select, Textarea, Checkbox, Switch), SearchDialog, EmptyState, PageGrid, Figure, Split, Feed. Slide type scale. Open: logo.
-- 0.1 · 2026-10-13: tokens in two themes, 15 components, brand book.
+Every release, newest first, is in [CHANGELOG.md](CHANGELOG.md). The current release is 1.1.0.
 
 ## Maintainers
 

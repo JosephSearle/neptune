@@ -1,7 +1,7 @@
 name: release
 
 # When package.json's version has no tag yet, tag main and publish a GitHub release
-# with that version's changelog entry from README.md.
+# with that version's section from CHANGELOG.md.
 on:
   push:
     branches: [main]

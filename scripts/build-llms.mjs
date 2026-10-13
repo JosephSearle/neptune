@@ -43,7 +43,8 @@ Rules an agent most often gets wrong:
 
 ## Guide
 
-- [Brand guide](${RAW}/README.md): voice, colour, type, space, layout, docs page recipe, slides, ornament, imagery, motion, accessibility, states, how to use it in code, changelog.
+- [Brand guide](${RAW}/README.md): voice, colour, type, space, layout, docs page recipe, slides, ornament, imagery, motion, accessibility, states, how to use it in code, versioning.
+- [Changelog](${RAW}/CHANGELOG.md): every release, newest first, in Keep a Changelog format.
 - [tokens.css](${RAW}/tokens.css): every token as a CSS variable for both themes, the system-dark default and print, plus a class per type style.
 - [tokens.json](${RAW}/tokens.json): the source of truth for all tokens, each with a usage note.
 - [components/bundle.css](${RAW}/components/bundle.css): every \`np-\` component class.

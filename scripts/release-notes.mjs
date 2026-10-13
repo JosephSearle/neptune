@@ -1,18 +1,18 @@
 #!/usr/bin/env node
-// Prints the changelog entry for a version from README.md, e.g. `node scripts/release-notes.mjs 1.1.0`.
+// Prints a version's section from CHANGELOG.md, e.g. `node scripts/release-notes.mjs 1.1.0`.
+// The release workflow uses it as the GitHub release notes.
 import { readFileSync } from "node:fs";
 
 const version = process.argv[2];
-const short = version.replace(/\.0$/, ""); // the changelog says "1.1", the tag says "v1.1.0"
-const lines = readFileSync(new URL("../README.md", import.meta.url), "utf8").split("\n");
-const start = lines.findIndex((l) => l.startsWith(`- ${short} · `) || l.startsWith(`- ${version} · `));
+const lines = readFileSync(new URL("../CHANGELOG.md", import.meta.url), "utf8").split("\n");
+const start = lines.findIndex((l) => l.startsWith(`## [${version}]`));
 if (start < 0) {
-  console.error(`No changelog entry for ${version}`);
+  console.error(`No CHANGELOG.md section for ${version}. Add "## [${version}] - YYYY-MM-DD" before bumping package.json.`);
   process.exit(1);
 }
-const out = [lines[start].replace(/^- /, "")];
+const out = [];
 for (const l of lines.slice(start + 1)) {
-  if (/^- \d/.test(l) || l.startsWith("#") || l.trim() === "") break;
-  out.push(l.replace(/^ {2}/, ""));
+  if (l.startsWith("## ") || /^\[[^\]]+\]: /.test(l)) break;
+  out.push(l.replace(/^### /, "## "));
 }
-console.log(out.join("\n") + "\n\nThe guide is README.md; agents start at llms.txt.");
+console.log(out.join("\n").trim() + "\n\nThe guide is README.md; agents start at llms.txt.");

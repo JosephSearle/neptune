@@ -101,4 +101,4 @@ This reinstalls `node_modules` for Linux; run `npm ci` again afterwards if you'r
 3. Say what changed visually and in which themes, with before and after screenshots for anything visible.
 4. The `ci` and `visual` workflows run on every pull request. `ci` must pass. `visual` may fail only for the change you described.
 
-Expect a first reply within a week. The maintainer merges to `main`, updates the changelog in the README, and cuts releases. Don't bump `package.json`'s version yourself, because a new version there publishes a release.
+Expect a first reply within a week. The maintainer merges to `main`, records the change in [CHANGELOG.md](CHANGELOG.md), and cuts releases. Don't bump `package.json`'s version yourself, because a new version there publishes a release.
