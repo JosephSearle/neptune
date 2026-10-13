@@ -152,15 +152,22 @@ const base = {
 const css = readFileSync(join(root, "tokens.css"), "utf8");
 const block = (sel) => {
   const i = css.indexOf(sel);
+  if (i < 0) errors.push(`tokens.css has no block "${sel}"`);
   return i < 0 ? "" : css.slice(i, css.indexOf("}", i));
 };
-for (const [sel, id] of [[':root, [data-theme="light"]', "light"], ['[data-theme="dark"]', "dark"]]) {
+// Every block that sets theme colours: the two themes, the system-dark default, and print (always Paper).
+for (const [sel, id] of [
+  [':root, [data-theme="light"] {', "light"],
+  ['[data-theme="dark"] {', "dark"],
+  [':root:not([data-theme="light"]) {', "dark"],
+  [':root[data-theme], :root:not([data-theme]) {', "light"],
+]) {
   const b = block(sel);
   for (const t of src.color.tokens) {
     const v = t.value[id];
     const want = v.startsWith("{") ? `var(--${v.slice(1, -1)})` : v.toLowerCase();
     const got = (b.match(new RegExp(`--${t.name}:\\s*([^;]+);`)) || [])[1];
-    if (got?.trim().toLowerCase() !== want) errors.push(`tokens.css ${id} --${t.name} is "${got}", tokens.json says "${want}"`);
+    if (got?.trim().toLowerCase() !== want) errors.push(`tokens.css "${sel}" --${t.name} is "${got}", tokens.json says "${want}"`);
   }
 }
 

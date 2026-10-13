@@ -1,20 +1,30 @@
 <!-- @dsCard group="Actions" height=72 subtitle="Paper / Deep" -->
 <!doctype html>
 <html>
-<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>ThemeToggle</title>
+<head><meta charset="utf-8">
+<script>try { var t = localStorage.getItem('np-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>ThemeToggle</title>
 <style>body{margin:0;padding:24px}</style></head>
 <body class="np-root">
 <div class="np-theme" role="group" aria-label="Theme">
-  <button type="button" aria-pressed="true" data-set="light">Paper</button>
+  <button type="button" aria-pressed="false" data-set="light">Paper</button>
   <button type="button" aria-pressed="false" data-set="dark">Deep</button>
 </div>
 <script>
-document.querySelectorAll('.np-theme button').forEach(function (b) {
+var buttons = document.querySelectorAll('.np-theme button');
+var showing = function () {
+  return document.documentElement.getAttribute('data-theme') ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+};
+var mark = function () { buttons.forEach(function (o) { o.setAttribute('aria-pressed', String(o.dataset.set === showing())); }); };
+buttons.forEach(function (b) {
   b.addEventListener('click', function () {
     document.documentElement.setAttribute('data-theme', b.dataset.set);
-    document.querySelectorAll('.np-theme button').forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+    try { localStorage.setItem('np-theme', b.dataset.set); } catch (e) {}
+    mark();
   });
 });
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', mark);
+mark();
 </script>
 </body>
 </html>

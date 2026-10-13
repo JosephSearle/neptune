@@ -447,3 +447,47 @@ a.np-card:focus-visible { outline: var(--stroke-key) solid var(--focus); outline
 .np-tip:hover .np-tip__bubble { visibility: visible; transition-delay: 300ms; }
 .np-tip:focus-within .np-tip__bubble, .np-tip[data-open] .np-tip__bubble { visibility: visible; transition-delay: 0s; }
 .np-tip[data-dismissed] .np-tip__bubble { visibility: hidden; }
+
+/* Visually hidden: in the accessibility tree, off the screen. Shows again when focused. */
+.np-visually-hidden:not(:focus):not(:active) { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Skip link: the first thing in <body>, hidden until a keyboard user tabs to it. */
+.np-skip { position: fixed; left: var(--space-4); top: var(--space-4); z-index: var(--z-tooltip, 300); padding: var(--space-3) var(--space-4); background: var(--neptune); color: var(--on-neptune); font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; }
+.np-skip:not(:focus) { width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+main[tabindex="-1"]:focus { outline: none; }
+
+/* Forced colours (Windows contrast themes): the browser replaces every colour, so state that was
+   carried by a fill or a coloured glyph gets a system colour or a line instead. */
+@media (forced-colors: active) {
+  .np-dot, .np-term .cur, .np-btn[aria-busy="true"]::after { forced-color-adjust: none; background: CanvasText; }
+  .np-nav__links a[aria-current="page"], .np-nav__menu a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; }
+  .np-tabs__tab[aria-selected="true"] { text-decoration: underline var(--stroke-key); text-underline-offset: 6px; }
+  .np-theme button[aria-pressed="true"], .np-search__item[aria-selected="true"] { forced-color-adjust: none; background: Highlight; color: HighlightText; }
+  .np-check input, .np-switch input { forced-color-adjust: none; border-color: ButtonText; background-color: Canvas; }
+  .np-check input:checked { background: Highlight; border-color: Highlight; box-shadow: inset 0 0 0 3px Canvas; }
+  .np-switch input { background: linear-gradient(ButtonText, ButtonText) 2px 50% / 14px 14px no-repeat, Canvas; }
+  .np-switch input:checked { border-color: Highlight; background: linear-gradient(HighlightText, HighlightText) calc(100% - 2px) 50% / 14px 14px no-repeat, Highlight; }
+  .np-check input:disabled, .np-switch input:disabled { border-color: GrayText; }
+  .np-btn--primary, .np-btn--danger { border-width: var(--stroke-key); }
+}
+
+/* Print: ink on paper. Tokens switch to Paper in tokens.css; this drops the chrome and keeps the reading. */
+@media print {
+  @page { margin: 16mm; }
+  .np-root { background: none; }
+  .np-nav, .np-skip, .np-docs__side, .np-docs__toc, .np-pager, .np-search, .np-toasts, .np-tip__bubble, .np-theme, .np-code__copy, .np-footer__cols, .np-footer__giant, .np-dialog { display: none !important; }
+  .np-container { max-width: none; padding: 0; }
+  .np-docs { display: block; }
+  .np-footer { padding: var(--space-6) 0 0; background: none; }
+  .np-hero { padding: 0 0 var(--space-8); }
+  .np-term, .np-code { background: none; color: var(--ink); border: var(--stroke-hairline) solid var(--line-strong); }
+  .np-term .p, .np-code .p, .np-term__bar, .np-code__head { color: var(--ink-muted); }
+  .np-term .c, .np-code .c { color: var(--ink); font-weight: 500; }
+  .np-term .cur { display: none; }
+  .np-term__body, .np-code pre { white-space: pre-wrap; overflow: visible; }
+  .np-btn, .np-card, .np-search, .np-nav__menu ul { box-shadow: none; transform: none; }
+  .np-prose a[href^="http"]::after { content: " (" attr(href) ")"; font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); word-break: break-all; }
+  h1, h2, h3, .np-card__title, .np-section-head { break-after: avoid; }
+  .np-figure, .np-code, .np-term, .np-callout, .np-card, .np-table tr, blockquote { break-inside: avoid; }
+  .np-table-wrap { overflow: visible; }
+}

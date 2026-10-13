@@ -1,5 +1,6 @@
-/* Neptune — generated from tokens.json */
+/* Neptune tokens. Colours mirror tokens.json; scripts/build-tokens.mjs --check fails if they drift. */
 :root, [data-theme="light"] {
+  color-scheme: light;
   --paper: #f4f1ea;
   --paper-raised: #fbf9f4;
   --paper-sunk: #ebe6db;
@@ -23,6 +24,7 @@
   --shadow-press: 3px 3px 0 #141a2e;
 }
 [data-theme="dark"] {
+  color-scheme: dark;
   --paper: #0b0e18;
   --paper-raised: #121626;
   --paper-sunk: #070910;
@@ -44,6 +46,60 @@
   --term-ok: #4fd1c0;
   --term-alert: #ff9a5c;
   --shadow-press: 3px 3px 0 #6f86ff;
+}
+/* No data-theme on <html>: follow the system setting. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #0b0e18;
+    --paper-raised: #121626;
+    --paper-sunk: #070910;
+    --line: #262c40;
+    --line-strong: #626a82;
+    --ink: #ebe7dc;
+    --ink-muted: #9aa0b2;
+    --neptune: #6f86ff;
+    --neptune-soft: #151c3d;
+    --on-neptune: #0b0e18;
+    --focus: var(--neptune);
+    --ok: #4fd1c0;
+    --alert: #ff9a5c;
+    --on-alert: #0b0e18;
+    --term-bg: #05070d;
+    --term-ink: #e8e4d8;
+    --term-muted: #8d93a6;
+    --term-accent: #8fa2ff;
+    --term-ok: #4fd1c0;
+    --term-alert: #ff9a5c;
+    --shadow-press: 3px 3px 0 #6f86ff;
+  }
+}
+/* Print is always Paper: ink on paper, whatever the screen theme. */
+@media print {
+  :root[data-theme], :root:not([data-theme]) {
+    color-scheme: light;
+    --paper: #f4f1ea;
+    --paper-raised: #fbf9f4;
+    --paper-sunk: #ebe6db;
+    --line: #d6cfc0;
+    --line-strong: #7a7466;
+    --ink: #141a2e;
+    --ink-muted: #545a6b;
+    --neptune: #1f3bff;
+    --neptune-soft: #dfe4ff;
+    --on-neptune: #ffffff;
+    --focus: var(--neptune);
+    --ok: #0d6b63;
+    --alert: #b4400a;
+    --on-alert: #ffffff;
+    --term-bg: #141a2e;
+    --term-ink: #e8e4d8;
+    --term-muted: #8d93a6;
+    --term-accent: #8fa2ff;
+    --term-ok: #4fd1c0;
+    --term-alert: #ff9a5c;
+    --shadow-press: 3px 3px 0 #141a2e;
+  }
 }
 :root {
   --space-1: 4px;

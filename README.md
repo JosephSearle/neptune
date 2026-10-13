@@ -116,6 +116,9 @@ Use typographic glyphs, not icons or emoji. In mono, `ink-muted`:
 - On touch screens, buttons, nav links, toggles and inputs grow to a 44px target.
 - Focus: 2px solid `focus`, 2px offset, on every interactive element. One rule in `bundle.css` sets it for everything inside `np-root`; don't override it.
 - Status always carries a word, never colour alone.
+- Every page starts with a SkipLink to `<main id="main">`. Text that only screen readers need goes in `np-visually-hidden`.
+- Forced colours (Windows contrast themes): state carried by a fill or a blue glyph gets a system colour or an underline instead. Checkboxes, switches, the ThemeToggle, Tabs, the active nav link and search results all stay readable.
+- Print is always Paper: nav, sidebars, search and toasts drop out, terminals print as outlined ink, and external links print their URL.
 - Errors are announced, not just coloured: `aria-invalid="true"` on the control, `aria-describedby` pointing at the hint. Disabled controls say why in their hint.
 
 ## Use in code
@@ -126,7 +129,7 @@ Load two stylesheets, in this order, plus the fonts:
 2. `components/bundle.css`: the `np-` component classes.
 3. Google Fonts: Newsreader (opsz, 300–700, italic) and IBM Plex Mono (400–600). `bundle.css` imports them; self-host for production.
 
-Set `data-theme="light"` or `"dark"` on `<html>`.
+Leave `data-theme` off `<html>` and the page follows the system setting; set `"light"` or `"dark"` when the reader picks one in the ThemeToggle. Wrap the page in `np-root`. Start `<body>` with a SkipLink, then the Nav, then `<main id="main" tabindex="-1">` with its content in `np-container`. Build pages from components: Nav, Hero, SectionHead, Card, Figure, Split, Feed, Table, Prose, CodeCopy, Footer. Docs pages add DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout and Tabs. Forms use Input, Select, Textarea, Checkbox and Switch. Lay out index pages on PageGrid. Every site gets SearchDialog behind ⌘K and an EmptyState for anything that can come back empty. Feedback uses Toast for results, Dialog for decisions and Tooltip for optional hints; destructive actions go through a Dialog with `np-btn--danger`. Style nothing inline that a component or type class already covers.
 
 ### Tokens
 
@@ -149,7 +152,7 @@ Buttons and fields share one set of states. Use the attribute, not a class:
 | Disabled | `disabled`, or `aria-disabled="true"` on a link with no `href` | `disabled`; box sinks to `paper-sunk` |
 | Busy | `aria-busy="true"` plus `disabled`; a block cursor blinks after the label | — |
 | Read-only | — | `readonly`; `paper-sunk`, still focusable |
-| Invalid | — | `aria-invalid="true"` + `aria-describedby`; border, prompt and hint turn `alert` | Wrap the page in `np-root` and its content in `np-container`. Build pages from components: Nav, Hero, SectionHead, Card, Figure, Split, Feed, Table, Prose, CodeCopy, Footer. Docs pages add DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout and Tabs. Forms use Input, Select, Textarea, Checkbox and Switch. Lay out index pages on PageGrid. Every site gets SearchDialog behind ⌘K and an EmptyState for anything that can come back empty. Feedback uses Toast for results, Dialog for decisions and Tooltip for optional hints; destructive actions go through a Dialog with `np-btn--danger`. Style nothing inline that a component or type class already covers.
+| Invalid | — | `aria-invalid="true"` + `aria-describedby`; border, prompt and hint turn `alert` |
 
 ## Wordmark
 
@@ -157,7 +160,7 @@ No logo yet. Set "Neptune" in Newsreader 500, -0.01em, `ink`. Pair it with a `me
 
 ## Changelog
 
-- Unreleased: Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
+- Unreleased: system theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
 
 - 1.0 · 2026-10-13: 35 components. Audit fixes (one focus ring, reduced-motion lift, terminal edges in Deep, 44px touch targets, measured contrast). Layout, breakpoint, timing and z-index tokens. Docs set (DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout, Tabs), forms (Select, Textarea, Checkbox, Switch), SearchDialog, EmptyState, PageGrid, Figure, Split, Feed. Slide type scale. Open: logo.
 - 0.1 · 2026-10-13: tokens in two themes, 15 components, brand book.
