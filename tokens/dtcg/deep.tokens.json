@@ -80,6 +80,98 @@
     "term-alert": {
       "$value": "{primitive.orange.300}",
       "$description": "Warning or failure on term-bg: toast labels. Always with a word."
+    },
+    "viz-1": {
+      "$value": "{color.neptune}",
+      "$description": "Chart series 1. Categorical slots go in order 1→6, never cycled; they follow the entity, not its rank."
+    },
+    "viz-2": {
+      "$value": "{primitive.gold.400}",
+      "$description": "Chart series 2 (gold)."
+    },
+    "viz-3": {
+      "$value": "{primitive.plum.400}",
+      "$description": "Chart series 3 (plum). Slots 1–3 are safe for scatter and small multiples; past three, fold into Other or facet."
+    },
+    "viz-4": {
+      "$value": "{primitive.green.400}",
+      "$description": "Chart series 4 (green). A series, not a status: status in charts wears ok and alert with a word."
+    },
+    "viz-5": {
+      "$value": "{primitive.cyan.400}",
+      "$description": "Chart series 5 (cyan)."
+    },
+    "viz-6": {
+      "$value": "{primitive.red.400}",
+      "$description": "Chart series 6 (red). A seventh series folds into Other."
+    },
+    "viz-other": {
+      "$value": "{color.ink-muted}",
+      "$description": "The Other series, and anything de-emphasised or greyed out in a chart."
+    },
+    "viz-grid": {
+      "$value": "{color.line}",
+      "$description": "Chart gridlines. Hairline, recessive."
+    },
+    "viz-axis": {
+      "$value": "{color.line-strong}",
+      "$description": "Chart baseline and axis line."
+    },
+    "viz-seq-1": {
+      "$value": "{primitive.blue.650}",
+      "$description": "Sequential step 1 of 7, for magnitude: heatmaps, choropleths. 1 is least. In Deep the ramp runs dark→light so low values recede into the ground."
+    },
+    "viz-seq-2": {
+      "$value": "{primitive.blue.550}",
+      "$description": "Sequential step 2 of 7."
+    },
+    "viz-seq-3": {
+      "$value": "{primitive.blue.450}",
+      "$description": "Sequential step 3 of 7."
+    },
+    "viz-seq-4": {
+      "$value": "{primitive.blue.350}",
+      "$description": "Sequential step 4 of 7."
+    },
+    "viz-seq-5": {
+      "$value": "{primitive.blue.250}",
+      "$description": "Sequential step 5 of 7."
+    },
+    "viz-seq-6": {
+      "$value": "{primitive.blue.150}",
+      "$description": "Sequential step 6 of 7."
+    },
+    "viz-seq-7": {
+      "$value": "{primitive.blue.75}",
+      "$description": "Sequential step 7 of 7."
+    },
+    "viz-div-mid": {
+      "$value": "{color.line}",
+      "$description": "Diverging midpoint: zero, no change. Neutral, never a hue."
+    },
+    "viz-div-neg-1": {
+      "$value": "{primitive.gold.550}",
+      "$description": "Diverging negative arm (gold), step 1 of 3; 3 is strongest. Equal steps on both arms."
+    },
+    "viz-div-neg-2": {
+      "$value": "{primitive.gold.400}",
+      "$description": "Diverging negative arm, step 2 of 3."
+    },
+    "viz-div-neg-3": {
+      "$value": "{primitive.gold.250}",
+      "$description": "Diverging negative arm, step 3 of 3."
+    },
+    "viz-div-pos-1": {
+      "$value": "{primitive.blue.550}",
+      "$description": "Diverging positive arm (blue), step 1 of 3; 3 is strongest."
+    },
+    "viz-div-pos-2": {
+      "$value": "{primitive.blue.350}",
+      "$description": "Diverging positive arm, step 2 of 3."
+    },
+    "viz-div-pos-3": {
+      "$value": "{primitive.blue.150}",
+      "$description": "Diverging positive arm, step 3 of 3."
     }
   },
   "shadow": {

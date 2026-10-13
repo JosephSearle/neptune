@@ -39,6 +39,7 @@ Rules an agent most often gets wrong:
 - [ArticleHeader](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/ArticleHeader/README.md): The top of a note or playbook: a kind-and-date stamp, the title, a lead, then byline and tags, closed by a hairline.
 - [Callout](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Callout/README.md): A boxed aside with a bracketed mono label: note, tip or warning.
 - [Card](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Card/README.md): A square, hairline-bordered panel with a mono index bar, serif title and a metadata footer.
+- [Chart](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Chart/README.md): The frame around a data plot: mono eyebrow, serif title, legend, an SVG plot with a hover readout, a source line, and the numbers as a table.
 - [CodeCopy](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/CodeCopy/README.md): A dark code block with a language label and a Copy button, plus a light inline code style.
 - [Feed](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Feed/README.md): A dated list of entries, one row each: ISO date, serif title, tag.
 - [Figure](https://raw.githubusercontent.com/JosephSearle/neptune/main/components/Figure/README.md): A framed image with ┌ ┘ corner marks and a numbered `FIG.` caption.

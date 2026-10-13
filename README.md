@@ -33,6 +33,7 @@ Keep it true. A stamp that lies (fake version numbers, fake uptime) is decoratio
 - Draw meaningful borders (inputs, cards, tags, kbd) in `line-strong`. Use `line` only for decorative rules.
 - Use `ok` and `alert` for state, always with a word or the `np-dot`. Never colour alone.
 - Fill `alert` only for the danger button, with `on-alert` text.
+- Charts take their own palette, `viz-`: six series hues in a fixed order led by `neptune`, a one-hue sequential ramp and a gold–blue diverging pair. The one-blue rule doesn't apply inside a plot. Chart has the rules; the numbers are measured there.
 - Terminals, code blocks, toasts and tooltips stay dark in both themes: `term-bg` with `term-ink`, `term-muted` for prompts, `term-accent` for commands and actions, `term-ok` and `term-alert` for state.
 
 ## Type
@@ -166,7 +167,7 @@ No logo yet. Set "Neptune" in Newsreader 500, -0.01em, `ink`. Pair it with a `me
 
 ## Changelog
 
-- Unreleased: `llms.txt` and `llms-full.txt` for agents, generated and checked in CI. System theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
+- Unreleased: Chart, with a measured data-viz palette (`viz-1`…`viz-6`, `viz-other`, `viz-grid`, `viz-axis`, `viz-seq-1`…`7`, `viz-div-*`) and new primitive families (gold, plum, cyan, red). `llms.txt` and `llms-full.txt` for agents, generated and checked in CI. System theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
 
 - 1.0 · 2026-10-13: 35 components. Audit fixes (one focus ring, reduced-motion lift, terminal edges in Deep, 44px touch targets, measured contrast). Layout, breakpoint, timing and z-index tokens. Docs set (DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout, Tabs), forms (Select, Textarea, Checkbox, Switch), SearchDialog, EmptyState, PageGrid, Figure, Split, Feed. Slide type scale. Open: logo.
 - 0.1 · 2026-10-13: tokens in two themes, 15 components, brand book.

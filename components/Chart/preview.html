@@ -1,0 +1,86 @@
+<!-- @dsCard group="Content" height=760 subtitle="Line chart: three series, legend, direct labels, hover and keyboard readout, table view" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Chart</title>
+<style>body{margin:0;padding:24px}.np-chart{max-width:720px}.ramps{display:grid;gap:var(--space-2);margin-top:var(--space-8);max-width:720px}.ramp{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:2px;height:24px;margin-bottom:var(--space-2)}</style></head>
+<body class="np-root">
+<figure class="np-chart">
+  <p class="np-chart__eyebrow">Fig. 03 · Evals</p>
+  <h3 class="np-chart__title">Pass rate by model, last 8 weeks</h3>
+  <ul class="np-chart__legend">
+    <li class="np-chart__key" style="--key:var(--viz-1)">claude-opus-5-5</li>
+    <li class="np-chart__key" style="--key:var(--viz-2)">claude-sonnet-5-5</li>
+    <li class="np-chart__key" style="--key:var(--viz-3)">claude-haiku-5-5</li>
+  </ul>
+  <div class="np-chart__plot" id="plot"><div class="np-chart__tip" hidden></div></div>
+  <figcaption class="np-chart__caption">Source: MCP gateway eval suite, 412 cases · 2026-10-13</figcaption>
+  <details class="np-chart__data">
+    <summary>Show the data</summary>
+    <div class="np-table-wrap"><table class="np-table" id="data"></table></div>
+  </details>
+</figure>
+<div class="ramps" aria-label="Chart palettes">
+  <p class="np-chart__eyebrow">Categorical · viz-1 … viz-6, viz-other</p>
+  <div class="ramp"><span style="background:var(--viz-1)"></span><span style="background:var(--viz-2)"></span><span style="background:var(--viz-3)"></span><span style="background:var(--viz-4)"></span><span style="background:var(--viz-5)"></span><span style="background:var(--viz-6)"></span><span style="background:var(--viz-other)"></span></div>
+  <p class="np-chart__eyebrow">Sequential · viz-seq-1 … 7</p>
+  <div class="ramp"><span style="background:var(--viz-seq-1)"></span><span style="background:var(--viz-seq-2)"></span><span style="background:var(--viz-seq-3)"></span><span style="background:var(--viz-seq-4)"></span><span style="background:var(--viz-seq-5)"></span><span style="background:var(--viz-seq-6)"></span><span style="background:var(--viz-seq-7)"></span></div>
+  <p class="np-chart__eyebrow">Diverging · neg-3 … mid … pos-3</p>
+  <div class="ramp"><span style="background:var(--viz-div-neg-3)"></span><span style="background:var(--viz-div-neg-2)"></span><span style="background:var(--viz-div-neg-1)"></span><span style="background:var(--viz-div-mid)"></span><span style="background:var(--viz-div-pos-1)"></span><span style="background:var(--viz-div-pos-2)"></span><span style="background:var(--viz-div-pos-3)"></span></div>
+</div>
+<script>
+(function () {
+  var weeks = ['W34', 'W35', 'W36', 'W37', 'W38', 'W39', 'W40', 'W41'];
+  var series = [
+    { name: 'claude-opus-5-5', key: 'var(--viz-1)', v: [86, 87, 89, 88, 91, 92, 93, 94] },
+    { name: 'claude-sonnet-5-5', key: 'var(--viz-2)', v: [78, 80, 79, 83, 84, 86, 86, 88] },
+    { name: 'claude-haiku-5-5', key: 'var(--viz-3)', v: [64, 66, 69, 70, 72, 71, 75, 77] }
+  ];
+  var W = 720, H = 300, m = { t: 12, r: 132, b: 28, l: 36 }, iw = W - m.l - m.r, ih = H - m.t - m.b;
+  var y0 = 60, y1 = 100, x = function (i) { return m.l + (i * iw) / (weeks.length - 1); }, y = function (v) { return m.t + ih - ((v - y0) / (y1 - y0)) * ih; };
+  var ns = 'http://www.w3.org/2000/svg', el = function (n, a, p) { var e = document.createElementNS(ns, n); for (var k in a) e.setAttribute(k, a[k]); (p || svg).appendChild(e); return e; };
+  var svg = document.createElementNS(ns, 'svg');
+  svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.setAttribute('role', 'img'); svg.setAttribute('tabindex', '0');
+  svg.setAttribute('aria-label', 'Pass rate rose for all three models over eight weeks; Opus leads at 94%, Haiku gained most, from 64% to 77%.');
+  [60, 70, 80, 90, 100].forEach(function (v) {
+    el('line', { class: v === 60 ? 'axis' : 'grid', x1: m.l, x2: m.l + iw, y1: y(v), y2: y(v) });
+    el('text', { class: 'label', x: m.l - 8, y: y(v) + 4, 'text-anchor': 'end' }).textContent = v + '%';
+  });
+  weeks.forEach(function (w, i) { el('text', { class: 'label', x: x(i), y: H - 8, 'text-anchor': 'middle' }).textContent = w; });
+  series.forEach(function (s) {
+    el('polyline', { points: s.v.map(function (v, i) { return x(i) + ',' + y(v); }).join(' '), fill: 'none', stroke: s.key, 'stroke-width': 2, 'stroke-linecap': 'square', 'stroke-linejoin': 'miter' }).style.stroke = s.key;
+    var last = s.v.length - 1;
+    el('text', { class: 'direct', x: x(last) + 10, y: y(s.v[last]) + 4 }).textContent = s.name.replace('claude-', '').replace('-5-5', '') + ' ' + s.v[last] + '%';
+  });
+  var hover = el('line', { class: 'hover-line', y1: m.t, y2: m.t + ih, visibility: 'hidden' });
+  var dots = series.map(function (s) { var c = el('rect', { width: 8, height: 8, visibility: 'hidden' }); c.style.fill = s.key; return c; });
+  var plot = document.getElementById('plot'); plot.insertBefore(svg, plot.firstChild);
+  var tip = plot.querySelector('.np-chart__tip'), at = -1;
+  function show(i) {
+    at = i; var X = x(i);
+    hover.setAttribute('x1', X); hover.setAttribute('x2', X); hover.setAttribute('visibility', 'visible');
+    dots.forEach(function (d, k) { d.setAttribute('x', X - 4); d.setAttribute('y', y(series[k].v[i]) - 4); d.setAttribute('visibility', 'visible'); });
+    tip.innerHTML = '<div>' + weeks[i] + '</div><dl>' + series.map(function (s) { return '<dt style="--key:' + s.key + '"></dt><dd style="text-align:left">' + s.name.replace('claude-', '') + '</dd><dd>' + s.v[i] + '%</dd>'; }).join('') + '</dl>';
+    tip.hidden = false;
+    var px = (X / W) * svg.clientWidth, left = px + 12 + tip.offsetWidth > svg.clientWidth ? px - tip.offsetWidth - 12 : px + 12;
+    tip.style.left = left + 'px'; tip.style.top = '8px';
+  }
+  function hide() { at = -1; tip.hidden = true; hover.setAttribute('visibility', 'hidden'); dots.forEach(function (d) { d.setAttribute('visibility', 'hidden'); }); }
+  svg.addEventListener('pointermove', function (e) {
+    var r = svg.getBoundingClientRect(), vx = ((e.clientX - r.left) / r.width) * W;
+    show(Math.max(0, Math.min(weeks.length - 1, Math.round(((vx - m.l) / iw) * (weeks.length - 1)))));
+  });
+  svg.addEventListener('pointerleave', hide);
+  svg.addEventListener('focus', function () { show(weeks.length - 1); });
+  svg.addEventListener('blur', hide);
+  svg.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { show(Math.min(weeks.length - 1, at + 1)); e.preventDefault(); }
+    if (e.key === 'ArrowLeft') { show(Math.max(0, at - 1)); e.preventDefault(); }
+    if (e.key === 'Escape') hide();
+  });
+  var t = document.getElementById('data');
+  t.innerHTML = '<thead><tr><th>Model</th>' + weeks.map(function (w) { return '<th class="num">' + w + '</th>'; }).join('') + '</tr></thead><tbody>' +
+    series.map(function (s) { return '<tr><td>' + s.name + '</td>' + s.v.map(function (v) { return '<td class="num">' + v + '%</td>'; }).join('') + '</tr>'; }).join('') + '</tbody>';
+})();
+</script>
+</body>
+</html>

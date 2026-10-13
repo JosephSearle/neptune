@@ -39,6 +39,7 @@ Keep it true. A stamp that lies (fake version numbers, fake uptime) is decoratio
 - Draw meaningful borders (inputs, cards, tags, kbd) in `line-strong`. Use `line` only for decorative rules.
 - Use `ok` and `alert` for state, always with a word or the `np-dot`. Never colour alone.
 - Fill `alert` only for the danger button, with `on-alert` text.
+- Charts take their own palette, `viz-`: six series hues in a fixed order led by `neptune`, a one-hue sequential ramp and a gold–blue diverging pair. The one-blue rule doesn't apply inside a plot. Chart has the rules; the numbers are measured there.
 - Terminals, code blocks, toasts and tooltips stay dark in both themes: `term-bg` with `term-ink`, `term-muted` for prompts, `term-accent` for commands and actions, `term-ok` and `term-alert` for state.
 
 ## Type
@@ -172,7 +173,7 @@ No logo yet. Set "Neptune" in Newsreader 500, -0.01em, `ink`. Pair it with a `me
 
 ## Changelog
 
-- Unreleased: `llms.txt` and `llms-full.txt` for agents, generated and checked in CI. System theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
+- Unreleased: Chart, with a measured data-viz palette (`viz-1`…`viz-6`, `viz-other`, `viz-grid`, `viz-axis`, `viz-seq-1`…`7`, `viz-div-*`) and new primitive families (gold, plum, cyan, red). `llms.txt` and `llms-full.txt` for agents, generated and checked in CI. System theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
 
 - 1.0 · 2026-10-13: 35 components. Audit fixes (one focus ring, reduced-motion lift, terminal edges in Deep, 44px touch targets, measured contrast). Layout, breakpoint, timing and z-index tokens. Docs set (DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout, Tabs), forms (Select, Textarea, Checkbox, Switch), SearchDialog, EmptyState, PageGrid, Figure, Split, Feed. Slide type scale. Open: logo.
 - 0.1 · 2026-10-13: tokens in two themes, 15 components, brand book.
@@ -254,6 +255,42 @@ A square, hairline-bordered panel with a mono index bar, serif title and a metad
 - Don't: add images inside the bar, colour the border, round the corners, add a coloured left edge.
 
 Source: components/Card/README.md · Preview: components/Card/preview.html
+
+---
+
+# Chart
+
+The frame around a data plot: mono eyebrow, serif title, legend, an SVG plot with a hover readout, a source line, and the numbers as a table.
+
+- Markup: `<figure class="np-chart">` holding `p.np-chart__eyebrow`, `h3.np-chart__title`, `ul.np-chart__legend` of `li.np-chart__key` (each sets `--key: var(--viz-N)`), `div.np-chart__plot` with the `<svg>` and a `div.np-chart__tip` (`hidden` until hover), `figcaption.np-chart__caption` (`Source: evals, 2026-10-07`), then `details.np-chart__data` with a Table.
+- Draw the plot yourself (inline SVG, D3, Observable Plot); this component styles the frame and the SVG classes: `.grid`, `.axis`, `.tick text`, `.label`, `.direct`, `.hover-line`.
+
+## Colour, by the job it does
+
+- Identity (which series): `viz-1` to `viz-6`, assigned in order and never cycled. Colour follows the entity: a filter that drops a series doesn't repaint the rest. A seventh series folds into Other (`viz-other`).
+- Scatter, bubble, maps and small multiples: at most three series (`viz-1` to `viz-3`), the only three that stay apart when any two can touch.
+- Magnitude: `viz-seq-1` (least) to `viz-seq-7`, one hue. Deep flips the ramp so low values recede into the ground; use the tokens and it happens for you. For ordered buckets (tiers, funnel steps), start at `viz-seq-4` on Paper so every step clears 2:1.
+- Polarity: `viz-div-neg-3…1`, `viz-div-mid`, `viz-div-pos-1…3`: gold below zero, blue above, neutral at zero. The weakest steps sit near the ground on purpose; label values.
+- State: when a series means good or bad, it wears `ok` or `alert` with a word, never a `viz-` slot.
+- Measured 2026-10-13 on `paper` and Deep `paper`: every series at least 3:1, adjacent series at least 16.5 apart under protan/deutan simulation (target 8) and 21 apart for full-colour vision (floor 15); the first three at least 11.6 apart as any pair.
+
+## Marks
+
+- Lines 2px, square caps. Bars square, with a 2px `paper` gap between neighbours and stacked segments. Points at least 8px.
+- Text wears ink tokens, never the series colour. Direct-label up to four series at the line end (`.direct`); always show the legend for two or more. One series: no legend, the title names it.
+- One y-axis. Two measures on different scales are two charts.
+- Gridlines in `viz-grid`, baseline in `viz-axis`. No chart junk: no 3D, no gradients, no shadows.
+
+## Interaction and access
+
+- Hover or focus shows the readout in `np-chart__tip`: a crosshair on line charts, per-mark on bars. Hit areas larger than the mark.
+- Keyboard: the plot takes focus (`tabindex="0"`); Left and Right step through x values and update the readout, Esc hides it.
+- The `details` table holds every number in the chart. A chart without it fails for screen readers, print and forced colours.
+- Give the `<svg>` `role="img"` and an `aria-label` that states the takeaway, not "a chart".
+
+- Don't: use a pie with more than three slices, label every point, or use colour as the only key.
+
+Source: components/Chart/README.md · Preview: components/Chart/preview.html
 
 ---
 
