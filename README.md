@@ -1,6 +1,6 @@
 # Neptune
 
-Neptune 1.0 (2026-10-13) is Joseph Searle's personal brand: an engineer's notebook printed on paper. Classical serif for ideas, monospace for anything a machine would say, one electric blue for action. Light paper by default; Deep is the dark theme.
+Neptune 1.1 (2026-10-13) is Joseph Searle's personal brand: an engineer's notebook printed on paper. Classical serif for ideas, monospace for anything a machine would say, one electric blue for action. Light paper by default; Deep is the dark theme.
 
 Code, tooling and history live in [JosephSearle/neptune](https://github.com/JosephSearle/neptune): the DTCG token export, `llms.txt` for agents and the CI checks are there, not in the design system page.
 
@@ -17,7 +17,7 @@ Code, tooling and history live in [JosephSearle/neptune](https://github.com/Jose
 
 Treat every page like a running program. Stamp it with mono metadata in `meta` style, `ink-muted`:
 
-- Version and place: `NEPTUNE / 1.0 · LDN`
+- Version and place: `NEPTUNE / 1.1 · LDN`
 - Dates in ISO: `2026-10-13`
 - Indexes on cards and sections: `01`, `02`, `03`
 - Status in brackets: `[ SHIPPED ]`, `[ DRAFT ]`, `[ ARCHIVED ]`
@@ -78,7 +78,7 @@ Decks use the same palette and faces at slide scale. Measured in the stress-test
 - Hairlines double to 2px. 1px disappears on a projector.
 - Slide tools take hex, not variables: use the values in `tokens.json` for the slide's theme.
 - Rhythm: Paper for content, Deep for quotes and terminals, one `neptune` statement slide with `on-neptune` text near the end.
-- Every content slide: eyebrow (`02 · Tools`), title at the top margin, one idea, footer stamp `NEPTUNE / 1.0 · 03`.
+- Every content slide: eyebrow (`02 · Tools`), title at the top margin, one idea, footer stamp `NEPTUNE / 1.1 · 03`.
 - Status in tables: the colour plus a word and a `●`.
 
 ## Ornament
@@ -171,9 +171,31 @@ Buttons and fields share one set of states. Use the attribute, not a class:
 
 The mark is Neptune's trident (♆), square-stroked on a 24-unit grid in a `neptune` tile; the lockup adds the wordmark, "Neptune" in Newsreader 500 at -0.01em. Files, sizes, clear space and the favicon and social card are in Logo. Where the mark would be the only blue on a page that has spent its `neptune`, use the single-ink version.
 
+## Versions
+
+Neptune follows semantic versioning. The public surface is the token names, the `np-` classes and their documented markup.
+
+- Major (2.0): removing or renaming a token, class, component or modifier; changing what a token means; markup changes existing pages must make.
+- Minor (1.2): new tokens, components, variants and states; visual refinements that existing markup picks up unchanged.
+- Patch (1.1.1): bug fixes, docs, and value nudges that keep contrast and meaning.
+
+Deprecation comes before removal, for at least one minor release:
+
+1. Mark it in its README: `[ DEPRECATED · 1.x · use np-new ]`, and in the changelog under Deprecated.
+2. Keep it working: an old class stays as an alias in `bundle.css`; an old token becomes an alias of the new one, its usage note starting "Deprecated:".
+3. Remove it in the next major, listed under Removed with what replaces it.
+
+A release updates the version stamps (README, Cover, Nav, Hero, Footer previews, `package.json`), moves the changelog entry under its number, and is tagged `vX.Y.Z` on `main`.
+
 ## Changelog
 
-- Unreleased: an Anatomy diagram for every compound component and a Keyboard section for every interactive one. Visual regression on every preview in both themes; fixed the image slot in Card and Figure (label centred, hatching back) and Card bars of unequal height. CI lints component CSS for raw colours and z-index; new `scrim` token replaces the last raw colour. Logo: the trident mark, lockups for Paper and Deep, single ink, favicon set and social card, all built from tokens by `scripts/build-brand.py`. Chart, with a measured data-viz palette (`viz-1`…`viz-6`, `viz-other`, `viz-grid`, `viz-axis`, `viz-seq-1`…`7`, `viz-div-*`) and new primitive families (gold, plum, cyan, red). `llms.txt` and `llms-full.txt` for agents, generated and checked in CI. System theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
+- 1.1 · 2026-10-13: 39 components.
+  - New: Chart with a measured data-viz palette; Dialog with the destructive pattern and `np-btn--danger`; Toast; Tooltip; SkipLink and `np-visually-hidden`; Logo (trident mark, lockups, single ink, favicon set, social card).
+  - States: disabled, busy, read-only and invalid for Button, Input, Select and Textarea, set by attributes; errors follow `aria-invalid`.
+  - Tokens: a primitive colour tier; `on-alert`, `scrim`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip` and the `viz-` set. W3C DTCG export.
+  - Themes: follows the system setting until the reader picks; forced colours; print is always Paper.
+  - Fixes: Card and Figure image slots (centring and hatching), Card bars of unequal height.
+  - Tooling: CI checks tokens, `llms.txt`, a colour and z-index lint, and visual regression in both themes. Anatomy and keyboard notes for every component that needs them.
 
 - 1.0 · 2026-10-13: 35 components. Audit fixes (one focus ring, reduced-motion lift, terminal edges in Deep, 44px touch targets, measured contrast). Layout, breakpoint, timing and z-index tokens. Docs set (DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout, Tabs), forms (Select, Textarea, Checkbox, Switch), SearchDialog, EmptyState, PageGrid, Figure, Split, Feed. Slide type scale. Open: logo.
 - 0.1 · 2026-10-13: tokens in two themes, 15 components, brand book.
