@@ -18,6 +18,10 @@ The format follows [Keep a Changelog 2.0.0](https://keepachangelog.com/en/2.0.0/
 - The changelog moved from the README to this file. GitHub release notes now come from here.
 - README: restructured to the Standard-Readme order, with a centred title, the social card and status badges. The brand guide's sections and wording are unchanged.
 
+### Fixed
+
+- Tabs: Home and End now move to the first and last tab, and the README documents the keys.
+
 ## [1.1.0] - 2026-10-13
 
 39 components.
