@@ -36,6 +36,7 @@ Code, tooling and history live in [JosephSearle/neptune](https://github.com/Jose
 Built with:
 
 - Plain CSS: tokens as CSS variables plus `np-` component classes, no framework.
+- One small script, `components/neptune.js`, for the interactive components. No dependencies, no build step.
 - [Newsreader](https://fonts.google.com/specimen/Newsreader) and [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono).
 - [W3C Design Tokens](https://www.designtokens.org/) (DTCG 2025.10) export.
 - [Playwright](https://playwright.dev/) for visual regression, [stylelint](https://stylelint.io/) for the CSS lint.
@@ -120,18 +121,20 @@ npm ci
 
 ### Dependencies
 
-- A browser with CSS custom properties and `prefers-color-scheme`. No JavaScript runtime.
+- A browser with CSS custom properties and `prefers-color-scheme`.
+- JavaScript only for the interactive components: Tabs, Tooltip, Toast, SearchDialog, Dialog, ThemeToggle and CodeCopy need `neptune.js` (ES2017, no dependencies). Every other component is CSS only.
 - Google Fonts, imported by `bundle.css`: Newsreader and IBM Plex Mono. Self-host for production.
 - Tooling only: Node.js 22 (CI's version) for the token, `llms.txt` and lint scripts and Playwright.
 - Brand files only: Python 3 with `fonttools`, `brotli` and `pillow`, for `scripts/build-brand.py`.
 
 ## Usage
 
-Load two stylesheets, in this order, plus the fonts:
+Load two stylesheets, in this order, plus the fonts and the script:
 
 1. `tokens.css`: every token as a CSS variable, both themes, and a class per type style (`.display`, `.heading`, `.label`…).
 2. `components/bundle.css`: the `np-` component classes.
 3. Google Fonts: Newsreader (opsz, 300–700, italic) and IBM Plex Mono (400–600). `bundle.css` imports them; self-host for production.
+4. `components/neptune.js`, with `defer`, after the stylesheets: `<script src="components/neptune.js" defer></script>`. Only pages with an interactive component need it.
 
 Leave `data-theme` off `<html>` and the page follows the system setting; set `"light"` or `"dark"` when the reader picks one in the ThemeToggle. Wrap the page in `np-root`. Start `<body>` with a SkipLink, then the Nav, then `<main id="main" tabindex="-1">` with its content in `np-container`. Build pages from components: Nav, Hero, SectionHead, Card, Figure, Split, Feed, Table, Prose, CodeCopy, Footer. Docs pages add DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout and Tabs. Forms use Input, Select, Textarea, Checkbox and Switch. Lay out index pages on PageGrid. Every site gets SearchDialog behind ⌘K and an EmptyState for anything that can come back empty. Feedback uses Toast for results, Dialog for decisions and Tooltip for optional hints; destructive actions go through a Dialog with `np-btn--danger`. Style nothing inline that a component or type class already covers.
 
@@ -147,6 +150,7 @@ A page with a skip link and a hero, following the system theme:
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components/bundle.css">
   <link rel="icon" href="brand/favicon.svg" type="image/svg+xml">
+  <script src="components/neptune.js" defer></script>
 </head>
 <body class="np-root">
   <a class="np-skip" href="#main">Skip to content</a>
@@ -163,6 +167,27 @@ A page with a skip link and a hero, following the system theme:
 
 Open it in a browser: a Paper page (Deep if the system is dark) with a serif headline, a mono eyebrow and a skip link that appears on the first Tab. Every component folder has a `preview.html` with working markup to copy.
 
+### Behaviour
+
+`neptune.js` wires components up from their documented markup. Add the markup; there's nothing to call. It runs once per page, however often it's loaded, and nothing it does animates.
+
+| Component | What it wires up |
+| --- | --- |
+| Tabs | Click selects. Left and Right move and wrap, Home and End go to the first and last. Only the selected tab is in the tab order. |
+| Tooltip | Esc hides an open tooltip without moving focus (WCAG 1.4.13); leaving the trigger resets it. The 300ms hover delay is CSS. |
+| Toast | Dismiss removes the toast. `Neptune.toast()` adds one with the timing below. |
+| SearchDialog | ⌘K / Ctrl+K and the Nav search button open it with `showModal()` and focus the input. Up and Down move `aria-selected`; Enter opens the selected result. |
+| Dialog | A button with `data-np-open="id"` opens that dialog with `showModal()`. An input with `data-np-confirm="name"` keeps the form's `np-btn--danger` disabled until the typed text matches. |
+| ThemeToggle | Click sets `data-theme` on `<html>`, saves it as `np-theme` in `localStorage` and marks the pressed side; on load, and when the system theme changes, the side the page shows is pressed. |
+| CodeCopy | Copy copies the code without `$ ` prompts, then reads "Copied" for 1.5s with `data-copied` set. |
+
+Two functions, on `window.Neptune`:
+
+- `Neptune.init(root)`: sets the initial state (tab order, theme marks, confirm buttons) inside `root`, `document` by default. Call it after adding a Tabs, ThemeToggle or confirm Dialog to the page. Events are delegated, so everything else works without it.
+- `Neptune.toast({ kind, label, text, action })`: adds a toast to the page's `np-toasts` region (made if missing) and returns it. `kind` is `"ok"`, `"alert"` or empty for neutral; `action` is `{ label, onClick }`. Ok and neutral toasts leave after 6s, paused while hovered or focused; alerts and toasts with an action stay. At most three show; the oldest goes first.
+
+Chart draws nothing: plot the data and its readout with your own code.
+
 ### CLI
 
 The tooling runs through npm scripts:
@@ -173,7 +198,7 @@ The tooling runs through npm scripts:
 | `npm run llms` | Rebuild `llms.txt` and `llms-full.txt` |
 | `npm run lint` | Lint `components/` for raw colours and `z-index` |
 | `npm run contrast` | Measure every documented colour pair in both themes; fail below 4.5:1 for text, 3:1 for borders |
-| `npm run check` | Everything CI runs, including the install contents check; writes nothing |
+| `npm run check` | Everything CI runs, including the install contents check and a syntax check of `neptune.js`; writes nothing |
 | `npm run visual` | Screenshot every preview in both themes and compare |
 | `npm run a11y` | Run axe-core on every preview in both themes; fail on serious or critical violations |
 
@@ -311,7 +336,7 @@ Use typographic glyphs, not icons or emoji. In mono, `ink-muted`:
 
 - Fast and stepped: `duration-step` (80ms) with `easing-step` (`steps(2)`) for hover lift. Nothing eases in slowly.
 - A blinking block cursor in terminals is the one ambient animation.
-- Respect `prefers-reduced-motion`: drop the cursor blink and the lift.
+- Respect `prefers-reduced-motion`: drop the cursor blink and the lift. `neptune.js` adds no motion of its own.
 
 ## Accessibility
 
@@ -368,7 +393,7 @@ npm run visual
 npm run a11y
 ```
 
-`npm run check` runs everything CI runs: tokens in sync, `llms.txt` current, a stylelint pass on `components/` that rejects raw colours (hex, `rgb()`, named colours) and any `z-index` that isn't a `z-` token, and `scripts/check-pack.mjs`, which fails if a git install would miss a site file, ship anything outside `files` in `package.json`, or run an install script. A new colour goes into `tokens.json` (and `tokens/primitives.json`) first.
+`npm run check` runs everything CI runs: tokens in sync, every documented colour pair at its WCAG minimum, `llms.txt` current, `neptune.js` parses, a stylelint pass on `components/` that rejects raw colours (hex, `rgb()`, named colours) and any `z-index` that isn't a `z-` token, and `scripts/check-pack.mjs`, which fails if a git install would miss a site file, ship anything outside `files` in `package.json`, or run an install script. A new colour goes into `tokens.json` (and `tokens/primitives.json`) first.
 
 Visual regression: `tests/visual.spec.js` screenshots every component preview in Paper and Deep, with the brand fonts served locally, and CI compares them with `tests/__screenshots__` on every push. After an intended visual change, run the **visual** workflow by hand with *update* ticked; it rewrites the baselines in the same container CI uses and commits them.
 
@@ -589,8 +614,8 @@ Source: components/Checkbox/README.md · Preview: components/Checkbox/preview.ht
 A dark code block with a language label and a Copy button, plus a light inline code style.
 
 - Markup: `<div class="np-code">` with `np-code__head` (language + `button.np-code__copy`) and `<pre><code>`. Inside, `.p` for prompts and `.c` for commands. Inline: `<code class="np-code-inline">`.
-- Consumer provides: the language label, the code, and the copy handler. Strip prompts (`$ `) from the copied text.
-- The button reads "Copy", then "Copied" for 1.5s with `data-copied` set. No toast.
+- Consumer provides: the language label and the code.
+- Behaviour comes from `neptune.js`: Copy copies the code with prompts (`$ `) stripped, then reads "Copied" for 1.5s with `data-copied` set. No toast.
 - Use Terminal for transcripts with output; use CodeCopy for things people paste.
 
 ## Anatomy
@@ -616,7 +641,7 @@ Source: components/CodeCopy/README.md · Preview: components/CodeCopy/preview.ht
 A native modal for confirmations and short tasks: bracketed label, serif title, body, and actions on a sunk footer.
 
 - Markup: `<dialog class="np-dialog" aria-labelledby="…" aria-describedby="…">` holding `form.np-dialog__box` with `method="dialog"`: `p.np-dialog__label` (`[ Confirm ]`), `h2.np-dialog__title`, `div.np-dialog__body`, `div.np-dialog__foot`.
-- Open with `showModal()`. The browser gives the focus trap, Esc and the backdrop. On close, focus returns to the button that opened it; set it yourself if that button is gone.
+- Open with `showModal()`: give the trigger `data-np-open="<dialog id>"` and `neptune.js` does it. The browser gives the focus trap, Esc and the backdrop. On close, focus returns to the button that opened it; set it yourself if that button is gone.
 - Buttons in the foot carry `value`; read `dialog.returnValue` on `close`. Esc returns an empty value: treat it as Cancel.
 - Order: Cancel, then the action, right-aligned. On phones they stack, action on top.
 - Consumer provides: a title that asks the question ("Delete mcp-gateway?"), one or two sentences on what happens, and a button that names the action ("Delete project", never "OK" or "Yes").
@@ -626,7 +651,7 @@ A native modal for confirmations and short tasks: bracketed label, serif title, 
 - Add `np-dialog--danger`: the label turns `alert` and reads `[ Delete ]` or `[ Irreversible ]`.
 - The confirm button is `np-btn--danger`, the only place it appears. Put `autofocus` on Cancel, so Enter can't destroy anything by accident.
 - Say what is lost, with numbers where you have them: "its 14 runs and 3 API keys".
-- Irreversible and large: add an Input asking for the name, and keep the action `disabled` until it matches.
+- Irreversible and large: add an Input asking for the name, and keep the action `disabled` until it matches. Put `data-np-confirm="<name>"` on the input and `neptune.js` enables the `np-btn--danger` button when the trimmed text matches.
 
 - Don't: open a dialog on page load, stack two dialogs, or use one for a message that needs no decision (use a Toast).
 
@@ -990,8 +1015,8 @@ The ⌘K search: a native modal dialog with a prompt input, grouped results and 
 
 - Markup: `<dialog class="np-search" aria-label="Search">` holding `form.np-search__box` (an `np-input` with `type="search"` and an `Esc` Kbd), `div.np-search__results` and `div.np-search__foot` with key hints.
 - Results are a listbox, with the input as its combobox. The input takes `role="combobox"`, `aria-autocomplete="list"`, `aria-expanded`, `aria-controls` pointing at the results' `id`, and `aria-activedescendant` naming the selected result. `div.np-search__results` takes `role="listbox"` and an `aria-label`. Per group: `div[role="group"]` labelled by its `p.np-search__group`, holding `ul.np-search__list[role="none"]` of `li[role="none"]` > `a.np-search__item[role="option"]`, each with an `id`, `tabindex="-1"` and `aria-selected`.
-- Open with `showModal()` from the Nav search button and from ⌘K / Ctrl+K. The browser handles Esc, the focus trap and the backdrop.
-- Keyboard: focus stays in the input. Up and Down move `aria-selected` and `aria-activedescendant` through results; Enter opens the selected one. The preview has the script to copy.
+- `neptune.js` opens it with `showModal()` from the Nav search button (`np-nav__search`) and from ⌘K / Ctrl+K, and focuses the input. One per page. The browser handles Esc, the focus trap and the backdrop.
+- Keyboard: focus stays in the input. Up and Down move `aria-selected` and `aria-activedescendant` through results; Enter opens the selected one. `neptune.js` handles all three.
 - Each result: the title, with the matched words in `<mark>`, and its section in `np-meta` on the right.
 - No results: put an EmptyState in the results area.
 - Results read from a prebuilt index; nothing loads until the dialog opens.
@@ -1176,7 +1201,7 @@ Source: components/Table/README.md · Preview: components/Table/preview.html
 Mono tabs over panels, for alternatives a reader picks one of: package managers, languages, operating systems.
 
 - Markup: `div.np-tabs` holding `div.np-tabs__list` with `role="tablist"` and an `aria-label`, then one `div.np-tabs__panel` per tab with `role="tabpanel"`. Tabs are `button.np-tabs__tab` with `role="tab"`, `aria-selected`, `aria-controls` and an `id`; panels carry `aria-labelledby` and `hidden` when not shown.
-- Needs a small script: click selects; Left, Right, Home and End move between tabs; only the selected tab is in the tab order (`tabindex="-1"` on the rest). The preview has one to copy.
+- Behaviour comes from `neptune.js`: click selects, and only the selected tab is in the tab order (`tabindex="-1"` on the rest). Call `Neptune.init(el)` after adding tabs to a live page.
 - The selected tab carries a 2px `neptune` underline. That is the view's one blue.
 - Consumer provides: two to five short labels and a panel each, usually a CodeCopy.
 - Don't: use tabs for content a reader needs to compare. Show it side by side.
@@ -1263,11 +1288,10 @@ Source: components/Textarea/README.md · Preview: components/Textarea/preview.ht
 
 A two-state segmented control that switches between the Paper and Deep themes.
 
-- Markup: `<div class="np-theme" role="group" aria-label="Theme">` with two `<button aria-pressed>` children labelled "Paper" and "Deep".
+- Markup: `<div class="np-theme" role="group" aria-label="Theme">` with two `<button type="button" aria-pressed="false">` children: `data-set="light"` labelled "Paper" and `data-set="dark"` labelled "Deep".
 - With no `data-theme` on `<html>`, the page follows the system setting (`prefers-color-scheme`). That is the default: don't set the attribute until the reader picks.
-- Consumer provides: the handler. On click, set `data-theme="light"` or `"dark"` on `<html>`, flip `aria-pressed`, and save the choice.
-- On load, mark the side the page is actually showing as pressed, whether it came from the saved choice or the system.
-- Apply a saved choice in an inline script in `<head>`, before the stylesheets, so the page doesn't flash the wrong theme. The preview has both scripts.
+- Behaviour comes from `neptune.js`: a click sets `data-theme="light"` or `"dark"` on `<html>`, flips `aria-pressed` and saves the choice as `np-theme` in `localStorage`. On load, and when the system theme changes, it marks the side the page is actually showing.
+- `neptune.js` is deferred, so also apply a saved choice in a one-line inline script in `<head>`, before the stylesheets, or the page flashes the wrong theme. Copy it from the preview.
 - The pressed side fills `neptune`. Put it in `np-nav__actions`, after search.
 
 ## Keyboard
@@ -1287,7 +1311,8 @@ A short machine message after something happens: dark like the terminal in both 
 - Timing: ok and neutral toasts leave after 6s, paused while hovered or focused. Alert toasts stay until dismissed. A toast with an action stays until acted on or dismissed.
 - Words: label is the result in one word (`Saved`, `Copied`, `Failed`); text is what happened, then what to do: "Deploy failed: missing `API_BASE_URL`. Set it in `.env`."
 - At most three on screen; the oldest goes first. Newest at the bottom.
-- Consumer provides: the region, the timer, and the handlers. The preview has a small script to copy.
+- Behaviour comes from `neptune.js`: Dismiss removes a toast, and `Neptune.toast({ kind, label, text, action })` adds one with the timing above (see the README's Behaviour section). Write toasts into the page yourself and they get Dismiss but no timer.
+- Consumer provides: the region and the action handlers.
 - Don't: toast something the user can see changed on the page, put the only copy of an error in a toast, or use a toast for a decision (use a Dialog). CodeCopy says "Copied" in its own button; no toast.
 
 ## Anatomy
@@ -1343,7 +1368,7 @@ A short mono hint on hover or keyboard focus, dark like the terminal.
 
 - Markup: `span.np-tip` wrapping the trigger and `span.np-tip__bubble` with `role="tooltip"` and an `id`. The trigger gets `aria-describedby` pointing at that `id`. Add `np-tip--below` when there's no room above.
 - Shows after 300ms on hover, at once on focus. Hovering the bubble keeps it open.
-- Esc hides it without moving focus (WCAG 1.4.13). The preview has the three-line script.
+- Esc hides it without moving focus (WCAG 1.4.13); leaving the trigger resets it. That part comes from `neptune.js`; the delays are CSS.
 - Consumer provides: one short sentence or a shortcut, under 80 characters: "Uses the last saved judge. About 4 min." or `⌘K`.
 - Supplementary only. Touch screens have no hover, so nothing a reader needs may live only in a tooltip.
 - Don't: put links or buttons inside, add one to a disabled control (it can't take focus; say why in a hint instead), or repeat the trigger's own label.
@@ -1356,5 +1381,9 @@ A short mono hint on hover or keyboard focus, dark like the terminal.
 │ __bubble        role=tooltip, mono, term-bg    │
 └────────────────────────────────────────────────┘
 ```
+
+## Keyboard
+
+- Focus on the trigger shows it at once. Esc hides it; focus stays on the trigger.
 
 Source: components/Tooltip/README.md · Preview: components/Tooltip/preview.html

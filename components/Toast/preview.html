@@ -23,28 +23,6 @@
     <button class="np-toast__close" type="button">Dismiss</button>
   </div>
 </section>
-<script>
-// toast(kind, label, text): adds a toast; ok/neutral leave after 6s unless hovered or focused.
-function toast(kind, label, text) {
-  var region = document.querySelector('.np-toasts'), t = document.createElement('div');
-  t.className = 'np-toast' + (kind ? ' np-toast--' + kind : '');
-  if (kind === 'alert') t.setAttribute('role', 'alert');
-  t.innerHTML = '<p class="np-toast__label">' + (kind ? '<span class="np-dot"></span> ' : '') + '</p><p class="np-toast__text"></p><button class="np-toast__close" type="button">Dismiss</button>';
-  t.querySelector('.np-toast__label').append(label);
-  t.querySelector('.np-toast__text').textContent = text;
-  region.append(t);
-  while (region.children.length > 3) region.firstElementChild.remove();
-  if (kind !== 'alert') {
-    var left = 6000, start, id, run = function () { start = Date.now(); id = setTimeout(function () { t.remove(); }, left); };
-    var hold = function () { clearTimeout(id); left -= Date.now() - start; };
-    t.addEventListener('mouseenter', hold); t.addEventListener('focusin', hold);
-    t.addEventListener('mouseleave', run); t.addEventListener('focusout', run);
-    run();
-  }
-}
-document.addEventListener('click', function (e) {
-  if (e.target.matches('.np-toast__close')) e.target.closest('.np-toast').remove();
-});
-</script>
+<script src="../neptune.js" defer></script>
 </body>
 </html>

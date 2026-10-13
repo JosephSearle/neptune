@@ -7,7 +7,8 @@ A short machine message after something happens: dark like the terminal in both 
 - Timing: ok and neutral toasts leave after 6s, paused while hovered or focused. Alert toasts stay until dismissed. A toast with an action stays until acted on or dismissed.
 - Words: label is the result in one word (`Saved`, `Copied`, `Failed`); text is what happened, then what to do: "Deploy failed: missing `API_BASE_URL`. Set it in `.env`."
 - At most three on screen; the oldest goes first. Newest at the bottom.
-- Consumer provides: the region, the timer, and the handlers. The preview has a small script to copy.
+- Behaviour comes from `neptune.js`: Dismiss removes a toast, and `Neptune.toast({ kind, label, text, action })` adds one with the timing above (see the README's Behaviour section). Write toasts into the page yourself and they get Dismiss but no timer.
+- Consumer provides: the region and the action handlers.
 - Don't: toast something the user can see changed on the page, put the only copy of an error in a toast, or use a toast for a decision (use a Dialog). CodeCopy says "Copied" in its own button; no toast.
 
 ## Anatomy

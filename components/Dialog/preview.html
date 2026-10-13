@@ -4,6 +4,7 @@
 <head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Dialog</title>
 <style>body{margin:0;padding:24px;min-height:380px}.np-dialog[open]:not(:modal){position:static;margin:0}</style></head>
 <body class="np-root">
+<!-- Preview only: shown open in place. In a page, open it with a data-np-open="id" trigger. -->
 <dialog class="np-dialog np-dialog--danger" open aria-labelledby="del-title" aria-describedby="del-text">
   <form class="np-dialog__box" method="dialog">
     <p class="np-dialog__label">[ Irreversible ]</p>
@@ -12,7 +13,7 @@
       <p id="del-text">This removes the project, its 14 runs and its 3 API keys. Connected agents lose access at once.</p>
       <label class="np-field">
         <span class="np-field__label">Type mcp-gateway to confirm</span>
-        <span class="np-input"><input id="del-name" autocomplete="off" spellcheck="false"></span>
+        <span class="np-input"><input id="del-name" autocomplete="off" spellcheck="false" data-np-confirm="mcp-gateway"></span>
       </label>
     </div>
     <div class="np-dialog__foot">
@@ -21,11 +22,6 @@
     </div>
   </form>
 </dialog>
-<script>
-// Enable the destructive action only when the typed name matches.
-var input = document.getElementById('del-name'), go = document.getElementById('del-go');
-input.addEventListener('input', function () { go.disabled = input.value.trim() !== 'mcp-gateway'; });
-// In a page: dialog.showModal() from a trigger; on 'close', check dialog.returnValue === 'confirm'.
-</script>
+<script src="../neptune.js" defer></script>
 </body>
 </html>

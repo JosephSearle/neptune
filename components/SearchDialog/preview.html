@@ -5,7 +5,8 @@
 <style>body{margin:0;padding:24px}.stage{position:relative;min-height:440px}.stage .np-search{position:static;margin:var(--space-6) 0 0}</style></head>
 <body class="np-root">
 <div class="stage">
-  <button class="np-nav__search" type="button" id="open"><span class="np-search-text">Search</span> <kbd class="np-kbd">⌘</kbd><kbd class="np-kbd">K</kbd></button>
+  <button class="np-nav__search" type="button"><span class="np-search-text">Search</span> <kbd class="np-kbd">⌘</kbd><kbd class="np-kbd">K</kbd></button>
+  <!-- Preview only: shown open in place. ⌘K or the button reopens it as a modal. -->
   <dialog class="np-search" aria-label="Search" open>
     <form class="np-search__box" method="dialog">
       <span class="np-input"><input type="search" value="gateway" aria-label="Search notes and playbooks" autocomplete="off" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-controls="search-results" aria-activedescendant="r-1"></span>
@@ -29,26 +30,6 @@
     <div class="np-search__foot"><span>↑ ↓ move</span><span>↵ open</span><span>Esc close</span></div>
   </dialog>
 </div>
-<script>
-var dlg = document.querySelector('.np-search');
-var items = function () { return Array.prototype.slice.call(dlg.querySelectorAll('.np-search__item')); };
-function move(d) {
-  var list = items(), i = list.findIndex(function (a) { return a.getAttribute('aria-selected') === 'true'; });
-  var n = (i + d + list.length) % list.length;
-  list.forEach(function (a, k) { a.setAttribute('aria-selected', String(k === n)); });
-  dlg.querySelector('input').setAttribute('aria-activedescendant', list[n].id);
-  list[n].scrollIntoView({ block: 'nearest' });
-}
-function openModal() { if (dlg.open) dlg.close(); dlg.showModal(); dlg.querySelector('input').focus(); }
-document.getElementById('open').addEventListener('click', openModal);
-document.addEventListener('keydown', function (e) {
-  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openModal(); }
-});
-dlg.addEventListener('keydown', function (e) {
-  if (e.key === 'ArrowDown') { e.preventDefault(); move(1); }
-  if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
-  if (e.key === 'Enter') { e.preventDefault(); var s = dlg.querySelector('[aria-selected="true"]'); if (s) s.click(); }
-});
-</script>
+<script src="../neptune.js" defer></script>
 </body>
 </html>

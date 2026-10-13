@@ -2,6 +2,7 @@
 <!doctype html>
 <html lang="en">
 <head><meta charset="utf-8">
+<!-- Inline in <head>, before the stylesheets: applies a saved theme before first paint. neptune.js does the rest. -->
 <script>try { var t = localStorage.getItem('np-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>ThemeToggle</title>
 <style>body{margin:0;padding:24px}</style></head>
 <body class="np-root">
@@ -9,22 +10,6 @@
   <button type="button" aria-pressed="false" data-set="light">Paper</button>
   <button type="button" aria-pressed="false" data-set="dark">Deep</button>
 </div>
-<script>
-var buttons = document.querySelectorAll('.np-theme button');
-var showing = function () {
-  return document.documentElement.getAttribute('data-theme') ||
-    (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-};
-var mark = function () { buttons.forEach(function (o) { o.setAttribute('aria-pressed', String(o.dataset.set === showing())); }); };
-buttons.forEach(function (b) {
-  b.addEventListener('click', function () {
-    document.documentElement.setAttribute('data-theme', b.dataset.set);
-    try { localStorage.setItem('np-theme', b.dataset.set); } catch (e) {}
-    mark();
-  });
-});
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change', mark);
-mark();
-</script>
+<script src="../neptune.js" defer></script>
 </body>
 </html>

@@ -30,6 +30,7 @@ Code, tooling and history live in [JosephSearle/neptune](https://github.com/Jose
 Built with:
 
 - Plain CSS: tokens as CSS variables plus `np-` component classes, no framework.
+- One small script, `components/neptune.js`, for the interactive components. No dependencies, no build step.
 - [Newsreader](https://fonts.google.com/specimen/Newsreader) and [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono).
 - [W3C Design Tokens](https://www.designtokens.org/) (DTCG 2025.10) export.
 - [Playwright](https://playwright.dev/) for visual regression, [stylelint](https://stylelint.io/) for the CSS lint.
@@ -114,18 +115,20 @@ npm ci
 
 ### Dependencies
 
-- A browser with CSS custom properties and `prefers-color-scheme`. No JavaScript runtime.
+- A browser with CSS custom properties and `prefers-color-scheme`.
+- JavaScript only for the interactive components: Tabs, Tooltip, Toast, SearchDialog, Dialog, ThemeToggle and CodeCopy need `neptune.js` (ES2017, no dependencies). Every other component is CSS only.
 - Google Fonts, imported by `bundle.css`: Newsreader and IBM Plex Mono. Self-host for production.
 - Tooling only: Node.js 22 (CI's version) for the token, `llms.txt` and lint scripts and Playwright.
 - Brand files only: Python 3 with `fonttools`, `brotli` and `pillow`, for `scripts/build-brand.py`.
 
 ## Usage
 
-Load two stylesheets, in this order, plus the fonts:
+Load two stylesheets, in this order, plus the fonts and the script:
 
 1. `tokens.css`: every token as a CSS variable, both themes, and a class per type style (`.display`, `.heading`, `.label`…).
 2. `components/bundle.css`: the `np-` component classes.
 3. Google Fonts: Newsreader (opsz, 300–700, italic) and IBM Plex Mono (400–600). `bundle.css` imports them; self-host for production.
+4. `components/neptune.js`, with `defer`, after the stylesheets: `<script src="components/neptune.js" defer></script>`. Only pages with an interactive component need it.
 
 Leave `data-theme` off `<html>` and the page follows the system setting; set `"light"` or `"dark"` when the reader picks one in the ThemeToggle. Wrap the page in `np-root`. Start `<body>` with a SkipLink, then the Nav, then `<main id="main" tabindex="-1">` with its content in `np-container`. Build pages from components: Nav, Hero, SectionHead, Card, Figure, Split, Feed, Table, Prose, CodeCopy, Footer. Docs pages add DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout and Tabs. Forms use Input, Select, Textarea, Checkbox and Switch. Lay out index pages on PageGrid. Every site gets SearchDialog behind ⌘K and an EmptyState for anything that can come back empty. Feedback uses Toast for results, Dialog for decisions and Tooltip for optional hints; destructive actions go through a Dialog with `np-btn--danger`. Style nothing inline that a component or type class already covers.
 
@@ -141,6 +144,7 @@ A page with a skip link and a hero, following the system theme:
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components/bundle.css">
   <link rel="icon" href="brand/favicon.svg" type="image/svg+xml">
+  <script src="components/neptune.js" defer></script>
 </head>
 <body class="np-root">
   <a class="np-skip" href="#main">Skip to content</a>
@@ -157,6 +161,27 @@ A page with a skip link and a hero, following the system theme:
 
 Open it in a browser: a Paper page (Deep if the system is dark) with a serif headline, a mono eyebrow and a skip link that appears on the first Tab. Every component folder has a `preview.html` with working markup to copy.
 
+### Behaviour
+
+`neptune.js` wires components up from their documented markup. Add the markup; there's nothing to call. It runs once per page, however often it's loaded, and nothing it does animates.
+
+| Component | What it wires up |
+| --- | --- |
+| Tabs | Click selects. Left and Right move and wrap, Home and End go to the first and last. Only the selected tab is in the tab order. |
+| Tooltip | Esc hides an open tooltip without moving focus (WCAG 1.4.13); leaving the trigger resets it. The 300ms hover delay is CSS. |
+| Toast | Dismiss removes the toast. `Neptune.toast()` adds one with the timing below. |
+| SearchDialog | ⌘K / Ctrl+K and the Nav search button open it with `showModal()` and focus the input. Up and Down move `aria-selected`; Enter opens the selected result. |
+| Dialog | A button with `data-np-open="id"` opens that dialog with `showModal()`. An input with `data-np-confirm="name"` keeps the form's `np-btn--danger` disabled until the typed text matches. |
+| ThemeToggle | Click sets `data-theme` on `<html>`, saves it as `np-theme` in `localStorage` and marks the pressed side; on load, and when the system theme changes, the side the page shows is pressed. |
+| CodeCopy | Copy copies the code without `$ ` prompts, then reads "Copied" for 1.5s with `data-copied` set. |
+
+Two functions, on `window.Neptune`:
+
+- `Neptune.init(root)`: sets the initial state (tab order, theme marks, confirm buttons) inside `root`, `document` by default. Call it after adding a Tabs, ThemeToggle or confirm Dialog to the page. Events are delegated, so everything else works without it.
+- `Neptune.toast({ kind, label, text, action })`: adds a toast to the page's `np-toasts` region (made if missing) and returns it. `kind` is `"ok"`, `"alert"` or empty for neutral; `action` is `{ label, onClick }`. Ok and neutral toasts leave after 6s, paused while hovered or focused; alerts and toasts with an action stay. At most three show; the oldest goes first.
+
+Chart draws nothing: plot the data and its readout with your own code.
+
 ### CLI
 
 The tooling runs through npm scripts:
@@ -167,7 +192,7 @@ The tooling runs through npm scripts:
 | `npm run llms` | Rebuild `llms.txt` and `llms-full.txt` |
 | `npm run lint` | Lint `components/` for raw colours and `z-index` |
 | `npm run contrast` | Measure every documented colour pair in both themes; fail below 4.5:1 for text, 3:1 for borders |
-| `npm run check` | Everything CI runs, including the install contents check; writes nothing |
+| `npm run check` | Everything CI runs, including the install contents check and a syntax check of `neptune.js`; writes nothing |
 | `npm run visual` | Screenshot every preview in both themes and compare |
 | `npm run a11y` | Run axe-core on every preview in both themes; fail on serious or critical violations |
 
@@ -305,7 +330,7 @@ Use typographic glyphs, not icons or emoji. In mono, `ink-muted`:
 
 - Fast and stepped: `duration-step` (80ms) with `easing-step` (`steps(2)`) for hover lift. Nothing eases in slowly.
 - A blinking block cursor in terminals is the one ambient animation.
-- Respect `prefers-reduced-motion`: drop the cursor blink and the lift.
+- Respect `prefers-reduced-motion`: drop the cursor blink and the lift. `neptune.js` adds no motion of its own.
 
 ## Accessibility
 
@@ -362,7 +387,7 @@ npm run visual
 npm run a11y
 ```
 
-`npm run check` runs everything CI runs: tokens in sync, `llms.txt` current, a stylelint pass on `components/` that rejects raw colours (hex, `rgb()`, named colours) and any `z-index` that isn't a `z-` token, and `scripts/check-pack.mjs`, which fails if a git install would miss a site file, ship anything outside `files` in `package.json`, or run an install script. A new colour goes into `tokens.json` (and `tokens/primitives.json`) first.
+`npm run check` runs everything CI runs: tokens in sync, every documented colour pair at its WCAG minimum, `llms.txt` current, `neptune.js` parses, a stylelint pass on `components/` that rejects raw colours (hex, `rgb()`, named colours) and any `z-index` that isn't a `z-` token, and `scripts/check-pack.mjs`, which fails if a git install would miss a site file, ship anything outside `files` in `package.json`, or run an install script. A new colour goes into `tokens.json` (and `tokens/primitives.json`) first.
 
 Visual regression: `tests/visual.spec.js` screenshots every component preview in Paper and Deep, with the brand fonts served locally, and CI compares them with `tests/__screenshots__` on every push. After an intended visual change, run the **visual** workflow by hand with *update* ticked; it rewrites the baselines in the same container CI uses and commits them.
 

@@ -21,7 +21,7 @@ Every issue starts from a form; blank issues are turned off. A mistake or gap in
 
 ## Reporting a security problem
 
-Don't open a public issue. Report it privately from the repository's **Security** tab, using **Report a vulnerability**. Neptune ships CSS and static files only, so the likely problems are in the workflows (`.github/workflows/`) and the build scripts.
+Don't open a public issue. Report it privately from the repository's **Security** tab, using **Report a vulnerability**. Neptune ships CSS, static files and one small script (`components/neptune.js`), so the likely problems are in that script, the workflows (`.github/workflows/`) and the build scripts.
 
 ## Reporting a bug
 
@@ -73,11 +73,12 @@ Each kind of change has generated files that must move with it. CI fails if they
 | A token | Edit `tokens.json`, `tokens/primitives.json` and `tokens.css` together, then run `npm run tokens` |
 | A component README or the guide | Run `npm run llms` |
 | Component CSS | Use tokens only: `npm run lint` rejects raw colours and raw `z-index` |
+| Component behaviour | Change `components/neptune.js`, not a preview. Keep it ES2017 with no dependencies, and update the README's Behaviour table and the component's Keyboard notes |
 | The logo colours or geometry | Rebuild `brand/` (below) |
 | Anything visible | Expect the visual workflow to fail, and say so in the pull request |
 | A file sites need, added or moved | Update `files` and `exports` in `package.json` and the required list in `scripts/check-pack.mjs` |
 
-A new component lives in `components/<Name>/` with a `README.md` and a `preview.html`. The preview's first line is a `@dsCard` comment naming its group (`Layout`, `Navigation`, `Content`, `Actions`, `Forms` or `Status`). Copy that line from a neighbour. Its CSS goes in `components/bundle.css`.
+A new component lives in `components/<Name>/` with a `README.md` and a `preview.html`. The preview's first line is a `@dsCard` comment naming its group (`Layout`, `Navigation`, `Content`, `Actions`, `Forms` or `Status`). Copy that line from a neighbour. Its CSS goes in `components/bundle.css`; any behaviour goes in `components/neptune.js`. A preview loads `<script src="../neptune.js" defer></script>` and carries no behaviour of its own: an inline script there is scaffolding for the screenshot only (forcing a state), with a comment saying so.
 
 To rebuild the brand files, install the Python dependencies once, then run the script with the Newsreader font from `node_modules`:
 

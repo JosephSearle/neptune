@@ -21,6 +21,8 @@ jobs:
         run: node scripts/check-contrast.mjs
       - name: llms.txt and llms-full.txt are up to date
         run: node scripts/build-llms.mjs --check
+      - name: neptune.js parses
+        run: node --check components/neptune.js
       - name: No raw colours or z-index values in component CSS
         run: npm run lint
       - name: A git install ships the whitelisted files and runs nothing

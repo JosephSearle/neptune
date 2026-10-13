@@ -12,14 +12,6 @@
   </div>
   <p>Set <code class="np-code-inline">API_BASE_URL</code> before the first run.</p>
 </div>
-<script>
-document.querySelectorAll('.np-code__copy').forEach(function (b) {
-  b.addEventListener('click', function () {
-    var text = b.closest('.np-code').querySelector('code').innerText.replace(/^\$ /gm, '');
-    var done = function () { b.textContent = 'Copied'; b.setAttribute('data-copied', ''); setTimeout(function () { b.textContent = 'Copy'; b.removeAttribute('data-copied'); }, 1500); };
-    try { navigator.clipboard.writeText(text).then(done, done); } catch (e) { done(); }
-  });
-});
-</script>
+<script src="../neptune.js" defer></script>
 </body>
 </html>

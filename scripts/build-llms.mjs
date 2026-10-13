@@ -34,7 +34,7 @@ const index = `# Neptune
 
 Rules an agent most often gets wrong:
 
-- Load \`tokens.css\` then \`components/bundle.css\`. Build from the \`np-\` components; never restyle them inline or invent new colours.
+- Load \`tokens.css\` then \`components/bundle.css\`, and \`components/neptune.js\` (deferred) for interactive components. Build from the \`np-\` components; never restyle them inline or invent new colours.
 - Spend \`neptune\` (the blue) on one thing per view: the primary action, a link, the active item or the focus ring.
 - Headings and body in serif; labels, buttons, nav, metadata and code in mono. Never paragraphs in mono, never buttons in serif.
 - Square corners, 1px hairlines, no blurred shadows, no gradients, no emoji, no icons: use the typographic glyphs in the guide.
@@ -48,6 +48,7 @@ Rules an agent most often gets wrong:
 - [tokens.css](${RAW}/tokens.css): every token as a CSS variable for both themes, the system-dark default and print, plus a class per type style.
 - [tokens.json](${RAW}/tokens.json): the source of truth for all tokens, each with a usage note.
 - [components/bundle.css](${RAW}/components/bundle.css): every \`np-\` component class.
+- [components/neptune.js](${RAW}/components/neptune.js): behaviour for Tabs, Tooltip, Toast, SearchDialog, Dialog, ThemeToggle and CodeCopy; no dependencies.
 
 ${groups
   .map(

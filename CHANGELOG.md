@@ -15,10 +15,14 @@ The format follows [Keep a Changelog 2.0.0](https://keepachangelog.com/en/2.0.0/
 - `npm run contrast` (`scripts/check-contrast.mjs`): measures every documented text pair (4.5:1) and `line-strong` and `focus` on each paper surface (3:1) in both themes. `npm run check` and CI run it, so a token nudge that breaks contrast fails the build.
 - Versioned installs: `npm i github:JosephSearle/neptune#v1.1.0` installs a release tag. `package.json` lists the files that ship (`files`) and the import paths (`exports`: `neptune/tokens.css`, `neptune/bundle.css`, `neptune/neptune.js`, `neptune/tokens/*`, `neptune/brand/*`). `scripts/check-pack.mjs`, run by `npm run check` and CI, fails if an install would miss a file, ship anything else, or run a script. README Install covers referencing the files and upgrading.
 - Accessibility checks: CI runs axe-core on every component preview in Paper and Deep, and fails on serious or critical violations. Run them with `npm run a11y`.
+- `components/neptune.js`: one dependency-free script that wires up Tabs, Tooltip, Toast, SearchDialog, Dialog, ThemeToggle and CodeCopy from their documented markup. `window.Neptune` exposes `init(root)` and `toast(options)`. README: a Behaviour section.
+- Dialog: `data-np-open="id"` on a button opens a dialog, and `data-np-confirm="name"` on an input keeps the danger button disabled until the name matches.
+- `npm run check` and CI check that `neptune.js` parses.
 
 ### Changed
 
 - The changelog moved from the README to this file. GitHub release notes now come from here.
+- Previews load `neptune.js` instead of carrying their own scripts. The only inline scripts left are the ThemeToggle's head script, SkipLink's forced focus and Chart's example plot, each commented.
 - README: restructured to the Standard-Readme order, with a centred title, the social card and status badges. The brand guide's sections and wording are unchanged.
 
 ### Fixed

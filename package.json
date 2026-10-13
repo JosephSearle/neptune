@@ -31,7 +31,7 @@
     "llms": "node scripts/build-llms.mjs",
     "lint": "stylelint \"components/**/*.css\"",
     "contrast": "node scripts/check-contrast.mjs",
-    "check": "node scripts/build-tokens.mjs --check && node scripts/check-contrast.mjs && node scripts/build-llms.mjs --check && npm run lint && node scripts/check-pack.mjs",
+    "check": "node scripts/build-tokens.mjs --check && node scripts/check-contrast.mjs && node scripts/build-llms.mjs --check && node --check components/neptune.js && npm run lint && node scripts/check-pack.mjs",
     "visual": "playwright test tests/visual.spec.js",
     "a11y": "playwright test tests/a11y.spec.js"
   },
