@@ -100,6 +100,8 @@ This reinstalls `node_modules` for Linux; run `npm ci` again afterwards if you'r
 
 ## Pull requests
 
+The pull request form asks for each of these; fill it in rather than deleting it.
+
 1. Keep each pull request to one change, and link its issue (`Fixes #12`).
 2. Write the title as a [Conventional Commit](https://www.conventionalcommits.org/): `fix:`, `feat:`, `docs:`, `test:` or `ci:`, as in the history (`feat: add Dialog, Toast, Tooltip and the danger button`).
 3. Say what changed visually and in which themes, with before and after screenshots for anything visible.

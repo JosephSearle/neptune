@@ -10,6 +10,7 @@ The format follows [Keep a Changelog 2.0.0](https://keepachangelog.com/en/2.0.0/
 
 - `CONTRIBUTING.md`: how to report a bug or a security problem, set up, and get a pull request merged, including how to run the visual tests in the same container CI uses.
 - Issue forms for bug reports, suggested changes, docs problems and questions. Blank issues are off, and security reports are routed to private reporting.
+- A pull request template asking why the change is needed, what it changes visually, and for the checks CI runs.
 - README: install steps, a working page example and a table of the npm scripts.
 
 ### Changed
