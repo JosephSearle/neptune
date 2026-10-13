@@ -28,7 +28,7 @@ jobs:
         run: npx playwright test
       - name: Rewrite baselines
         if: ${{ inputs.update }}
-        run: npx playwright test --update-snapshots
+        run: npx playwright test --update-snapshots=all
       - name: Commit baselines
         if: ${{ inputs.update }}
         run: |
