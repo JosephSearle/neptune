@@ -185,7 +185,7 @@ Deprecation comes before removal, for at least one minor release:
 2. Keep it working: an old class stays as an alias in `bundle.css`; an old token becomes an alias of the new one, its usage note starting "Deprecated:".
 3. Remove it in the next major, listed under Removed with what replaces it.
 
-A release updates the version stamps (README, Cover, Nav, Hero, Footer previews, `package.json`), moves the changelog entry under its number, and is tagged `vX.Y.Z` on `main`.
+A release updates the version stamps (README, Cover, Nav, Hero, Footer previews, `package.json`), moves the changelog entry under its number, and bumps `package.json`; on push, the release workflow tags `vX.Y.Z` and publishes the GitHub release from this changelog.
 
 ## Changelog
 

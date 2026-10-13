@@ -1,0 +1,35 @@
+name: release
+
+# When package.json's version has no tag yet, tag main and publish a GitHub release
+# with that version's changelog entry from README.md.
+on:
+  push:
+    branches: [main]
+    paths: [package.json]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Tag and release if this version is new
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          v=$(node -p "require('./package.json').version")
+          if git rev-parse "v$v" >/dev/null 2>&1; then echo "v$v already released"; exit 0; fi
+          node scripts/release-notes.mjs "$v" > notes.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git tag -a "v$v" -m "Neptune $v"
+          git push origin "v$v"
+          gh release create "v$v" --title "Neptune ${v%.0}" --notes-file notes.md
