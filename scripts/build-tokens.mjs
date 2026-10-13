@@ -13,10 +13,8 @@
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { root, readJSON as read, aliasOf, primitiveIndex } from "./tokens-lib.mjs";
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const read = (p) => JSON.parse(readFileSync(join(root, p), "utf8"));
 const src = read("tokens.json");
 const prim = read("tokens/primitives.json");
 const errors = [];
@@ -45,15 +43,7 @@ const dur = (v) => {
 };
 
 // hex -> "{primitive.family.step}"
-const byHex = new Map();
-for (const [family, steps] of Object.entries(prim)) {
-  if (family.startsWith("$")) continue;
-  for (const [step, hex] of Object.entries(steps)) {
-    const h = hex.toLowerCase();
-    if (byHex.has(h)) errors.push(`Primitive ${family}.${step} duplicates ${byHex.get(h)} (${h})`);
-    else byHex.set(h, `{primitive.${family}.${step}}`);
-  }
-}
+const byHex = primitiveIndex(prim, errors);
 const ref = (hex, where) => {
   const r = byHex.get(hex.toLowerCase());
   if (!r) errors.push(`${where}: ${hex} has no primitive in tokens/primitives.json`);
@@ -78,9 +68,9 @@ for (const theme of src.color.themes) {
   const out = { color: { $type: "color" } };
   for (const t of src.color.tokens) {
     const v = t.value[theme.id];
-    const alias = v.match(/^\{(.+)\}$/);
+    const alias = aliasOf(v);
     out.color[t.name] = {
-      $value: alias ? `{color.${alias[1]}}` : ref(v, `${theme.name} ${t.name}`),
+      $value: alias ? `{color.${alias}}` : ref(v, `${theme.name} ${t.name}`),
       $description: t.usage,
     };
   }

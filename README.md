@@ -126,6 +126,7 @@ The tooling runs through npm scripts:
 | `npm run tokens` | Rebuild `tokens/dtcg/` and `tokens.css` from `tokens.json` |
 | `npm run llms` | Rebuild `llms.txt` and `llms-full.txt` |
 | `npm run lint` | Lint `components/` for raw colours and `z-index` |
+| `npm run contrast` | Measure every documented colour pair in both themes; fail below 4.5:1 for text, 3:1 for borders |
 | `npm run check` | Everything CI runs; writes nothing |
 | `npm run visual` | Screenshot every preview in both themes and compare |
 
@@ -267,8 +268,8 @@ Use typographic glyphs, not icons or emoji. In mono, `ink-muted`:
 
 ## Accessibility
 
-- Measured 2026-10-13: every text pair meets 4.5:1 in both themes. Tightest: `alert` on `paper-sunk` 4.59:1 (Paper); `neptune` on `neptune-soft` 5.16:1 (Deep); `ink-muted` on `neptune-soft` 5.47:1 (Paper). Re-measure when a colour changes.
-- `line-strong` meets 3:1 on every paper surface, lowest 3.34:1 (Deep, `paper-raised`). `line` measures 1.3–1.5:1: decoration only, never the only edge of a control.
+- Measured 2026-10-13: every text pair meets 4.5:1 in both themes. Tightest: `alert` on `paper-sunk` 4.59:1 (Paper); `neptune` on `neptune-soft` 5.16:1 (Deep); `ink-muted` on `neptune-soft` 5.47:1 (Paper). `npm run contrast` measures these from `tokens.json`, and CI fails if any documented pair drops below its minimum.
+- `line-strong` meets 3:1 on every paper surface, lowest 3.34:1 (Deep, `paper-raised`). `line` measures 1.25–1.47:1: decoration only, never the only edge of a control.
 - Terminals and code blocks carry a `line` border: in Deep, `term-bg` almost matches `paper` and the block would lose its edge.
 - On touch screens, buttons, nav links, toggles and inputs grow to a 44px target.
 - Focus: 2px solid `focus`, 2px offset, on every interactive element. One rule in `bundle.css` sets it for everything inside `np-root`; don't override it.

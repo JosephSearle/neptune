@@ -17,6 +17,8 @@ jobs:
       - run: npm ci
       - name: DTCG tokens and tokens.css match tokens.json
         run: node scripts/build-tokens.mjs --check
+      - name: Every documented colour pair meets WCAG contrast in both themes
+        run: node scripts/check-contrast.mjs
       - name: llms.txt and llms-full.txt are up to date
         run: node scripts/build-llms.mjs --check
       - name: No raw colours or z-index values in component CSS

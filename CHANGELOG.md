@@ -12,6 +12,7 @@ The format follows [Keep a Changelog 2.0.0](https://keepachangelog.com/en/2.0.0/
 - Issue forms for bug reports, suggested changes, docs problems and questions. Blank issues are off, and security reports are routed to private reporting.
 - A pull request template asking why the change is needed, what it changes visually, and for the checks CI runs.
 - README: install steps, a working page example and a table of the npm scripts.
+- `npm run contrast` (`scripts/check-contrast.mjs`): measures every documented text pair (4.5:1) and `line-strong` and `focus` on each paper surface (3:1) in both themes. `npm run check` and CI run it, so a token nudge that breaks contrast fails the build.
 
 ### Changed
 

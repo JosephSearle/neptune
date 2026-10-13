@@ -9,7 +9,8 @@
     "tokens": "node scripts/build-tokens.mjs",
     "llms": "node scripts/build-llms.mjs",
     "lint": "stylelint \"components/**/*.css\"",
-    "check": "node scripts/build-tokens.mjs --check && node scripts/build-llms.mjs --check && npm run lint",
+    "contrast": "node scripts/check-contrast.mjs",
+    "check": "node scripts/build-tokens.mjs --check && node scripts/check-contrast.mjs && node scripts/build-llms.mjs --check && npm run lint",
     "visual": "playwright test"
   },
   "devDependencies": {
