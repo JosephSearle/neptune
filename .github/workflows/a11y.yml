@@ -1,0 +1,30 @@
+name: a11y
+
+# Runs axe-core on every component preview in Paper and Deep. Serious and critical violations fail.
+# Same Playwright container as the visual workflow, so results match it.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  axe:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.64.0-noble
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - name: No serious or critical axe violations
+        run: npx playwright test tests/a11y.spec.js
+      - uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
+        with:
+          name: a11y-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
