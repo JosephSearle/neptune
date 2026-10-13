@@ -7,3 +7,14 @@ The three-column docs page: Sidebar, content, On this page.
 - Main runs: Breadcrumb, `display` title, Prose (with Callouts and Tabs), Rule, Pager. The README's Docs pages section has the full recipe.
 - The side columns are sticky at `space-8` from the top.
 - Consumer provides: the three regions. Nothing else goes in the grid.
+
+## Anatomy
+
+```text
+┌ main > div.np-docs ─────────────────────────────────┐
+│ __side          Sidebar, 240px, sticky              │
+│ __main          Breadcrumb · ArticleHeader ·        │
+│                 Prose · Rule · Pager                │
+│ __toc           Toc, 200px, sticky; hidden < 1080   │
+└─────────────────────────────────────────────────────┘
+```

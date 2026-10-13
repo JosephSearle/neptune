@@ -9,3 +9,7 @@ A multi-line field in the Input box. Mono text, resizes vertically.
 - Disabled: `disabled` on the control. The box sinks to `paper-sunk` and the text mutes. Say why in the hint.
 - Read-only: `readonly`, same as Input.
 - Consumer provides: a label, a placeholder that shows the format (not a second label), and a length hint if there is a limit.
+
+## Keyboard
+
+- Tab focuses; Enter adds a line, so it never submits the form. Tab leaves the field.

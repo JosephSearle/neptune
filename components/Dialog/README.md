@@ -16,3 +16,21 @@ A native modal for confirmations and short tasks: bracketed label, serif title, 
 - Irreversible and large: add an Input asking for the name, and keep the action `disabled` until it matches.
 
 - Don't: open a dialog on page load, stack two dialogs, or use one for a message that needs no decision (use a Toast).
+
+## Anatomy
+
+```text
+┌ dialog.np-dialog ──────────────────────────────┐
+│ __label         [ Confirm ]                    │
+├────────────────────────────────────────────────┤
+│ __title         the question                   │
+│ __body          what happens; optional field   │
+├────────────────────────────────────────────────┤
+│ __foot          Cancel   Action                │
+└────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Tab cycles inside the dialog only; Esc cancels; Enter on a focused button presses it.
+- Focus starts on Cancel in a danger dialog, on the first field otherwise.

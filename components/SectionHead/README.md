@@ -6,3 +6,13 @@ The opener for a page section: an optional indexed rule, a serif heading, an opt
 - Consumer provides: the index and name for the rule (`01 · Notes`), the heading in sentence case, and at most one action.
 - Index sections in page order. The heading drops to `heading` size below 640px.
 - Use this instead of styling `h2` inline.
+
+## Anatomy
+
+```text
+┌ header.np-section-head ───────────────────────────┐
+│ np-rule         optional 02 · Research            │
+│ __row           __title · optional ghost button   │
+│ __lead          optional, ≤ 52ch                  │
+└───────────────────────────────────────────────────┘
+```

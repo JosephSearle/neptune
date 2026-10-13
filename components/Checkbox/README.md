@@ -8,3 +8,8 @@ Checkboxes and radio buttons: a square (round for radio) that fills with a `nept
 - Labels are serif, sentence case, and say what happens when checked.
 - Disabled: add `disabled` to the input; the label turns `ink-muted`.
 - Don't: use a checkbox for an action that applies at once. Use a Switch.
+
+## Keyboard
+
+- Tab moves between checkboxes; Space toggles.
+- Radios are one tab stop per group: Tab enters, Up/Down or Left/Right move and select.

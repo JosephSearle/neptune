@@ -7,3 +7,13 @@ A dark code and command block with a mono title bar; stays dark in both themes.
 - Show commands people can copy. Keep output honest and short.
 - One blinking cursor per page at most. It stops under reduced motion.
 - Don't: add macOS traffic-light dots, syntax-highlight with more than `term-accent`.
+
+## Anatomy
+
+```text
+┌ div.np-term ─────────────────────────────────────┐
+│ __bar           title             status         │
+├──────────────────────────────────────────────────┤
+│ __body          pre: .p prompt .c command .cur   │
+└──────────────────────────────────────────────────┘
+```

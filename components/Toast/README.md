@@ -9,3 +9,18 @@ A short machine message after something happens: dark like the terminal in both 
 - At most three on screen; the oldest goes first. Newest at the bottom.
 - Consumer provides: the region, the timer, and the handlers. The preview has a small script to copy.
 - Don't: toast something the user can see changed on the page, put the only copy of an error in a toast, or use a toast for a decision (use a Dialog). CodeCopy says "Copied" in its own button; no toast.
+
+## Anatomy
+
+```text
+┌ section.np-toasts (live region) ───────────────┐
+│ np-toast        __label ● word       Dismiss   │
+│                 __text                         │
+│                 __actions: one __action        │
+└────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Toasts never take focus. Tab reaches Dismiss and the action in place; alert toasts are announced at once.
+- An ok toast's timer pauses while it holds focus.

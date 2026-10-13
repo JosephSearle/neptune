@@ -6,3 +6,17 @@ A dark code block with a language label and a Copy button, plus a light inline c
 - Consumer provides: the language label, the code, and the copy handler. Strip prompts (`$ `) from the copied text.
 - The button reads "Copy", then "Copied" for 1.5s with `data-copied` set. No toast.
 - Use Terminal for transcripts with output; use CodeCopy for things people paste.
+
+## Anatomy
+
+```text
+┌ div.np-code ─────────────────────────────────────┐
+│ __head          bash                  [ Copy ]   │
+├──────────────────────────────────────────────────┤
+│ pre > code      .p prompt  .c command            │
+└──────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Tab reaches Copy; Enter or Space copies. The label change to "Copied" is the confirmation; nothing moves focus.

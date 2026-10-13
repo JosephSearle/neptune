@@ -7,3 +7,16 @@ The page opener: a mono stamp, a `display-xl` serif headline, a lead, actions an
 - Put one word of the headline in `<em>` to set it in italic `neptune`. Once only.
 - Stats must be real and countable. No stats beats fake stats.
 - One hero per page. Below 640px the headline drops to `display` size.
+
+## Anatomy
+
+```text
+┌ section.np-hero ─────────────────────────────┐
+│ __eyebrow       mono stamp                   │
+│ __title         h1, display-xl, one <em>     │
+│ __lead          ≤ 52ch                       │
+│ np-row          primary + secondary button   │
+├──────────────────────────────────────────────┤
+│ __stats         optional dl of dt/dd         │
+└──────────────────────────────────────────────┘
+```

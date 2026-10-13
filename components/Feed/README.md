@@ -9,3 +9,17 @@ A dated list of entries, one row each: ISO date, serif title, tag.
 - Consumer provides: date, title in sentence case, tag, and the link.
 - Open it with a SectionHead. Close long feeds with a ghost button (`All notes →`), not pagination.
 - Don't: add summaries or thumbnails to rows. Use Card for that.
+
+## Anatomy
+
+```text
+┌ ol.np-feed › li.np-feed__item › a.np-feed__link ────┐
+│ __date          time, ISO                           │
+│ __title         serif, sentence case                │
+│ np-tag          one, from a fixed set               │
+└─────────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- One tab stop per row: the whole row is the link.

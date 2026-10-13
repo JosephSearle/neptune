@@ -179,7 +179,7 @@ The mark is Neptune's trident (♆), square-stroked on a 24-unit grid in a `nept
 
 ## Changelog
 
-- Unreleased: visual regression on every preview in both themes; fixed the image slot in Card and Figure (label centred, hatching back) and Card bars of unequal height. CI lints component CSS for raw colours and z-index; new `scrim` token replaces the last raw colour. Logo: the trident mark, lockups for Paper and Deep, single ink, favicon set and social card, all built from tokens by `scripts/build-brand.py`. Chart, with a measured data-viz palette (`viz-1`…`viz-6`, `viz-other`, `viz-grid`, `viz-axis`, `viz-seq-1`…`7`, `viz-div-*`) and new primitive families (gold, plum, cyan, red). `llms.txt` and `llms-full.txt` for agents, generated and checked in CI. System theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
+- Unreleased: an Anatomy diagram for every compound component and a Keyboard section for every interactive one. Visual regression on every preview in both themes; fixed the image slot in Card and Figure (label centred, hatching back) and Card bars of unequal height. CI lints component CSS for raw colours and z-index; new `scrim` token replaces the last raw colour. Logo: the trident mark, lockups for Paper and Deep, single ink, favicon set and social card, all built from tokens by `scripts/build-brand.py`. Chart, with a measured data-viz palette (`viz-1`…`viz-6`, `viz-other`, `viz-grid`, `viz-axis`, `viz-seq-1`…`7`, `viz-div-*`) and new primitive families (gold, plum, cyan, red). `llms.txt` and `llms-full.txt` for agents, generated and checked in CI. System theme by default (`prefers-color-scheme`, `color-scheme` for native controls), SkipLink and `np-visually-hidden`, forced-colours support, print stylesheet. Dialog (with the destructive confirmation pattern), Toast and Tooltip; `np-btn--danger`. Tokens `on-alert`, `term-ok`, `term-alert`, `z-toast`, `z-tooltip`; z-index tokens now in `tokens.css`. Disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
 
 - 1.0 · 2026-10-13: 35 components. Audit fixes (one focus ring, reduced-motion lift, terminal edges in Deep, 44px touch targets, measured contrast). Layout, breakpoint, timing and z-index tokens. Docs set (DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout, Tabs), forms (Select, Textarea, Checkbox, Switch), SearchDialog, EmptyState, PageGrid, Figure, Split, Feed. Slide type scale. Open: logo.
 - 0.1 · 2026-10-13: tokens in two themes, 15 components, brand book.
@@ -197,6 +197,18 @@ The top of a note or playbook: a kind-and-date stamp, the title, a lead, then by
 - One to three tags, from the same fixed set as the Feed.
 - The title wraps at 20 characters wide and drops to `heading` size below `bp-sm`.
 
+## Anatomy
+
+```text
+┌ header.np-article-head ─────────────────────────┐
+│ __stamp         Playbook · 2026-10-08 · 8 min   │
+│ __title         h1, serif display               │
+│ __lead          one sentence, ink-muted         │
+├─────────────────────────────────────────────────┤
+│ __foot          __byline · row of np-tag        │
+└─────────────────────────────────────────────────┘
+```
+
 Source: components/ArticleHeader/README.md · Preview: components/ArticleHeader/preview.html
 
 ---
@@ -210,6 +222,10 @@ The path from the docs root to the current page, in mono with › separators.
 - Consumer provides: the section names as they appear in the Sidebar, and the page title (shortened to a few words if long).
 - Two to four levels. Skip it on top-level pages.
 - Don't: link the current page, or use it as the only navigation.
+
+## Keyboard
+
+- Tab walks the linked levels; the current page isn't a link and isn't a tab stop.
 
 Source: components/Breadcrumb/README.md · Preview: components/Breadcrumb/preview.html
 
@@ -229,6 +245,11 @@ A square, mono-labelled action that lifts on hover with `shadow-press`.
 - Do: "Read the playbook →", "View source", "Copy".
 - Don't: sentence-case labels, icons without text, two primaries side by side.
 
+## Keyboard
+
+- Tab focuses; Enter activates; Space activates a `<button>` (not a link).
+- A disabled `<button>` leaves the tab order; an `aria-disabled` link stays in it, so it can still explain itself.
+
 Source: components/Button/README.md · Preview: components/Button/preview.html
 
 ---
@@ -243,6 +264,20 @@ A boxed aside with a bracketed mono label: note, tip or warning.
 - Consumer provides: the kind, and one to three sentences. A callout longer than a paragraph is a section.
 - Inside Prose it takes `space-8` above and below.
 - Don't: stack two callouts, put a callout in a card, or add a coloured left edge.
+
+## Anatomy
+
+```text
+┌ aside.np-callout ─────────────────────────────────┐
+│ __label         [ Tip ], mono, coloured by kind   │
+├───────────────────────────────────────────────────┤
+│ __body          1–3 sentences, lists or code      │
+└───────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Not interactive. Links inside it are ordinary tab stops.
 
 Source: components/Callout/README.md · Preview: components/Callout/preview.html
 
@@ -259,6 +294,24 @@ A square, hairline-bordered panel with a mono index bar, serif title and a metad
 - Optional image: `img.np-card__media` (with `alt`) between the bar and the body. 16:9 by default; add `np-ratio-square`, `np-ratio-portrait` or `np-ratio-wide` to change it. No image yet: `div.np-card__media.np-slot` with a `<span>` label (`[ IMAGE · 16:9 ]`).
 - In a grid, give every card an image or none. Mixed rows break the baseline.
 - Don't: add images inside the bar, colour the border, round the corners, add a coloured left edge.
+
+## Anatomy
+
+```text
+┌ a.np-card ────────────────────────────────────────┐
+│ __bar           01 / Playbook        [ tag ]      │
+├───────────────────────────────────────────────────┤
+│ __media         optional image or np-slot, 16:9   │
+├───────────────────────────────────────────────────┤
+│ __body          __title, then __text              │
+├───────────────────────────────────────────────────┤
+│ __foot          2026-10-08          8 min →       │
+└───────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- A linked card is one tab stop: the whole card is the `<a>`. Don't nest other links or buttons inside it.
 
 Source: components/Card/README.md · Preview: components/Card/preview.html
 
@@ -296,6 +349,21 @@ The frame around a data plot: mono eyebrow, serif title, legend, an SVG plot wit
 
 - Don't: use a pie with more than three slices, label every point, or use colour as the only key.
 
+## Anatomy
+
+```text
+┌ figure.np-chart ──────────────────────────────────┐
+│ __eyebrow       Fig. 03 · Evals                   │
+│ __title         serif, the takeaway               │
+│ __legend        ■ series  ■ series  ■ series      │
+├───────────────────────────────────────────────────┤
+│ __plot          svg role=img + __tip readout      │
+├───────────────────────────────────────────────────┤
+│ __caption       Source: …, date                   │
+│ __data          details › Table of every number   │
+└───────────────────────────────────────────────────┘
+```
+
 Source: components/Chart/README.md · Preview: components/Chart/preview.html
 
 ---
@@ -311,6 +379,11 @@ Checkboxes and radio buttons: a square (round for radio) that fills with a `nept
 - Disabled: add `disabled` to the input; the label turns `ink-muted`.
 - Don't: use a checkbox for an action that applies at once. Use a Switch.
 
+## Keyboard
+
+- Tab moves between checkboxes; Space toggles.
+- Radios are one tab stop per group: Tab enters, Up/Down or Left/Right move and select.
+
 Source: components/Checkbox/README.md · Preview: components/Checkbox/preview.html
 
 ---
@@ -323,6 +396,20 @@ A dark code block with a language label and a Copy button, plus a light inline c
 - Consumer provides: the language label, the code, and the copy handler. Strip prompts (`$ `) from the copied text.
 - The button reads "Copy", then "Copied" for 1.5s with `data-copied` set. No toast.
 - Use Terminal for transcripts with output; use CodeCopy for things people paste.
+
+## Anatomy
+
+```text
+┌ div.np-code ─────────────────────────────────────┐
+│ __head          bash                  [ Copy ]   │
+├──────────────────────────────────────────────────┤
+│ pre > code      .p prompt  .c command            │
+└──────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Tab reaches Copy; Enter or Space copies. The label change to "Copied" is the confirmation; nothing moves focus.
 
 Source: components/CodeCopy/README.md · Preview: components/CodeCopy/preview.html
 
@@ -347,6 +434,24 @@ A native modal for confirmations and short tasks: bracketed label, serif title, 
 
 - Don't: open a dialog on page load, stack two dialogs, or use one for a message that needs no decision (use a Toast).
 
+## Anatomy
+
+```text
+┌ dialog.np-dialog ──────────────────────────────┐
+│ __label         [ Confirm ]                    │
+├────────────────────────────────────────────────┤
+│ __title         the question                   │
+│ __body          what happens; optional field   │
+├────────────────────────────────────────────────┤
+│ __foot          Cancel   Action                │
+└────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Tab cycles inside the dialog only; Esc cancels; Enter on a focused button presses it.
+- Focus starts on Cancel in a danger dialog, on the first field otherwise.
+
 Source: components/Dialog/README.md · Preview: components/Dialog/preview.html
 
 ---
@@ -360,6 +465,17 @@ The three-column docs page: Sidebar, content, On this page.
 - Main runs: Breadcrumb, `display` title, Prose (with Callouts and Tabs), Rule, Pager. The README's Docs pages section has the full recipe.
 - The side columns are sticky at `space-8` from the top.
 - Consumer provides: the three regions. Nothing else goes in the grid.
+
+## Anatomy
+
+```text
+┌ main > div.np-docs ─────────────────────────────────┐
+│ __side          Sidebar, 240px, sticky              │
+│ __main          Breadcrumb · ArticleHeader ·        │
+│                 Prose · Rule · Pager                │
+│ __toc           Toc, 200px, sticky; hidden < 1080   │
+└─────────────────────────────────────────────────────┘
+```
 
 Source: components/DocsLayout/README.md · Preview: components/DocsLayout/preview.html
 
@@ -375,6 +491,17 @@ What shows when a list, a search or a page has nothing in it: a mono frame glyph
 - Art: a small box drawn in box glyphs with `∴` inside. Same art everywhere.
 - Inside the SearchDialog it drops its border and background.
 - Don't: add an illustration, a joke, or more than one action.
+
+## Anatomy
+
+```text
+┌ div.np-empty ───────────────────────────────────────┐
+│ __art           ┌─┐ box glyph with ∴, aria-hidden   │
+│ __title         what is empty, specifically         │
+│ __text          what to do next                     │
+│ np-row          at most one button                  │
+└─────────────────────────────────────────────────────┘
+```
 
 Source: components/EmptyState/README.md · Preview: components/EmptyState/preview.html
 
@@ -392,6 +519,20 @@ A dated list of entries, one row each: ISO date, serif title, tag.
 - Open it with a SectionHead. Close long feeds with a ghost button (`All notes →`), not pagination.
 - Don't: add summaries or thumbnails to rows. Use Card for that.
 
+## Anatomy
+
+```text
+┌ ol.np-feed › li.np-feed__item › a.np-feed__link ────┐
+│ __date          time, ISO                           │
+│ __title         serif, sentence case                │
+│ np-tag          one, from a fixed set               │
+└─────────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- One tab stop per row: the whole row is the link.
+
 Source: components/Feed/README.md · Preview: components/Feed/preview.html
 
 ---
@@ -407,6 +548,17 @@ A framed image with ┌ ┘ corner marks and a numbered `FIG.` caption.
 - Images follow the brand's imagery rules: dithered or halftone classical subjects, diagrams in hairlines. No stock photos.
 - Don't: round the frame, add a shadow, set the caption in italic, or drop the number.
 
+## Anatomy
+
+```text
+┌ figure.np-figure ──────────────────────────┐
+│ __frame         ┌ corner marks ┘           │
+│   __media       img, or np-slot            │
+├────────────────────────────────────────────┤
+│ __caption       __num Fig. 01 · one line   │
+└────────────────────────────────────────────┘
+```
+
 Source: components/Figure/README.md · Preview: components/Figure/preview.html
 
 ---
@@ -419,6 +571,21 @@ The page closer on `paper-sunk`: link columns with mono headings, a metadata lin
 - Consumer provides: 2–4 columns of 3–5 links, the version stamp, and the copyright line.
 - The giant wordmark is decorative and sits flush with the bottom edge, cropped at the descenders. It stays type: the mark is for small sizes and the Nav.
 - One footer per page.
+
+## Anatomy
+
+```text
+┌ footer.np-footer ────────────────────────────────┐
+│ __cols          2–4 × __col: h4 + ul of links    │
+├──────────────────────────────────────────────────┤
+│ __meta          stamp · © · built with           │
+│ __giant         wordmark, aria-hidden, cropped   │
+└──────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Tab walks the columns left to right, top to bottom. The giant wordmark is hidden from assistive tech and never focused.
 
 Source: components/Footer/README.md · Preview: components/Footer/preview.html
 
@@ -433,6 +600,19 @@ The page opener: a mono stamp, a `display-xl` serif headline, a lead, actions an
 - Put one word of the headline in `<em>` to set it in italic `neptune`. Once only.
 - Stats must be real and countable. No stats beats fake stats.
 - One hero per page. Below 640px the headline drops to `display` size.
+
+## Anatomy
+
+```text
+┌ section.np-hero ─────────────────────────────┐
+│ __eyebrow       mono stamp                   │
+│ __title         h1, display-xl, one <em>     │
+│ __lead          ≤ 52ch                       │
+│ np-row          primary + secondary button   │
+├──────────────────────────────────────────────┤
+│ __stats         optional dl of dt/dd         │
+└──────────────────────────────────────────────┘
+```
 
 Source: components/Hero/README.md · Preview: components/Hero/preview.html
 
@@ -449,6 +629,21 @@ A mono text field with a `›` prompt, an uppercase label and a hint line.
 - Disabled: `disabled` on the control. The box sinks to `paper-sunk` and the text mutes. Say why in the hint.
 - Read-only: `readonly` on the input. It sits on `paper-sunk`, stays focusable and copyable. Use it for values a reader can see but not change, like an ID.
 - The focus ring is on the wrapper (`:focus-within`), so the prompt glyph stays inside it.
+
+## Anatomy
+
+```text
+┌ label.np-field ────────────────────────────────────┐
+│ __label         EMAIL, mono uppercase              │
+│ np-input        › prompt + input                   │
+│ __hint          format, or the error and its fix   │
+└────────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Tab focuses the field; the ring is on the whole box.
+- Hint and error text are reached by screen readers through `aria-describedby`, not by tabbing.
 
 Source: components/Input/README.md · Preview: components/Input/preview.html
 
@@ -505,6 +700,23 @@ The top bar: serif wordmark with a mono version stamp, uppercase mono links and 
 - The active link turns `neptune`. Nothing else in the bar is blue.
 - Below 720px the CSS hides `np-nav__links` and the search label, and shows the "Menu" disclosure. No JavaScript needed; `<details>` handles open, close and keyboard.
 
+## Anatomy
+
+```text
+┌ nav.np-nav ───────────────────────────────────────┐
+│ __brand         __mark wordmark + np-meta stamp   │
+│ __links         3–5 links, one aria-current       │
+│ __actions       __search ⌘K · ThemeToggle ·       │
+│                 __menu (details, < 720px)         │
+└───────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Tab order: wordmark, links, search, theme, menu.
+- ⌘K / Ctrl+K opens SearchDialog from anywhere on the page.
+- Below 720px the Menu is a `<details>`: Enter or Space opens it, Tab walks its links.
+
 Source: components/Nav/README.md · Preview: components/Nav/preview.html
 
 ---
@@ -533,6 +745,19 @@ Previous and next links at the foot of a docs page.
 - Below 640px the links stack, previous first.
 - Consumer provides: the neighbouring pages in Sidebar order, with their real titles.
 - Don't: number pages, or use it for anything but reading order.
+
+## Anatomy
+
+```text
+┌ nav.np-pager ────────────────────────────────┐
+│ __link          __dir ← Previous · __title   │
+│ __link--next    __dir Next → · __title       │
+└──────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Two tab stops, previous then next. Each link's text names the page it goes to.
 
 Source: components/Pager/README.md · Preview: components/Pager/preview.html
 
@@ -574,6 +799,19 @@ The ⌘K search: a native modal dialog with a prompt input, grouped results and 
 - No results: put an EmptyState in the results area.
 - Results read from a prebuilt index; nothing loads until the dialog opens.
 
+## Anatomy
+
+```text
+┌ dialog.np-search ──────────────────────────────┐
+│ __box           np-input type=search · Esc     │
+├────────────────────────────────────────────────┤
+│ __results       __group + ul of __item         │
+│                 title with <mark> · np-meta    │
+├────────────────────────────────────────────────┤
+│ __foot          ↑↓ move · ↵ open · esc close   │
+└────────────────────────────────────────────────┘
+```
+
 Source: components/SearchDialog/README.md · Preview: components/SearchDialog/preview.html
 
 ---
@@ -586,6 +824,16 @@ The opener for a page section: an optional indexed rule, a serif heading, an opt
 - Consumer provides: the index and name for the rule (`01 · Notes`), the heading in sentence case, and at most one action.
 - Index sections in page order. The heading drops to `heading` size below 640px.
 - Use this instead of styling `h2` inline.
+
+## Anatomy
+
+```text
+┌ header.np-section-head ───────────────────────────┐
+│ np-rule         optional 02 · Research            │
+│ __row           __title · optional ghost button   │
+│ __lead          optional, ≤ 52ch                  │
+└───────────────────────────────────────────────────┘
+```
 
 Source: components/SectionHead/README.md · Preview: components/SectionHead/preview.html
 
@@ -602,6 +850,10 @@ A native select in the Input box, mono text, ▾ on the right.
 - Disabled: `disabled` on the control. The box sinks to `paper-sunk` and the text mutes. Say why in the hint.
 - Consumer provides: options in a sensible order (most used first, or alphabetical), and a default.
 
+## Keyboard
+
+- Tab focuses; Space or Alt+Down opens the native list; Up and Down change the value; type to jump.
+
 Source: components/Select/README.md · Preview: components/Select/preview.html
 
 ---
@@ -616,6 +868,23 @@ Grouped navigation for a docs site, inside a disclosure that ships open.
 - Consumer provides: sections in reading order, pages in each, and the current page.
 - Keep groups to about eight pages. More: split the group.
 - Don't: nest beyond one level, or add icons.
+
+## Anatomy
+
+```text
+┌ details.np-sidebar[open] ───────────────────────┐
+│ summary         Contents                        │
+├─────────────────────────────────────────────────┤
+│ __group         __heading 01 · MCP              │
+│                 ul of links, one aria-current   │
+├─────────────────────────────────────────────────┤
+│ __group         …                               │
+└─────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Tab walks the links in reading order; the `summary` toggles the list with Enter or Space.
 
 Source: components/Sidebar/README.md · Preview: components/Sidebar/preview.html
 
@@ -649,6 +918,16 @@ A row of text beside a figure, alternating sides down the page.
 - Use for walk-throughs and feature tours. Two to four rows; more becomes a list, so use Feed.
 - Don't: put two figures in a row, or a card in place of the figure.
 
+## Anatomy
+
+```text
+┌ div.np-splits › section.np-split ────────────────┐
+│ __text          np-meta · __title · __lead ·     │
+│                 optional button                  │
+│ np-figure       alternates sides; stacks < 720   │
+└──────────────────────────────────────────────────┘
+```
+
 Source: components/Split/README.md · Preview: components/Split/preview.html
 
 ---
@@ -662,6 +941,10 @@ An on/off control for a setting that applies at once. Square track, square thumb
 - Use for settings that take effect immediately. For choices submitted with a form, use a Checkbox.
 - Disabled: add `disabled` to the input.
 - Don't: pair a switch with a Save button.
+
+## Keyboard
+
+- Tab focuses; Space toggles, and the change applies at once. Screen readers announce on/off via `role="switch"`.
 
 Source: components/Switch/README.md · Preview: components/Switch/preview.html
 
@@ -677,6 +960,16 @@ A data table with mono uppercase headers on `paper-sunk`, serif cells, hairline 
 - The wrapper scrolls horizontally on phones; don't hide columns.
 - Optional `<caption>` for a mono source line: "Source: evals, 2026-10-07".
 
+## Anatomy
+
+```text
+┌ div.np-table-wrap › table.np-table ───────────────┐
+│ caption         optional source line              │
+│ thead th        mono uppercase on paper-sunk      │
+│ tbody td        serif; .num right-aligned, .idx   │
+└───────────────────────────────────────────────────┘
+```
+
 Source: components/Table/README.md · Preview: components/Table/preview.html
 
 ---
@@ -690,6 +983,16 @@ Mono tabs over panels, for alternatives a reader picks one of: package managers,
 - The selected tab carries a 2px `neptune` underline. That is the view's one blue.
 - Consumer provides: two to five short labels and a panel each, usually a CodeCopy.
 - Don't: use tabs for content a reader needs to compare. Show it side by side.
+
+## Anatomy
+
+```text
+┌ div.np-tabs ────────────────────────────────┐
+│ __list          role=tablist: __tab × 2–5   │
+├─────────────────────────────────────────────┤
+│ __panel         role=tabpanel, one shown    │
+└─────────────────────────────────────────────┘
+```
 
 Source: components/Tabs/README.md · Preview: components/Tabs/preview.html
 
@@ -719,6 +1022,16 @@ A dark code and command block with a mono title bar; stays dark in both themes.
 - One blinking cursor per page at most. It stops under reduced motion.
 - Don't: add macOS traffic-light dots, syntax-highlight with more than `term-accent`.
 
+## Anatomy
+
+```text
+┌ div.np-term ─────────────────────────────────────┐
+│ __bar           title             status         │
+├──────────────────────────────────────────────────┤
+│ __body          pre: .p prompt .c command .cur   │
+└──────────────────────────────────────────────────┘
+```
+
 Source: components/Terminal/README.md · Preview: components/Terminal/preview.html
 
 ---
@@ -735,6 +1048,10 @@ A multi-line field in the Input box. Mono text, resizes vertically.
 - Read-only: `readonly`, same as Input.
 - Consumer provides: a label, a placeholder that shows the format (not a second label), and a length hint if there is a limit.
 
+## Keyboard
+
+- Tab focuses; Enter adds a line, so it never submits the form. Tab leaves the field.
+
 Source: components/Textarea/README.md · Preview: components/Textarea/preview.html
 
 ---
@@ -749,6 +1066,10 @@ A two-state segmented control that switches between the Paper and Deep themes.
 - On load, mark the side the page is actually showing as pressed, whether it came from the saved choice or the system.
 - Apply a saved choice in an inline script in `<head>`, before the stylesheets, so the page doesn't flash the wrong theme. The preview has both scripts.
 - The pressed side fills `neptune`. Put it in `np-nav__actions`, after search.
+
+## Keyboard
+
+- Each side is a button: Tab between them, Enter or Space to choose. `aria-pressed` announces the current theme.
 
 Source: components/ThemeToggle/README.md · Preview: components/ThemeToggle/preview.html
 
@@ -766,6 +1087,21 @@ A short machine message after something happens: dark like the terminal in both 
 - Consumer provides: the region, the timer, and the handlers. The preview has a small script to copy.
 - Don't: toast something the user can see changed on the page, put the only copy of an error in a toast, or use a toast for a decision (use a Dialog). CodeCopy says "Copied" in its own button; no toast.
 
+## Anatomy
+
+```text
+┌ section.np-toasts (live region) ───────────────┐
+│ np-toast        __label ● word       Dismiss   │
+│                 __text                         │
+│                 __actions: one __action        │
+└────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Toasts never take focus. Tab reaches Dismiss and the action in place; alert toasts are announced at once.
+- An ok toast's timer pauses while it holds focus.
+
 Source: components/Toast/README.md · Preview: components/Toast/preview.html
 
 ---
@@ -779,6 +1115,20 @@ The "on this page" list: the page's headings, the one in view marked with › in
 - Two levels: `h2` and `h3`. Deeper headings stay out.
 - Lives in `np-docs__toc`, sticky; hidden below `bp-lg`.
 - Consumer provides: the headings, in page order, with the same words as the headings.
+
+## Anatomy
+
+```text
+┌ nav.np-toc ───────────────────────────────────────┐
+│ __label         On this page                      │
+│ __list          ol of links; np-toc__sub for h3   │
+│                 › marks the heading in view       │
+└───────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Tab walks the headings; Enter jumps to one and moves focus there (the heading needs an `id`).
 
 Source: components/Toc/README.md · Preview: components/Toc/preview.html
 
@@ -794,5 +1144,14 @@ A short mono hint on hover or keyboard focus, dark like the terminal.
 - Consumer provides: one short sentence or a shortcut, under 80 characters: "Uses the last saved judge. About 4 min." or `⌘K`.
 - Supplementary only. Touch screens have no hover, so nothing a reader needs may live only in a tooltip.
 - Don't: put links or buttons inside, add one to a disabled control (it can't take focus; say why in a hint instead), or repeat the trigger's own label.
+
+## Anatomy
+
+```text
+┌ span.np-tip ───────────────────────────────────┐
+│ trigger         aria-describedby → bubble id   │
+│ __bubble        role=tooltip, mono, term-bg    │
+└────────────────────────────────────────────────┘
+```
 
 Source: components/Tooltip/README.md · Preview: components/Tooltip/preview.html

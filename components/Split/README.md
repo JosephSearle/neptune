@@ -8,3 +8,13 @@ A row of text beside a figure, alternating sides down the page.
 - Consumer provides: an eyebrow (`02 · Retrieval`), a title in sentence case, a lead of one or two sentences, and the figure.
 - Use for walk-throughs and feature tours. Two to four rows; more becomes a list, so use Feed.
 - Don't: put two figures in a row, or a card in place of the figure.
+
+## Anatomy
+
+```text
+┌ div.np-splits › section.np-split ────────────────┐
+│ __text          np-meta · __title · __lead ·     │
+│                 optional button                  │
+│ np-figure       alternates sides; stacks < 720   │
+└──────────────────────────────────────────────────┘
+```

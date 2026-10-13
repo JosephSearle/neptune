@@ -8,3 +8,15 @@ The top of a note or playbook: a kind-and-date stamp, the title, a lead, then by
 - Read time is true or absent: compute it from the word count (about 230 words a minute) or leave it out.
 - One to three tags, from the same fixed set as the Feed.
 - The title wraps at 20 characters wide and drops to `heading` size below `bp-sm`.
+
+## Anatomy
+
+```text
+┌ header.np-article-head ─────────────────────────┐
+│ __stamp         Playbook · 2026-10-08 · 8 min   │
+│ __title         h1, serif display               │
+│ __lead          one sentence, ink-muted         │
+├─────────────────────────────────────────────────┤
+│ __foot          __byline · row of np-tag        │
+└─────────────────────────────────────────────────┘
+```

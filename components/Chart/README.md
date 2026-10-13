@@ -29,3 +29,18 @@ The frame around a data plot: mono eyebrow, serif title, legend, an SVG plot wit
 - Give the `<svg>` `role="img"` and an `aria-label` that states the takeaway, not "a chart".
 
 - Don't: use a pie with more than three slices, label every point, or use colour as the only key.
+
+## Anatomy
+
+```text
+┌ figure.np-chart ──────────────────────────────────┐
+│ __eyebrow       Fig. 03 · Evals                   │
+│ __title         serif, the takeaway               │
+│ __legend        ■ series  ■ series  ■ series      │
+├───────────────────────────────────────────────────┤
+│ __plot          svg role=img + __tip readout      │
+├───────────────────────────────────────────────────┤
+│ __caption       Source: …, date                   │
+│ __data          details › Table of every number   │
+└───────────────────────────────────────────────────┘
+```

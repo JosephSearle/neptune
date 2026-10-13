@@ -8,3 +8,12 @@ A short mono hint on hover or keyboard focus, dark like the terminal.
 - Consumer provides: one short sentence or a shortcut, under 80 characters: "Uses the last saved judge. About 4 min." or `⌘K`.
 - Supplementary only. Touch screens have no hover, so nothing a reader needs may live only in a tooltip.
 - Don't: put links or buttons inside, add one to a disabled control (it can't take focus; say why in a hint instead), or repeat the trigger's own label.
+
+## Anatomy
+
+```text
+┌ span.np-tip ───────────────────────────────────┐
+│ trigger         aria-describedby → bubble id   │
+│ __bubble        role=tooltip, mono, term-bg    │
+└────────────────────────────────────────────────┘
+```

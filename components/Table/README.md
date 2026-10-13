@@ -7,3 +7,13 @@ A data table with mono uppercase headers on `paper-sunk`, serif cells, hairline 
 - Use Tag for status columns, with a word. Rows highlight `neptune-soft` on hover.
 - The wrapper scrolls horizontally on phones; don't hide columns.
 - Optional `<caption>` for a mono source line: "Source: evals, 2026-10-07".
+
+## Anatomy
+
+```text
+┌ div.np-table-wrap › table.np-table ───────────────┐
+│ caption         optional source line              │
+│ thead th        mono uppercase on paper-sunk      │
+│ tbody td        serif; .num right-aligned, .idx   │
+└───────────────────────────────────────────────────┘
+```

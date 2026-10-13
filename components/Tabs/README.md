@@ -7,3 +7,13 @@ Mono tabs over panels, for alternatives a reader picks one of: package managers,
 - The selected tab carries a 2px `neptune` underline. That is the view's one blue.
 - Consumer provides: two to five short labels and a panel each, usually a CodeCopy.
 - Don't: use tabs for content a reader needs to compare. Show it side by side.
+
+## Anatomy
+
+```text
+┌ div.np-tabs ────────────────────────────────┐
+│ __list          role=tablist: __tab × 2–5   │
+├─────────────────────────────────────────────┤
+│ __panel         role=tabpanel, one shown    │
+└─────────────────────────────────────────────┘
+```

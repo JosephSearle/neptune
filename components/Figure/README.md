@@ -8,3 +8,14 @@ A framed image with ┌ ┘ corner marks and a numbered `FIG.` caption.
 - Consumer provides: the image with real `alt` text, a figure number counting up through the page, and a one-line caption in sentence case.
 - Images follow the brand's imagery rules: dithered or halftone classical subjects, diagrams in hairlines. No stock photos.
 - Don't: round the frame, add a shadow, set the caption in italic, or drop the number.
+
+## Anatomy
+
+```text
+┌ figure.np-figure ──────────────────────────┐
+│ __frame         ┌ corner marks ┘           │
+│   __media       img, or np-slot            │
+├────────────────────────────────────────────┤
+│ __caption       __num Fig. 01 · one line   │
+└────────────────────────────────────────────┘
+```

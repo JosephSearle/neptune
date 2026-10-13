@@ -8,3 +8,14 @@ What shows when a list, a search or a page has nothing in it: a mono frame glyph
 - Art: a small box drawn in box glyphs with `∴` inside. Same art everywhere.
 - Inside the SearchDialog it drops its border and background.
 - Don't: add an illustration, a joke, or more than one action.
+
+## Anatomy
+
+```text
+┌ div.np-empty ───────────────────────────────────────┐
+│ __art           ┌─┐ box glyph with ∴, aria-hidden   │
+│ __title         what is empty, specifically         │
+│ __text          what to do next                     │
+│ np-row          at most one button                  │
+└─────────────────────────────────────────────────────┘
+```

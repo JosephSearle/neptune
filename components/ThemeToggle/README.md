@@ -8,3 +8,7 @@ A two-state segmented control that switches between the Paper and Deep themes.
 - On load, mark the side the page is actually showing as pressed, whether it came from the saved choice or the system.
 - Apply a saved choice in an inline script in `<head>`, before the stylesheets, so the page doesn't flash the wrong theme. The preview has both scripts.
 - The pressed side fills `neptune`. Put it in `np-nav__actions`, after search.
+
+## Keyboard
+
+- Each side is a button: Tab between them, Enter or Space to choose. `aria-pressed` announces the current theme.

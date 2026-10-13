@@ -8,3 +8,16 @@ The ⌘K search: a native modal dialog with a prompt input, grouped results and 
 - Each result: the title, with the matched words in `<mark>`, and its section in `np-meta` on the right.
 - No results: put an EmptyState in the results area.
 - Results read from a prebuilt index; nothing loads until the dialog opens.
+
+## Anatomy
+
+```text
+┌ dialog.np-search ──────────────────────────────┐
+│ __box           np-input type=search · Esc     │
+├────────────────────────────────────────────────┤
+│ __results       __group + ul of __item         │
+│                 title with <mark> · np-meta    │
+├────────────────────────────────────────────────┤
+│ __foot          ↑↓ move · ↵ open · esc close   │
+└────────────────────────────────────────────────┘
+```

@@ -8,3 +8,17 @@ A boxed aside with a bracketed mono label: note, tip or warning.
 - Consumer provides: the kind, and one to three sentences. A callout longer than a paragraph is a section.
 - Inside Prose it takes `space-8` above and below.
 - Don't: stack two callouts, put a callout in a card, or add a coloured left edge.
+
+## Anatomy
+
+```text
+┌ aside.np-callout ─────────────────────────────────┐
+│ __label         [ Tip ], mono, coloured by kind   │
+├───────────────────────────────────────────────────┤
+│ __body          1–3 sentences, lists or code      │
+└───────────────────────────────────────────────────┘
+```
+
+## Keyboard
+
+- Not interactive. Links inside it are ordinary tab stops.

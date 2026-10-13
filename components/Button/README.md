@@ -11,3 +11,8 @@ A square, mono-labelled action that lifts on hover with `shadow-press`.
 - Say why a control is disabled, in a hint or nearby text. A dead button with no reason is a dead end.
 - Do: "Read the playbook →", "View source", "Copy".
 - Don't: sentence-case labels, icons without text, two primaries side by side.
+
+## Keyboard
+
+- Tab focuses; Enter activates; Space activates a `<button>` (not a link).
+- A disabled `<button>` leaves the tab order; an `aria-disabled` link stays in it, so it can still explain itself.

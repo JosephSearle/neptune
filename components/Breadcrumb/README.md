@@ -7,3 +7,7 @@ The path from the docs root to the current page, in mono with › separators.
 - Consumer provides: the section names as they appear in the Sidebar, and the page title (shortened to a few words if long).
 - Two to four levels. Skip it on top-level pages.
 - Don't: link the current page, or use it as the only navigation.
+
+## Keyboard
+
+- Tab walks the linked levels; the current page isn't a link and isn't a tab stop.
