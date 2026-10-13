@@ -1,0 +1,42 @@
+{
+  "$description": "Neptune primitive colours. Raw values, named by family and lightness step (50 lightest, 990 darkest). Semantic tokens in tokens.json must use one of these; scripts/build-tokens.mjs fails if a semantic colour has no primitive.",
+  "paper": {
+    "50": "#fbf9f4",
+    "100": "#f4f1ea",
+    "150": "#ebe7dc",
+    "200": "#ebe6db",
+    "250": "#e8e4d8",
+    "300": "#d6cfc0",
+    "600": "#7a7466"
+  },
+  "slate": {
+    "300": "#9aa0b2",
+    "400": "#8d93a6",
+    "500": "#626a82",
+    "600": "#545a6b",
+    "800": "#262c40",
+    "900": "#141a2e",
+    "925": "#121626",
+    "950": "#0b0e18",
+    "975": "#070910",
+    "990": "#05070d"
+  },
+  "blue": {
+    "100": "#dfe4ff",
+    "300": "#8fa2ff",
+    "400": "#6f86ff",
+    "600": "#1f3bff",
+    "950": "#151c3d"
+  },
+  "green": {
+    "300": "#4fd1c0",
+    "700": "#0d6b63"
+  },
+  "orange": {
+    "300": "#ff9a5c",
+    "700": "#b4400a"
+  },
+  "white": {
+    "0": "#ffffff"
+  }
+}

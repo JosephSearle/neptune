@@ -1,13 +1,18 @@
-<!-- @dsCard group="Forms" height=200 subtitle="Default with hint" -->
+<!-- @dsCard group="Forms" height=400 subtitle="Default and error" -->
 <!doctype html>
 <html>
 <head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Textarea</title>
-<style>body{margin:0;padding:24px}.np-field{max-width:480px}</style></head>
+<style>body{margin:0;padding:24px}.np-field{max-width:480px;margin-bottom:var(--space-6)}</style></head>
 <body class="np-root">
 <label class="np-field">
   <span class="np-field__label">What went wrong</span>
   <textarea class="np-textarea" placeholder="Steps, expected result, actual result"></textarea>
   <span class="np-field__hint">Plain text. 2,000 characters max.</span>
+</label>
+<label class="np-field">
+  <span class="np-field__label">Summary</span>
+  <textarea class="np-textarea" aria-invalid="true" aria-describedby="summary-hint"></textarea>
+  <span class="np-field__hint" id="summary-hint">Summary is empty. Add one sentence on what changed.</span>
 </label>
 </body>
 </html>

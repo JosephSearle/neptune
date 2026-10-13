@@ -383,3 +383,25 @@ a.np-card:focus-visible { outline: var(--stroke-key) solid var(--focus); outline
   .np-select select { min-height: 44px; }
   .np-crumbs a, .np-toc__list a, .np-sidebar__group a { min-height: 44px; display: flex; align-items: center; }
 }
+
+/* States: disabled, read-only, invalid and busy for buttons and form fields.
+   Error styling follows aria-invalid, so assistive tech hears what the eye sees.
+   np-field--error still works and means the same thing. */
+.np-btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+.np-btn[aria-busy="true"] { cursor: progress; transform: none; box-shadow: none; }
+.np-btn[aria-busy="true"]::after { content: ""; display: inline-block; width: 6px; height: 12px; background: currentColor; animation: np-blink var(--duration-blink, 1s) steps(1) infinite; }
+
+.np-input:has(input:disabled), .np-select:has(select:disabled), .np-textarea:disabled { background: var(--paper-sunk); border-color: var(--line); cursor: not-allowed; }
+.np-input input:disabled, .np-select select:disabled, .np-textarea:disabled { color: var(--ink-muted); cursor: not-allowed; }
+.np-input:has(input:disabled)::before, .np-select:has(select:disabled)::after { color: var(--ink-muted); }
+
+.np-input:has(input[readonly]), .np-textarea[readonly] { background: var(--paper-sunk); }
+.np-input:has(input[readonly])::before { color: var(--ink-muted); }
+
+.np-input:has([aria-invalid="true"]), .np-select:has([aria-invalid="true"]), .np-textarea[aria-invalid="true"] { border-color: var(--alert); }
+.np-field:has([aria-invalid="true"]) .np-field__hint { color: var(--alert); }
+.np-field--error .np-input::before, .np-input:has([aria-invalid="true"])::before { color: var(--alert); }
+
+@media (prefers-reduced-motion: reduce) {
+  .np-btn[aria-busy="true"]::after { animation: none; }
+}

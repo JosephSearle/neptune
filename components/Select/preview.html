@@ -1,13 +1,23 @@
-<!-- @dsCard group="Forms" height=130 subtitle="Native select in the Neptune box" -->
+<!-- @dsCard group="Forms" height=340 subtitle="Default, error, disabled" -->
 <!doctype html>
 <html>
 <head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Select</title>
-<style>body{margin:0;padding:24px}.np-field{max-width:320px}</style></head>
+<style>body{margin:0;padding:24px}.np-field{max-width:320px;margin-bottom:var(--space-6)}</style></head>
 <body class="np-root">
 <label class="np-field">
   <span class="np-field__label">Model</span>
   <span class="np-select"><select><option>claude-opus-5-5</option><option>claude-sonnet-5-5</option><option>claude-haiku-5-5</option></select></span>
   <span class="np-field__hint">Used for every eval run in this project.</span>
+</label>
+<label class="np-field">
+  <span class="np-field__label">Judge</span>
+  <span class="np-select"><select aria-invalid="true" aria-describedby="judge-hint"><option>Choose a model</option><option>claude-opus-5-5</option></select></span>
+  <span class="np-field__hint" id="judge-hint">No judge set: evals can't score. Pick a model.</span>
+</label>
+<label class="np-field">
+  <span class="np-field__label">Region</span>
+  <span class="np-select"><select disabled><option>uksouth</option></select></span>
+  <span class="np-field__hint">Fixed by your plan.</span>
 </label>
 </body>
 </html>

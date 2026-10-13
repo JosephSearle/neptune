@@ -115,6 +115,7 @@ Use typographic glyphs, not icons or emoji. In mono, `ink-muted`:
 - On touch screens, buttons, nav links, toggles and inputs grow to a 44px target.
 - Focus: 2px solid `focus`, 2px offset, on every interactive element. One rule in `bundle.css` sets it for everything inside `np-root`; don't override it.
 - Status always carries a word, never colour alone.
+- Errors are announced, not just coloured: `aria-invalid="true"` on the control, `aria-describedby` pointing at the hint. Disabled controls say why in their hint.
 
 ## Use in code
 
@@ -124,13 +125,38 @@ Load two stylesheets, in this order, plus the fonts:
 2. `components/bundle.css`: the `np-` component classes.
 3. Google Fonts: Newsreader (opsz, 300–700, italic) and IBM Plex Mono (400–600). `bundle.css` imports them; self-host for production.
 
-Set `data-theme="light"` or `"dark"` on `<html>`. Wrap the page in `np-root` and its content in `np-container`. Build pages from components: Nav, Hero, SectionHead, Card, Figure, Split, Feed, Table, Prose, CodeCopy, Footer. Docs pages add DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout and Tabs. Forms use Input, Select, Textarea, Checkbox and Switch. Lay out index pages on PageGrid. Every site gets SearchDialog behind ⌘K and an EmptyState for anything that can come back empty. Style nothing inline that a component or type class already covers.
+Set `data-theme="light"` or `"dark"` on `<html>`.
+
+### Tokens
+
+`tokens.json` is the source of truth. `scripts/build-tokens.mjs` turns it into W3C DTCG files (format 2025.10) in `tokens/dtcg/`, for Style Dictionary, Terrazzo, Tokens Studio or Figma variables:
+
+- `primitives.tokens.json`: raw colours by family and step (`primitive.blue.600`), from `tokens/primitives.json`.
+- `base.tokens.json`: space, radius, stroke, layout, breakpoints, durations, z-index, fonts and type styles. Values DTCG has no type for (`68ch`, `steps(2)`) sit under `$extensions`.
+- `paper.tokens.json`, `deep.tokens.json`: the semantic colours and shadow for each theme, as aliases of primitives.
+
+Load primitives + base + one theme. Every semantic colour must alias a primitive: add the primitive first, then use it.
+
+After changing `tokens.json`, `tokens/primitives.json` or `tokens.css`, run `node scripts/build-tokens.mjs`. CI runs it with `--check` and fails if the DTCG files or `tokens.css` disagree with `tokens.json`.
+
+### States
+
+Buttons and fields share one set of states. Use the attribute, not a class:
+
+| State | Button | Input, Select, Textarea |
+| --- | --- | --- |
+| Disabled | `disabled`, or `aria-disabled="true"` on a link with no `href` | `disabled`; box sinks to `paper-sunk` |
+| Busy | `aria-busy="true"` plus `disabled`; a block cursor blinks after the label | — |
+| Read-only | — | `readonly`; `paper-sunk`, still focusable |
+| Invalid | — | `aria-invalid="true"` + `aria-describedby`; border, prompt and hint turn `alert` | Wrap the page in `np-root` and its content in `np-container`. Build pages from components: Nav, Hero, SectionHead, Card, Figure, Split, Feed, Table, Prose, CodeCopy, Footer. Docs pages add DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout and Tabs. Forms use Input, Select, Textarea, Checkbox and Switch. Lay out index pages on PageGrid. Every site gets SearchDialog behind ⌘K and an EmptyState for anything that can come back empty. Style nothing inline that a component or type class already covers.
 
 ## Wordmark
 
 No logo yet. Set "Neptune" in Newsreader 500, -0.01em, `ink`. Pair it with a `meta` version stamp. Do not draw a mark until one is designed.
 
 ## Changelog
+
+- Unreleased: disabled, busy, read-only and invalid states for Button, Input, Select and Textarea, driven by attributes (`aria-invalid` now styles errors). DTCG 2025.10 token export with a primitive colour tier, generated from `tokens.json` and checked in CI.
 
 - 1.0 · 2026-10-13: 35 components. Audit fixes (one focus ring, reduced-motion lift, terminal edges in Deep, 44px touch targets, measured contrast). Layout, breakpoint, timing and z-index tokens. Docs set (DocsLayout, Sidebar, Breadcrumb, ArticleHeader, Toc, Pager, Callout, Tabs), forms (Select, Textarea, Checkbox, Switch), SearchDialog, EmptyState, PageGrid, Figure, Split, Feed. Slide type scale. Open: logo.
 - 0.1 · 2026-10-13: tokens in two themes, 15 components, brand book.

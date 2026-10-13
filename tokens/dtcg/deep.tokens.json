@@ -1,0 +1,99 @@
+{
+  "color": {
+    "$type": "color",
+    "paper": {
+      "$value": "{primitive.slate.950}",
+      "$description": "Page background. The default ground for everything."
+    },
+    "paper-raised": {
+      "$value": "{primitive.slate.925}",
+      "$description": "Cards, inputs, menus and kbd keys sitting on paper."
+    },
+    "paper-sunk": {
+      "$value": "{primitive.slate.975}",
+      "$description": "Recessed wells: code spans, table headers, footer band."
+    },
+    "line": {
+      "$value": "{primitive.slate.800}",
+      "$description": "Decorative hairlines and section rules. Never the only boundary of a control."
+    },
+    "line-strong": {
+      "$value": "{primitive.slate.500}",
+      "$description": "Borders that carry meaning: inputs, cards, tags, kbd. Meets 3:1 on paper and paper-raised in both themes."
+    },
+    "ink": {
+      "$value": "{primitive.paper.150}",
+      "$description": "Primary text and the secondary button border, on paper, paper-raised and paper-sunk."
+    },
+    "ink-muted": {
+      "$value": "{primitive.slate.300}",
+      "$description": "Metadata, captions and mono labels, on paper, paper-raised and paper-sunk."
+    },
+    "neptune": {
+      "$value": "{primitive.blue.400}",
+      "$description": "The brand. Primary button fill, links, focus ring, active state. As text, on paper, paper-raised and neptune-soft."
+    },
+    "neptune-soft": {
+      "$value": "{primitive.blue.950}",
+      "$description": "Tinted ground behind neptune text: accent tags, selected rows, highlights."
+    },
+    "on-neptune": {
+      "$value": "{primitive.slate.950}",
+      "$description": "Text and icons on a neptune fill."
+    },
+    "focus": {
+      "$value": "{color.neptune}",
+      "$description": "Focus ring: 2px solid, 2px offset. 3:1 or better on every paper surface."
+    },
+    "ok": {
+      "$value": "{primitive.green.300}",
+      "$description": "Healthy / shipped / online state. Always paired with a word. As text, on paper and paper-raised."
+    },
+    "alert": {
+      "$value": "{primitive.orange.300}",
+      "$description": "Warning, failure or breaking change. Always paired with a word. As text, on paper and paper-raised."
+    },
+    "term-bg": {
+      "$value": "{primitive.slate.990}",
+      "$description": "Terminal and code-block ground. Dark in both themes."
+    },
+    "term-ink": {
+      "$value": "{primitive.paper.250}",
+      "$description": "Text on term-bg."
+    },
+    "term-muted": {
+      "$value": "{primitive.slate.400}",
+      "$description": "Prompts, comments and timestamps on term-bg."
+    },
+    "term-accent": {
+      "$value": "{primitive.blue.300}",
+      "$description": "Commands, paths and highlights on term-bg."
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "shadow-press": {
+      "$value": {
+        "color": "{primitive.blue.400}",
+        "offsetX": {
+          "value": 3,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 3,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 0,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Hover lift on buttons and linked cards. No blur, ever."
+    }
+  },
+  "$description": "Neptune Deep theme (dark). Combine with primitives.tokens.json and base.tokens.json."
+}

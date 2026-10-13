@@ -1,4 +1,4 @@
-<!-- @dsCard group="Forms" height=200 subtitle="Prompt-style input, default and error" -->
+<!-- @dsCard group="Forms" height=420 subtitle="Default, error, read-only, disabled" -->
 <!doctype html>
 <html>
 <head><meta charset="utf-8"><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><title>Input</title>
@@ -10,10 +10,20 @@
     <span class="np-input"><input type="email" placeholder="you@domain.com"></span>
     <span class="np-field__hint">One note a month. Unsubscribe any time.</span>
   </label>
-  <label class="np-field np-field--error">
+  <label class="np-field">
     <span class="np-field__label">Repo</span>
-    <span class="np-input"><input value="josephsearle/neptune ui"></span>
-    <span class="np-field__hint">Invalid name: spaces not allowed. Use kebab-case.</span>
+    <span class="np-input"><input value="josephsearle/neptune ui" aria-invalid="true" aria-describedby="repo-hint"></span>
+    <span class="np-field__hint" id="repo-hint">Invalid name: spaces not allowed. Use kebab-case.</span>
+  </label>
+  <label class="np-field">
+    <span class="np-field__label">Project ID</span>
+    <span class="np-input"><input value="np-2026-0413" readonly></span>
+    <span class="np-field__hint">Set when the project was created.</span>
+  </label>
+  <label class="np-field">
+    <span class="np-field__label">Region</span>
+    <span class="np-input"><input value="uksouth" disabled></span>
+    <span class="np-field__hint">Fixed by your plan.</span>
   </label>
 </div>
 </body>

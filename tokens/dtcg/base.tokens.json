@@ -1,0 +1,558 @@
+{
+  "$description": "Neptune tokens shared by both themes.",
+  "font": {
+    "$type": "fontFamily",
+    "serif": {
+      "$value": [
+        "Newsreader",
+        "Iowan Old Style",
+        "Georgia",
+        "serif"
+      ]
+    },
+    "mono": {
+      "$value": [
+        "IBM Plex Mono",
+        "ui-monospace",
+        "SF Mono",
+        "Menlo",
+        "monospace"
+      ]
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "space-1": {
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$description": "Icon-to-label gap, tag vertical padding."
+    },
+    "space-2": {
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$description": "Tight stacks, tag horizontal padding."
+    },
+    "space-3": {
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      },
+      "$description": "Button vertical padding, input padding."
+    },
+    "space-4": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "Button horizontal padding, gutter on phones."
+    },
+    "space-6": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$description": "Card padding."
+    },
+    "space-8": {
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      },
+      "$description": "Gap between cards."
+    },
+    "space-12": {
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      },
+      "$description": "Between page sections on phones."
+    },
+    "space-16": {
+      "$value": {
+        "value": 64,
+        "unit": "px"
+      },
+      "$description": "Between page sections on desktop."
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "radius-none": {
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      },
+      "$description": "Cards, tags, terminals. The default."
+    },
+    "radius-sm": {
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      },
+      "$description": "Buttons, inputs, kbd keys."
+    },
+    "radius-full": {
+      "$value": {
+        "value": 9999,
+        "unit": "px"
+      },
+      "$description": "Status dots and radio buttons only."
+    }
+  },
+  "stroke": {
+    "$type": "dimension",
+    "stroke-hairline": {
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      },
+      "$description": "Every border and rule."
+    },
+    "stroke-key": {
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      },
+      "$description": "Bottom edge of kbd keys and the focus ring."
+    }
+  },
+  "layout": {
+    "$type": "dimension",
+    "container": {
+      "$value": {
+        "value": 1200,
+        "unit": "px"
+      },
+      "$description": "Max width of page content, centred with auto margins."
+    },
+    "gutter": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$description": "Side padding of the page container on desktop."
+    },
+    "gutter-sm": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "Side padding of the page container below bp-sm."
+    }
+  },
+  "breakpoint": {
+    "$type": "dimension",
+    "bp-sm": {
+      "$value": {
+        "value": 640,
+        "unit": "px"
+      },
+      "$description": "Below this: display type drops one step, Feed rows stack, the container gutter narrows."
+    },
+    "bp-md": {
+      "$value": {
+        "value": 720,
+        "unit": "px"
+      },
+      "$description": "Below this: Nav collapses to Menu, Split rows stack, the Docs layout drops to one column."
+    },
+    "bp-lg": {
+      "$value": {
+        "value": 1080,
+        "unit": "px"
+      },
+      "$description": "Below this: the Docs layout hides its On this page column."
+    }
+  },
+  "duration": {
+    "$type": "duration",
+    "duration-step": {
+      "$value": {
+        "value": 80,
+        "unit": "ms"
+      },
+      "$description": "Hover lift and press on buttons and linked cards."
+    },
+    "duration-blink": {
+      "$value": {
+        "value": 1,
+        "unit": "s"
+      },
+      "$description": "Terminal cursor blink, the one ambient animation."
+    }
+  },
+  "z": {
+    "$type": "number",
+    "z-menu": {
+      "$value": 10,
+      "$description": "Nav phone menu and dropdowns."
+    },
+    "z-dialog": {
+      "$value": 100,
+      "$description": "Dialogs and their backdrop, such as search."
+    }
+  },
+  "typography": {
+    "$type": "typography",
+    "display-xl": {
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 72,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": -1.44,
+          "unit": "px"
+        },
+        "lineHeight": 1
+      },
+      "$description": "One per page: the hero headline.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Display",
+          "letterSpacing": "-0.02em"
+        }
+      }
+    },
+    "display": {
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 48,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": -0.72,
+          "unit": "px"
+        },
+        "lineHeight": 1.0833
+      },
+      "$description": "Page titles.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Display",
+          "letterSpacing": "-0.015em"
+        }
+      }
+    },
+    "heading": {
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 32,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": -0.32,
+          "unit": "px"
+        },
+        "lineHeight": 1.1875
+      },
+      "$description": "Section headings.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Display",
+          "letterSpacing": "-0.01em"
+        }
+      }
+    },
+    "title": {
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 22,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        },
+        "lineHeight": 1.2727
+      },
+      "$description": "Card and sub-section titles.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Display"
+        }
+      }
+    },
+    "body": {
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 18,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        },
+        "lineHeight": 1.5556
+      },
+      "$description": "Long-form reading. Max 68ch.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Text"
+        }
+      }
+    },
+    "body-sm": {
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 16,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        },
+        "lineHeight": 1.5
+      },
+      "$description": "Card copy, captions under figures.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Text"
+        }
+      }
+    },
+    "quote": {
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 24,
+          "unit": "px"
+        },
+        "fontWeight": 300,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        },
+        "lineHeight": 1.4167
+      },
+      "$description": "Pull quotes. Italic serif only here. Italic.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Text",
+          "fontStyle": "italic"
+        }
+      }
+    },
+    "label": {
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": {
+          "value": 12,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "letterSpacing": {
+          "value": 0.96,
+          "unit": "px"
+        },
+        "lineHeight": 1.3333
+      },
+      "$description": "Uppercase. Buttons, nav, tags, section eyebrows.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Mono",
+          "letterSpacing": "0.08em"
+        }
+      }
+    },
+    "meta": {
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": {
+          "value": 11,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0.44,
+          "unit": "px"
+        },
+        "lineHeight": 1.4545
+      },
+      "$description": "System metadata strings, timestamps, version stamps.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Mono",
+          "letterSpacing": "0.04em"
+        }
+      }
+    },
+    "code": {
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": {
+          "value": 14,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        },
+        "lineHeight": 1.5714
+      },
+      "$description": "Inline code, terminal, inputs.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Mono"
+        }
+      }
+    },
+    "slide-display": {
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 200,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": -4,
+          "unit": "px"
+        },
+        "lineHeight": 1
+      },
+      "$description": "Cover title on a 1920x1080 slide. Once per deck.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Slides",
+          "letterSpacing": "-0.02em"
+        }
+      }
+    },
+    "slide-statement": {
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 120,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": -1.8,
+          "unit": "px"
+        },
+        "lineHeight": 1.05
+      },
+      "$description": "The one accent statement slide.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Slides",
+          "letterSpacing": "-0.015em"
+        }
+      }
+    },
+    "slide-quote": {
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 88,
+          "unit": "px"
+        },
+        "fontWeight": 300,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        },
+        "lineHeight": 1.2045
+      },
+      "$description": "Pull-quote slide. The only italic. Italic.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Slides",
+          "fontStyle": "italic"
+        }
+      }
+    },
+    "slide-title": {
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 72,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": -1.08,
+          "unit": "px"
+        },
+        "lineHeight": 1.1111
+      },
+      "$description": "Slide headings, at the top margin on every content slide.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Slides",
+          "letterSpacing": "-0.015em"
+        }
+      }
+    },
+    "slide-body": {
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 32,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        },
+        "lineHeight": 1.4375
+      },
+      "$description": "Leads, table cells, card text on slides.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Slides"
+        }
+      }
+    },
+    "slide-label": {
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": {
+          "value": 24,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "letterSpacing": {
+          "value": 1.92,
+          "unit": "px"
+        },
+        "lineHeight": 1.3333
+      },
+      "$description": "Eyebrows, table headers, footers, stamps on slides. Uppercase. 24px is the floor: label and meta both map here.",
+      "$extensions": {
+        "dev.neptune": {
+          "group": "Slides",
+          "letterSpacing": "0.08em"
+        }
+      }
+    }
+  },
+  "$extensions": {
+    "dev.neptune": {
+      "css": {
+        "measure": "68ch",
+        "measure-short": "52ch",
+        "easing-step": "steps(2)"
+      }
+    }
+  }
+}
